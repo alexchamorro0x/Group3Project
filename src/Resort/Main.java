@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// Dont forget to add your H2 driver to the dependencies.
 /**
  * Main class that starts the FXML application.
  */
