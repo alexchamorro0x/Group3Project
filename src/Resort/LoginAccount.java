@@ -40,8 +40,8 @@ public class LoginAccount {
       return false;
     }
     LoginAccount that = (LoginAccount) o;
-    return Objects.equals(firstName, that.firstName) &&
-        Objects.equals(password, that.password);
+    return Objects.equals(firstName, that.firstName)
+        && Objects.equals(password, that.password);
   }
 
   @Override
@@ -51,10 +51,9 @@ public class LoginAccount {
 
   @Override
   public String toString() {
-    return "LoginAccount{" +
-        "firstName='" + firstName + '\'' +
-        ", password='" + password + '\'' +
-        '}';
+    return "LoginAccount{" + "firstName='" + firstName + '\''
+        + ", password='" + password + '\''
+        + '}';
   }
 }
 

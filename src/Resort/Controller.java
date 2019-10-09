@@ -16,6 +16,9 @@ import javafx.util.Duration;
 public class Controller {
 
   @FXML
+  private Label lblLoginValidation;
+
+  @FXML
   private AnchorPane btnCreateAccount;
 
   @FXML
@@ -40,7 +43,7 @@ public class Controller {
    * Handler for clicking the create account button. Extracts account information from text fields
    * and makes a call to DatabaseCrud addAccount method if fields are populated.
    *
-   * @param event
+   * @param event records when the mouse clicks the create account button
    */
   @FXML
   void clickCreateAccount(MouseEvent event) {
@@ -68,8 +71,11 @@ public class Controller {
       System.out.println("Logged in successfully");
     } else {
       System.out.println("Username or password incorrect");
+      createLoginValidator(false);
     }
   }
+
+  private FadeTransition loginFadeOut = new FadeTransition(Duration.millis(2000));
 
   // Transition effect for fading out Success/Failed indicators
   private FadeTransition fadeOut = new FadeTransition(
@@ -80,7 +86,7 @@ public class Controller {
    * Indicator that shows success or failed while attempting to make an account. Fades out over 2
    * seconds.
    *
-   * @param success
+   * @param success determines the success of creating a new account
    */
   private void createIndicator(boolean success) {
     if (success) {
@@ -90,6 +96,15 @@ public class Controller {
     }
     lblCreateIndicate.setVisible(true);
     fadeOut.playFromStart();
+  }
+
+  private void createLoginValidator(boolean success) {
+    if (success) {
+      lblLoginValidation.setText("Incorrect First Name or Password");
+    }
+    lblLoginValidation.setVisible(true);
+    loginFadeOut.playFromStart();
+
   }
 
   /**
@@ -104,6 +119,15 @@ public class Controller {
     fadeOut.setToValue(0.0);
     fadeOut.setCycleCount(1);
     fadeOut.setAutoReverse(false);
+
+    lblLoginValidation.setVisible(false);
+    loginFadeOut.setNode(lblLoginValidation);
+    loginFadeOut.setFromValue(1.0);
+    loginFadeOut.setToValue(0.0);
+    loginFadeOut.setCycleCount(1);
+    loginFadeOut.setAutoReverse(false);
+
+
   }
 
 

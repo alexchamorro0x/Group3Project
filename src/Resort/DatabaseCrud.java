@@ -32,9 +32,13 @@ public class DatabaseCrud {
       ps.setString(3, password);
       int returnCode = ps.executeUpdate();
 
+      //close the prepared statement
+      ps.close();
+
       if (returnCode == 1) {
         return true;
       }
+
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {
@@ -70,7 +74,7 @@ public class DatabaseCrud {
 
     try {
       //Read first names and passwords into result set
-      String sql = ("SELECT PASSWORD, FIRSTNAME FROM RESORTDB.PUBLIC.ACCOUNTS");
+      String sql = ("SELECT PASSWORD, FIRSTNAME FROM ACCOUNTS");
       Statement statement = loginConnection.createStatement();
       ResultSet resultSet = statement.executeQuery(sql);
 
@@ -81,12 +85,15 @@ public class DatabaseCrud {
         checkAccount.setPassword(resultSet.getString("PASSWORD"));
         accounts.add(checkAccount);
       }
-      System.out.println("Result Set: " + accounts.toString());
-      boolean contains = accounts.contains(userAccount);
 
+      //close the statement and the result set created
+      statement.close();
+      resultSet.close();
+      //System.out.println("Result Set: " + accounts.toString());
+      boolean contains = accounts.contains(userAccount);
       //if the test account is found it returns true
       if (contains) {
-        System.out.println(true);
+        //System.out.println(true);
         return true;
       }
 
@@ -94,6 +101,7 @@ public class DatabaseCrud {
       ex.printStackTrace();
     } finally {
       // close the connection
+
       try {
         if (loginConnection != null) {
           loginConnection.close();
