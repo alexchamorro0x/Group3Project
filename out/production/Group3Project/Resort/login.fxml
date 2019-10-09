@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.Controller">
+  <tabs>
+    <Tab text="Login">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="tfFirstNameLogin" layoutX="84.0" layoutY="35.0" />
+                  <PasswordField fx:id="pfLoginPassword" layoutX="84.0" layoutY="70.0" />
+                  <Label layoutX="84.0" layoutY="14.0" text="Login:" />
+                  <Label layoutX="14.0" layoutY="39.0" text="First Name:" />
+                  <Label layoutX="14.0" layoutY="74.0" text="Password:" />
+                  <Button layoutX="133.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#clickLogin" text="Login" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Create Account">
+      <content>
+        <AnchorPane fx:id="btnCreateAccount" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="tfCreateFirstName" layoutX="226.0" layoutY="100.0" />
+                  <TextField fx:id="tfCreateLastName" layoutX="226.0" layoutY="144.0" />
+                  <Label layoutX="165.0" layoutY="104.0" text="First Name: " />
+                  <Label layoutX="167.0" layoutY="148.0" text="Last Name:" />
+                  <Label layoutX="259.0" layoutY="46.0" text="Create Account" />
+                  <Button layoutX="277.0" layoutY="224.0" mnemonicParsing="false" onMouseClicked="#clickCreateAccount" text="Create Account" />
+                  <TextField fx:id="tfCreatePassword" layoutX="226.0" layoutY="186.0" />
+                  <Label layoutX="170.0" layoutY="190.0" text="Password:" />
+                  <Label fx:id="lblCreateIndicate" layoutX="197.0" layoutY="228.0" text="Success" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

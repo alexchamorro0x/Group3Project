@@ -3,16 +3,18 @@ package Resort;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
- * Controller class for the login scene. Handles logging in or making a new account.
- * todo: make separate controllers for each scene of the application.
+ * Controller class for the login scene. Handles logging in or making a new account. todo: make
+ * separate controllers for each scene of the application.
  */
 public class Controller {
+
   @FXML
   private AnchorPane btnCreateAccount;
 
@@ -28,9 +30,16 @@ public class Controller {
   @FXML
   private Label lblCreateIndicate;
 
+  @FXML
+  private TextField tfFirstNameLogin;
+
+  @FXML
+  private PasswordField pfLoginPassword;
+
   /**
-   * Handler for clicking the create account button. Extracts account information from
-   * text fields and makes a call to DatabaseCrud addAccount method if fields are populated.
+   * Handler for clicking the create account button. Extracts account information from text fields
+   * and makes a call to DatabaseCrud addAccount method if fields are populated.
+   *
    * @param event
    */
   @FXML
@@ -49,14 +58,28 @@ public class Controller {
 
   }
 
+  @FXML
+  void clickLogin(MouseEvent event) {
+    DatabaseCrud updater = new DatabaseCrud();
+    String name = tfFirstNameLogin.getText();
+    String password = pfLoginPassword.getText();
+
+    if (updater.checkLoginInformation(name, password)) {
+      System.out.println("Logged in successfully");
+    } else {
+      System.out.println("Username or password incorrect");
+    }
+  }
+
   // Transition effect for fading out Success/Failed indicators
   private FadeTransition fadeOut = new FadeTransition(
       Duration.millis(2000)
   );
 
   /**
-   * Indicator that shows success or failed while attempting to make an account.
-   * Fades out over 2 seconds.
+   * Indicator that shows success or failed while attempting to make an account. Fades out over 2
+   * seconds.
+   *
    * @param success
    */
   private void createIndicator(boolean success) {
