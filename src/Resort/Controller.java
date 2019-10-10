@@ -1,12 +1,17 @@
 package Resort;
 
+import java.io.IOException;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -62,13 +67,19 @@ public class Controller {
   }
 
   @FXML
-  void clickLogin(MouseEvent event) {
+  void clickLogin(MouseEvent event) throws IOException {
     DatabaseCrud updater = new DatabaseCrud();
     String name = tfFirstNameLogin.getText();
     String password = pfLoginPassword.getText();
 
     if (updater.checkLoginInformation(name, password)) {
       System.out.println("Logged in successfully");
+
+      // changing scenes code
+      Stage thisStage = (Stage) lblLoginValidation.getScene().getWindow();
+      Parent loggedInScene = FXMLLoader.load(getClass().getResource("loggedIn.fxml"));
+      thisStage.setScene(new Scene(loggedInScene, 500, 500));
+
     } else {
       System.out.println("Username or password incorrect");
       createLoginValidator(false);
