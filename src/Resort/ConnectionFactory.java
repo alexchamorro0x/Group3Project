@@ -8,6 +8,7 @@ import java.sql.SQLException;
  * Class that handles creating connections to the database.
  */
 public class ConnectionFactory {
+
   // prepare string for database and driver
   private static final String JDBCDRIVER = "org.h2.Driver";
   private static final String DBURL = "jdbc:h2:.\\res\\ResortDB";
@@ -16,9 +17,10 @@ public class ConnectionFactory {
 
   /**
    * Makes a connection to the database and returns it to the caller.
+   *
    * @return Connection to the database
    */
-  public static Connection getConnection(){
+  public static Connection getConnection() {
     try {
       // register JDBC driver
       Class.forName(JDBCDRIVER);
