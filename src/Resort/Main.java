@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Title.fxtml"));
         primaryStage.setTitle("Resort Reservations");
         root.getStylesheets().add
             (Main.class.getResource("login.css").toExternalForm());
