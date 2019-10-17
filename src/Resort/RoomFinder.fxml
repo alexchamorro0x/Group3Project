@@ -5,10 +5,17 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-  xmlns:fx="http://javafx.com/fxml"
-  fx:controller="Resort.RoomFinderController"
-  prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/2.2" fx:controller="Resort.RoomFinderController">
+    <children>
+        <Label layoutX="273.0" layoutY="14.0" text="Room Finder">
+            <font>
+                <Font name="Times New Roman Bold" size="36.0"/>
+            </font>
+        </Label>
+        <Button fx:id="GoToScene1From4" layoutX="28.0" layoutY="29.0" mnemonicParsing="false"
+                onAction="#btnClickedHome4" text="Home"/>
+    </children>
 </AnchorPane>

@@ -18,7 +18,7 @@ public class LoggedInController {
   void btnClicklogOut(MouseEvent event) throws IOException {
     Stage thisStage = (Stage) btnLogOut.getScene().getWindow();
 
-    Parent loginScene = FXMLLoader.load(getClass().getResource("Title.fxtml"));
+    Parent loginScene = FXMLLoader.load(getClass().getResource("Title.fxml"));
     thisStage.setScene(new Scene(loginScene, 500, 500));
 
   }

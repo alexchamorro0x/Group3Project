@@ -2,10 +2,12 @@ package Resort;
 
 import java.io.IOException;
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -142,4 +144,16 @@ public class Controller {
   }
 
 
+
+  // This declares the button to change to teh 'Room Finder' Scene. It is a temporary test button to design
+  // the scene.
+  @FXML
+  private Button GoToScene4From1;
+
+  public void btnClickedFindRoom(MouseEvent mouseEvent) throws IOException {
+    Stage thisStage = (Stage) GoToScene4From1.getScene().getWindow();
+
+    Parent loginScene = FXMLLoader.load(getClass().getResource("RoomFinder.fxml"));
+    thisStage.setScene(new Scene(loginScene, 750, 500));
+  }
 }
