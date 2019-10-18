@@ -44,6 +44,7 @@
       <TextField fx:id="tfCreateFirstName21" layoutX="403.0" layoutY="199.0" prefHeight="25.0" prefWidth="149.0" />
       <ImageView fitHeight="95.0" fitWidth="210.0" layoutX="386.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" styleClass="image">
          <image>
+            <!-- HELLO -->
             <Image url="@Creditcard.PNG" />
          </image>
       </ImageView>
