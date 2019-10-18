@@ -5,6 +5,7 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -101,10 +102,14 @@
         <Font size="18.0" />
       </font>
     </Label>
-    <AnchorPane id="RoomLayoutPicture" layoutX="511.0" layoutY="85.0" prefHeight="220.0" prefWidth="220.0">
-      <stylesheets>
-        <URL value="@RoomFinder.css" />
-      </stylesheets>
-    </AnchorPane>
+    <ImageView fx:id="RoomLayoutPicture" fitHeight="220.0" fitWidth="220.0" layoutX="503.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+    <Text fx:id="RoomTypeText" layoutX="521.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="">
+      <font>
+        <Font size="17.0" />
+      </font>
+    </Text>
+    <Text fx:id="RoomDescription1" layoutX="545.0" layoutY="353.0" scaleX="1.0" scaleY="0.9999934445143697" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+    <Text fx:id="RoomDescription3" layoutX="545.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+    <Text fx:id="RoomDescription2" layoutX="545.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
   </children>
 </AnchorPane>
