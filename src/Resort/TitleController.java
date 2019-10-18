@@ -156,4 +156,14 @@ public class TitleController {
     Parent loginScene = FXMLLoader.load(getClass().getResource("RoomFinder.fxml"));
     thisStage.setScene(new Scene(loginScene, 750, 500));
   }
+
+    @FXML
+    private Button GoToScene2From1;
+
+    public void btnClickedCreateAccount(MouseEvent mouseEvent) throws IOException {
+        Stage thisStage = (Stage) GoToScene2From1.getScene().getWindow();
+
+        Parent loginScene = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
+        thisStage.setScene(new Scene(loginScene, 750, 500));
+    }
 }

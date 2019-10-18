@@ -1,0 +1,28 @@
+
+.background {
+    -fx-background-color: #1b1c1c;
+}
+
+.text {
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+}
+
+.title {
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 22px;
+    -fx-text-alignment: center;
+}
+
+.head {
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 16px;
+}
+
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-style: 6px solid;
+    -fx-border-color: white;
+}
