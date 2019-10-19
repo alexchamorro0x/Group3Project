@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -23,22 +24,16 @@ import javafx.util.Duration;
 public class TitleController {
 
   @FXML
-  private Label lblLoginValidation;
+  private Button btnRoomFinder;
 
   @FXML
-  private AnchorPane btnCreateAccount;
+  private Label lblNewUser;
 
   @FXML
-  private TextField tfCreateFirstName;
+  private Label lblTitleLabel;
 
   @FXML
-  private TextField tfCreateLastName;
-
-  @FXML
-  private TextField tfCreatePassword;
-
-  @FXML
-  private Label lblCreateIndicate;
+  private ImageView ivTitlePage;
 
   @FXML
   private TextField tfFirstNameLogin;
@@ -46,26 +41,24 @@ public class TitleController {
   @FXML
   private PasswordField pfLoginPassword;
 
-  /**
-   * Handler for clicking the create account button. Extracts account information from text fields
-   * and makes a call to DatabaseCrud addAccount method if fields are populated.
-   *
-   * @param event records when the mouse clicks the create account button
-   */
   @FXML
-  void clickCreateAccount(MouseEvent event) {
-    DatabaseCrud executor = new DatabaseCrud();
-    String firstName = tfCreateFirstName.getText();
-    String lastName = tfCreateLastName.getText();
-    String password = tfCreatePassword.getText();
-    if (tfCreateLastName.getLength() != 0 && tfCreateFirstName.getLength() != 0
-        && tfCreatePassword.getLength() != 0) {
-      executor.addUser(firstName, lastName, password);
-      createIndicator(true);
-    } else {
-      createIndicator(false);
-    }
+  private Label lblLoginValidation;
 
+  @FXML
+  void clickNewUser(MouseEvent event) throws IOException {
+// changing scenes code
+    Stage thisStage = (Stage) lblNewUser.getScene().getWindow();
+    Parent loggedInScene = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
+    thisStage.setScene(new Scene(loggedInScene, 750, 500));
+
+  }
+
+  @FXML
+  void clickRoomFinder(ActionEvent event) throws IOException {
+// changing scenes code
+    Stage thisStage = (Stage) btnRoomFinder.getScene().getWindow();
+    Parent loggedInScene = FXMLLoader.load(getClass().getResource("RoomFinder.fxml"));
+    thisStage.setScene(new Scene(loggedInScene, 750, 500));
   }
 
   @FXML
@@ -76,12 +69,10 @@ public class TitleController {
 
     if (updater.checkLoginInformation(name, password)) {
       System.out.println("Logged in successfully");
-
       // changing scenes code
       Stage thisStage = (Stage) lblLoginValidation.getScene().getWindow();
-      Parent loggedInScene = FXMLLoader.load(getClass().getResource("loggedIn.fxml"));
-      thisStage.setScene(new Scene(loggedInScene, 500, 500));
-
+      Parent loggedInScene = FXMLLoader.load(getClass().getResource("MyAccount.fxml"));
+      thisStage.setScene(new Scene(loggedInScene, 750, 500));
     } else {
       System.out.println("Username or password incorrect");
       createLoginValidator(false);
@@ -95,21 +86,6 @@ public class TitleController {
       Duration.millis(2000)
   );
 
-  /**
-   * Indicator that shows success or failed while attempting to make an account. Fades out over 2
-   * seconds.
-   *
-   * @param success determines the success of creating a new account
-   */
-  private void createIndicator(boolean success) {
-    if (success) {
-      lblCreateIndicate.setText("Success");
-    } else {
-      lblCreateIndicate.setText("Failed");
-    }
-    lblCreateIndicate.setVisible(true);
-    fadeOut.playFromStart();
-  }
 
   private void createLoginValidator(boolean success) {
     if (success) {
@@ -126,13 +102,6 @@ public class TitleController {
   public void initialize() {
     // set create account success/fail label none visible
     // and prepare fade graphic for it
-    lblCreateIndicate.setVisible(false);
-    fadeOut.setNode(lblCreateIndicate);
-    fadeOut.setFromValue(1.0);
-    fadeOut.setToValue(0.0);
-    fadeOut.setCycleCount(1);
-    fadeOut.setAutoReverse(false);
-
     lblLoginValidation.setVisible(false);
     loginFadeOut.setNode(lblLoginValidation);
     loginFadeOut.setFromValue(1.0);
@@ -143,27 +112,4 @@ public class TitleController {
 
   }
 
-
-
-  // This declares the button to change to teh 'Room Finder' Scene. It is a temporary test button to design
-  // the scene.
-  @FXML
-  private Button GoToScene4From1;
-
-  public void btnClickedFindRoom(MouseEvent mouseEvent) throws IOException {
-    Stage thisStage = (Stage) GoToScene4From1.getScene().getWindow();
-
-    Parent loginScene = FXMLLoader.load(getClass().getResource("RoomFinder.fxml"));
-    thisStage.setScene(new Scene(loginScene, 750, 500));
-  }
-
-    @FXML
-    private Button GoToScene2From1;
-
-    public void btnClickedCreateAccount(MouseEvent mouseEvent) throws IOException {
-        Stage thisStage = (Stage) GoToScene2From1.getScene().getWindow();
-
-        Parent loginScene = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
-        thisStage.setScene(new Scene(loginScene, 750, 500));
-    }
 }
