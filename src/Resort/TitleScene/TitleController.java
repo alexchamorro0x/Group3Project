@@ -1,5 +1,6 @@
 package Resort.TitleScene;
 
+import Resort.CreateAccountScene.CreateAccountController;
 import Resort.MyAccountScene.MyAccountController;
 import Resort.Utility.DatabaseCrud;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -49,6 +51,9 @@ public class TitleController {
   private Label lblDescription;
 
   @FXML
+  private CheckBox ckbManagerLogin;
+
+  @FXML
   void clickNewUser(MouseEvent event) throws IOException {
 
 // changing scenes code
@@ -71,10 +76,12 @@ public class TitleController {
   @FXML
   void clickLogin(MouseEvent event) throws IOException {
     DatabaseCrud updater = new DatabaseCrud();
-    String name = tfFirstNameLogin.getText();
+    String username = tfFirstNameLogin.getText();
     String password = pfLoginPassword.getText();
 
-    if (updater.checkLoginInformation(name, password)) {
+    boolean managerCheck = ckbManagerLogin.isSelected();
+
+    if (!managerCheck && updater.checkLoginInformation(username, password)) {
       System.out.println("Logged in successfully");
 
       // changing scenes code
@@ -94,7 +101,26 @@ public class TitleController {
       MyAccountController myAccountController = loader.getController();
 
       // initialize necessary data in the controller before making the scene change
-      myAccountController.setUserInformation(name);
+      myAccountController.setUserInformation(username);
+
+      // initiate the scene change
+      window.setScene(myAccountScene);
+
+    } else if (managerCheck && updater.checkLoginInformation(username, password)) {
+      System.out.println("Manager Login");
+
+      // changing scenes code
+      //get a reference to the window we are in
+      Stage window = (Stage) ckbManagerLogin.getScene().getWindow();
+
+      // declare and initialize a loader for the FXML scene we are going to
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../ManagerViewScene/ManagerView.fxml"));
+
+      // create a parent class with our loader pointing at the new scene
+      Parent myAccountParent = loader.load();
+      // make the new scene we are going to
+      Scene myAccountScene = new Scene(myAccountParent);
 
       // initiate the scene change
       window.setScene(myAccountScene);
