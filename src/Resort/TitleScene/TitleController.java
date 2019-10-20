@@ -1,6 +1,5 @@
 package Resort.TitleScene;
 
-import Resort.CreateAccountScene.CreateAccountController;
 import Resort.MyAccountScene.MyAccountController;
 import Resort.Utility.DatabaseCrud;
 import java.io.IOException;
@@ -10,11 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -30,7 +25,7 @@ public class TitleController {
   private Button btnRoomFinder;
 
   @FXML
-  private Label lblNewUser;
+  private Button btnNewUser;
 
   @FXML
   private Label lblTitleLabel;
@@ -45,19 +40,19 @@ public class TitleController {
   private PasswordField pfLoginPassword;
 
   @FXML
+  private CheckBox ckbManagerLogin;
+
+  @FXML
   private Label lblLoginValidation;
 
   @FXML
   private Label lblDescription;
 
   @FXML
-  private CheckBox ckbManagerLogin;
-
-  @FXML
   void clickNewUser(MouseEvent event) throws IOException {
 
 // changing scenes code
-    Stage thisStage = (Stage) lblNewUser.getScene().getWindow();
+    Stage thisStage = (Stage) btnNewUser.getScene().getWindow();
     Parent loggedInScene = FXMLLoader.load(getClass().getResource(
         "../CreateAccountScene/CreateAccount.fxml"));
     thisStage.setScene(new Scene(loggedInScene, 750, 500));
@@ -130,7 +125,6 @@ public class TitleController {
       createLoginValidator(false);
     }
   }
-
   private FadeTransition loginFadeOut = new FadeTransition(Duration.millis(2000));
 
   // Transition effect for fading out Success/Failed indicators

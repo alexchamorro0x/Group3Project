@@ -25,8 +25,6 @@ public class RoomFinderController implements Initializable {
   @FXML private ImageView RoomLayoutPicture;
   @FXML private Text RoomTypeText;
   @FXML private Text RoomDescription1;
-  @FXML private Text RoomDescription2;
-  @FXML private Text RoomDescription3;
 
   @FXML private RadioButton RadioBtnRoomTypeA;
   @FXML private RadioButton RadioBtnRoomTypeB;
@@ -40,14 +38,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomA(MouseEvent mouseEvent) {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomLayoutSampleA.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleA.png");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Room A");
-    RoomDescription1.setText("3 Bed Room");
-    RoomDescription2.setText("kitchen");
-    RoomDescription3.setText("living room");
+    RoomDescription1.setText("- 3 Bed Room \n\n- Kitchen \n\n- Living room");
     RadioBtnRoomTypeA.setSelected(true);
     RadioBtnRoomTypeB.setSelected(false);
     RadioBtnRoomTypeC.setSelected(false);
@@ -57,14 +53,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomB(MouseEvent mouseEvent) {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomLayoutSampleB.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleB.png");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Room B");
-    RoomDescription1.setText("kitchen");
-    RoomDescription2.setText("4 Bed Room");
-    RoomDescription3.setText("dining room");
+    RoomDescription1.setText("- Kitchen \n\n- 4 Bed Room \n\n- Dining room");
     RadioBtnRoomTypeA.setSelected(false);
     RadioBtnRoomTypeB.setSelected(true);
     RadioBtnRoomTypeC.setSelected(false);
@@ -74,14 +68,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomC(MouseEvent mouseEvent) {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomLayoutSampleC.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleC.png");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Room C");
-    RoomDescription1.setText("4 Bed Room");
-    RoomDescription2.setText("dining room");
-    RoomDescription3.setText("kitchen");
+    RoomDescription1.setText("- 4 Bed Room \n\n- Dining room \n\n- Kitchen");
     RadioBtnRoomTypeA.setSelected(false);
     RadioBtnRoomTypeB.setSelected(false);
     RadioBtnRoomTypeC.setSelected(true);
@@ -91,14 +83,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomD(MouseEvent mouseEvent) {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomLayoutSampleD.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleD.png");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Room D");
-    RoomDescription1.setText("5 Bed Room");
-    RoomDescription2.setText("kitchen");
-    RoomDescription3.setText("living room");
+    RoomDescription1.setText("- 5 Bed Room \n\n- Kitchen \n\n- Living room");
     RadioBtnRoomTypeA.setSelected(false);
     RadioBtnRoomTypeB.setSelected(false);
     RadioBtnRoomTypeC.setSelected(false);
