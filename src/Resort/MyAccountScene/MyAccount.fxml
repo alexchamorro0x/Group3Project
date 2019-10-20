@@ -70,6 +70,6 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnBack" layoutX="627.0" layoutY="363.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="btnHome" layoutX="29.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#btnClickHome" text="Home" />
    </children>
 </AnchorPane>

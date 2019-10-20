@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javafx.scene.Scene;
 
 /**
  * Database CRUD(Create, Retrieve, Update, Delete) class. Handles the methods for making connections
@@ -21,14 +22,24 @@ public class DatabaseCrud {
    * @param password
    * @return
    */
-  public boolean addUser(String firstName, String lastName, String password) {
+  public boolean addUser(String username, String firstName, String lastName, String password,
+      String email, String address, String state, String zipCode, String creditCardNumber,
+      String cvv) {
     Connection connection = ConnectionFactory.getConnection();
     try {
       PreparedStatement ps = connection.prepareStatement(
-          "INSERT INTO PUBLIC.ACCOUNTs(FIRSTNAME, LASTNAME, PASSWORD) values (?, ?, ?);");
+          "INSERT INTO PUBLIC.ACCOUNTs(FIRSTNAME, LASTNAME, PASSWORD, USERNAME, EMAIL, ADDRESS, "
+              + "STATE, ZIPCODE, CREDITCARDNUMBER, CVV) values (?,?,?,?,?,?,?,?,?,?);");
       ps.setString(1, firstName);
       ps.setString(2, lastName);
       ps.setString(3, password);
+      ps.setString(4, username);
+      ps.setString(5, email);
+      ps.setString(6, address);
+      ps.setString(7, state);
+      ps.setString(8, zipCode);
+      ps.setString(9, creditCardNumber);
+      ps.setString(10, cvv);
       int returnCode = ps.executeUpdate();
 
       //close the prepared statement
@@ -56,62 +67,92 @@ public class DatabaseCrud {
   }
 
   /**
-   * takes the first name and password the user enters and checks if it exists in the database
+   * takes the username name and password the user enters and checks if it exists in the database
    *
-   * @param firstName
+   * @param username
    * @param password
    * @return
    */
-  public boolean checkLoginInformation(String firstName, String password) {
+  public boolean checkLoginInformation(String username, String password) {
     //establish a connection to the database
-    Connection loginConnection = ConnectionFactory.getConnection();
-
-    //test account to compare with all accounts
-    LoginAccount userAccount = new LoginAccount(firstName, password);
-    //List of all accounts from the database
-    ArrayList<LoginAccount> accounts = new ArrayList<LoginAccount>();
+    Connection connection = ConnectionFactory.getConnection();
+    String databasePassword = "";
 
     try {
       //Read first names and passwords into result set
-      String sql = ("SELECT PASSWORD, FIRSTNAME FROM ACCOUNTS");
-      Statement statement = loginConnection.createStatement();
+      String sql = ("SELECT (PASSWORD) FROM ACCOUNTS WHERE USERNAME = '" + username + "'");
+      Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery(sql);
 
       //Loop through database and read all the values into accounts
       while (resultSet.next()) {
-        LoginAccount checkAccount = new LoginAccount();
-        checkAccount.setFirstName(resultSet.getString("FIRSTNAME"));
-        checkAccount.setPassword(resultSet.getString("PASSWORD"));
-        accounts.add(checkAccount);
+        databasePassword = resultSet.getString("PASSWORD");
       }
-
       //close the statement and the result set created
       statement.close();
       resultSet.close();
-      //System.out.println("Result Set: " + accounts.toString());
-      boolean contains = accounts.contains(userAccount);
-      //if the test account is found it returns true
-      if (contains) {
-        //System.out.println(true);
-        return true;
-      }
 
     } catch (SQLException ex) {
       ex.printStackTrace();
-    } finally {
-      // close the connection
-
-      try {
-        if (loginConnection != null) {
-          loginConnection.close();
-        }
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
     }
-    return false;
+//      try {
+//        if (connection != null) {
+//          connection.close();
+//        }
+//      } catch (SQLException e) {
+//        e.printStackTrace();
+//      }
+
+      if (databasePassword.equals(password)) {
+        return true;
+      } else {
+        return false;
+    }
+
   }
+
+  /**
+   * method gets the account information for a specific username in the database
+   * @return AccountInformation
+   */
+  public AccountInformation getAccountInformation(String username) {
+    //establish a connection to the database
+    Connection connection = ConnectionFactory.getConnection();
+    AccountInformation returnAccountInformation = new AccountInformation();
+
+    try {
+      //Read first names and passwords into result set
+      String sql = ("SELECT * FROM PUBLIC.ACCOUNTS WHERE USERNAME = '" + username + "'");
+      Statement statement = connection.createStatement();
+      ResultSet resultSetForAccount = statement.executeQuery(sql);
+
+
+      //Loop through and read all the values into returnAccountInformation
+      while (resultSetForAccount.next()) {
+
+        returnAccountInformation.setUserName(resultSetForAccount.getString("USERNAME"));
+        returnAccountInformation.setFirstName(resultSetForAccount.getString("FIRSTNAME"));
+        returnAccountInformation.setLastName(resultSetForAccount.getString("LASTNAME"));
+        returnAccountInformation.setEmail(resultSetForAccount.getString("EMAIL"));
+        returnAccountInformation.setAddress(resultSetForAccount.getString("ADDRESS"));
+        returnAccountInformation.setState(resultSetForAccount.getString("STATE"));
+        returnAccountInformation.setZipCode(resultSetForAccount.getString("ZIPCODE"));
+
+
+
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+      }
+
+    // return the account information class
+    return returnAccountInformation;
+    }
+
 }
+
+
+
 
 
 

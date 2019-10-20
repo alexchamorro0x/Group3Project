@@ -8,22 +8,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="btnCreateAccount" minHeight="0.0" minWidth="0.0" styleClass="root" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="btnCreateAccount" minHeight="0.0" minWidth="0.0" styleClass="root" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.CreateAccountScene.CreateAccountController">
    <children>
-      <TextField fx:id="tfCreateFirstName" layoutX="20.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreateLastName" layoutX="20.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreatePassword" layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreatePassword1" layoutX="20.0" layoutY="245.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreatePassword11" layoutX="20.0" layoutY="292.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreatePassword111" layoutX="20.0" layoutY="341.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreateFirstName1" layoutX="208.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreateFirstName11" layoutX="208.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreateFirstName111" layoutX="208.0" layoutY="199.0" prefHeight="25.0" prefWidth="85.0" />
-      <TextField fx:id="tfCreateFirstName2" layoutX="403.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCreateFirstName21" layoutX="403.0" layoutY="199.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfFirstName" layoutX="20.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfLastName" layoutX="20.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfUsername" layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfEmail" layoutX="20.0" layoutY="245.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfPassword" layoutX="20.0" layoutY="292.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfConfirmPassword" layoutX="20.0" layoutY="341.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfAddress" layoutX="208.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfState" layoutX="208.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfzipcode" layoutX="208.0" layoutY="199.0" prefHeight="25.0" prefWidth="85.0" />
+      <TextField fx:id="tfCreditCardNumber" layoutX="403.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfCvv" layoutX="403.0" layoutY="199.0" prefHeight="25.0" prefWidth="149.0" />
       <ComboBox layoutX="385.0" layoutY="148.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
       <ComboBox layoutX="510.0" layoutY="148.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
-      <Button layoutX="240.0" layoutY="333.0" mnemonicParsing="false" text="Create Account" />
+      <Button layoutX="240.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#btnClickCreateAccount" text="Create Account" />
       <Label layoutX="20.0" layoutY="83.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="First Name" />
       <Label layoutX="21.0" layoutY="133.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Last Name" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="6.0" prefHeight="41.0" prefWidth="168.0" styleClass="title" text="Create Account" />
@@ -48,5 +48,6 @@
             <Image url="@Creditcard.PNG" />
          </image>
       </ImageView>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnClickHome" text="Home" />
    </children>
 </AnchorPane>

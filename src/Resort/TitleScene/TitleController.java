@@ -1,5 +1,6 @@
 package Resort.TitleScene;
 
+import Resort.MyAccountScene.MyAccountController;
 import Resort.Utility.DatabaseCrud;
 import java.io.IOException;
 import javafx.animation.FadeTransition;
@@ -75,11 +76,29 @@ public class TitleController {
 
     if (updater.checkLoginInformation(name, password)) {
       System.out.println("Logged in successfully");
+
       // changing scenes code
-      Stage thisStage = (Stage) lblLoginValidation.getScene().getWindow();
-      Parent loggedInScene = FXMLLoader.load(getClass().getResource(
-          "../MyAccountScene/MyAccount.fxml"));
-      thisStage.setScene(new Scene(loggedInScene, 750, 500));
+      //get a reference to the window we are in
+      Stage window = (Stage) lblLoginValidation.getScene().getWindow();
+
+      // declare and initialize a loader for the FXML scene we are going to
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../MyAccountScene/MyAccount.fxml"));
+
+      // create a parent class with our loader pointing at the new scene
+      Parent myAccountParent = loader.load();
+      // make the new scene we are going to
+      Scene myAccountScene = new Scene(myAccountParent);
+
+      // get a reference to the controller for the scene we are going to
+      MyAccountController myAccountController = loader.getController();
+
+      // initialize necessary data in the controller before making the scene change
+      myAccountController.setUserInformation(name);
+
+      // initiate the scene change
+      window.setScene(myAccountScene);
+
     } else {
       System.out.println("Username or password incorrect");
       createLoginValidator(false);

@@ -1,15 +1,24 @@
 package Resort.MyAccountScene;
 
+import Resort.Utility.AccountInformation;
 import Resort.Utility.Booking;
+import Resort.Utility.DatabaseCrud;
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class MyAccountController {
+
+  private String userName;
 
   @FXML
   private Label lblFirstName;
@@ -60,7 +69,7 @@ public class MyAccountController {
   private Button btnDeleteAccount;
 
   @FXML
-  private Button btnBack;
+  private Button btnHome;
 
   @FXML
   void btnClickCancelBooking(MouseEvent event) {
@@ -87,7 +96,44 @@ public class MyAccountController {
     System.out.println("Edit Account Entered");
   }
 
+  @FXML
+  void btnClickHome(MouseEvent event) throws IOException {
+    //get a reference to the window we are in
+    Stage window = (Stage) btnHome.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent title = loader.load();
+    // make the new scene we are going to
+    Scene titleScene = new Scene(title);
+
+    // initiate the scene change (no need to make changes to controller)
+    window.setScene(titleScene);
+  }
+
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserInformation(String userName) {
+    DatabaseCrud databaseAgent = new DatabaseCrud();
+    AccountInformation userInformation = databaseAgent.getAccountInformation(userName);
+    this.userName = userName;
+    lblUserName.setText(userInformation.getUserName());
+    lblFirstName.setText(userInformation.getFirstName());
+    lblLastName.setText(userInformation.getLastName());
+    lblEmail.setText(userInformation.getEmail());
+    lblAddress.setText(userInformation.getAddress());
+    lblState.setText(userInformation.getState());
+    lblZipCode.setText(userInformation.getZipCode());
+  }
+
   public void initialize() {
+
     tvCheckIn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
     tvCheckOut.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
     tvRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
