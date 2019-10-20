@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.TitleController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.TitleScene.TitleController">
     <AnchorPane layoutX="497.0" layoutY="231.0" minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="250.0">
         <TextField fx:id="tfFirstNameLogin" layoutX="84.0" layoutY="56.0" prefHeight="25.0" prefWidth="111.0" />
         <PasswordField fx:id="pfLoginPassword" layoutX="84.0" layoutY="116.0" prefHeight="25.0" prefWidth="111.0" />

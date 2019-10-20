@@ -1,5 +1,6 @@
-package Resort;
+package Resort.TitleScene;
 
+import Resort.Utility.DatabaseCrud;
 import java.io.IOException;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -13,8 +14,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -53,7 +52,8 @@ public class TitleController {
 
 // changing scenes code
     Stage thisStage = (Stage) lblNewUser.getScene().getWindow();
-    Parent loggedInScene = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
+    Parent loggedInScene = FXMLLoader.load(getClass().getResource(
+        "../CreateAccountScene/CreateAccount.fxml"));
     thisStage.setScene(new Scene(loggedInScene, 750, 500));
 
   }
@@ -62,7 +62,8 @@ public class TitleController {
   void clickRoomFinder(ActionEvent event) throws IOException {
 // changing scenes code
     Stage thisStage = (Stage) btnRoomFinder.getScene().getWindow();
-    Parent loggedInScene = FXMLLoader.load(getClass().getResource("RoomFinder.fxml"));
+    Parent loggedInScene = FXMLLoader.load(getClass().getResource(
+        "../RoomFinderScene/RoomFinder.fxml"));
     thisStage.setScene(new Scene(loggedInScene, 750, 500));
   }
 
@@ -76,7 +77,8 @@ public class TitleController {
       System.out.println("Logged in successfully");
       // changing scenes code
       Stage thisStage = (Stage) lblLoginValidation.getScene().getWindow();
-      Parent loggedInScene = FXMLLoader.load(getClass().getResource("MyAccount.fxml"));
+      Parent loggedInScene = FXMLLoader.load(getClass().getResource(
+          "../MyAccountScene/MyAccount.fxml"));
       thisStage.setScene(new Scene(loggedInScene, 750, 500));
     } else {
       System.out.println("Username or password incorrect");

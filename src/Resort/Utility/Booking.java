@@ -1,4 +1,4 @@
-package Resort;
+package Resort.Utility;
 
 public class Booking {
 

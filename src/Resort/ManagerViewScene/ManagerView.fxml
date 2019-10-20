@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="Name" onDragDetected="#tfName" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.ManagerViewController">
+<AnchorPane fx:id="Name" onDragDetected="#tfName" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.ManagerViewScene.ManagerViewController">
    <children>
       <TableView layoutX="14.0" layoutY="87.0" prefHeight="192.0" prefWidth="411.0">
         <columns>

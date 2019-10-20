@@ -1,4 +1,4 @@
-package Resort;
+package Resort.RoomFinderScene;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,8 +11,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -111,7 +109,7 @@ public class RoomFinderController implements Initializable {
   // 'Title'.
   public void btnClickedHome4(ActionEvent actionEvent) throws IOException {
     Stage thisStage = (Stage) GoToScene1From4.getScene().getWindow();
-    Parent loginScene = FXMLLoader.load(getClass().getResource("Title.fxml"));
+    Parent loginScene = FXMLLoader.load(getClass().getResource("../TitleScene/Title.fxml"));
     thisStage.setScene(new Scene(loginScene, 750, 500));
   }
 }
