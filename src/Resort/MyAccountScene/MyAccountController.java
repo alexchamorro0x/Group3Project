@@ -1,5 +1,6 @@
 package Resort.MyAccountScene;
 
+import Resort.EditAccountScene.EditAccountController;
 import Resort.Utility.AccountInformation;
 import Resort.Utility.Booking;
 import Resort.Utility.DatabaseCrud;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 
 public class MyAccountController {
 
-  private String userName;
+  private AccountInformation userAccount = new AccountInformation();
 
   @FXML
   private Label lblFirstName;
@@ -89,11 +90,24 @@ public class MyAccountController {
   }
 
   @FXML
-  void btnClickEditAccount(MouseEvent event) {
-    /*
-      Todo: add code to initiate a scene change the edit account scene
-     */
-    System.out.println("Edit Account Entered");
+  void btnClickEditAccount(MouseEvent event) throws IOException {
+    //get a reference to the window we are in
+    Stage window = (Stage) btnHome.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../EditAccountScene/EditAccount.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent title = loader.load();
+    // make the new scene we are going to
+    Scene titleScene = new Scene(title);
+
+    EditAccountController editAccountController = loader.getController();
+    editAccountController.setAccountInformation(userAccount);
+
+    // initiate the scene change (no need to make changes to controller)
+    window.setScene(titleScene);
   }
 
   @FXML
@@ -114,15 +128,10 @@ public class MyAccountController {
     window.setScene(titleScene);
   }
 
-
-  public String getUserName() {
-    return userName;
-  }
-
   public void setUserInformation(String userName) {
     DatabaseCrud databaseAgent = new DatabaseCrud();
     AccountInformation userInformation = databaseAgent.getAccountInformation(userName);
-    this.userName = userName;
+    this.userAccount = userInformation;
     lblUserName.setText(userInformation.getUserName());
     lblFirstName.setText(userInformation.getFirstName());
     lblLastName.setText(userInformation.getLastName());
@@ -133,7 +142,6 @@ public class MyAccountController {
   }
 
   public void initialize() {
-
     tvCheckIn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
     tvCheckOut.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
     tvRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
