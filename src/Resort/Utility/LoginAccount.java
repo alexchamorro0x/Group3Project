@@ -1,4 +1,4 @@
-package Resort;
+package Resort.Utility;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package Resort;
+package Resort.Utility;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Database CRUD(Create, Retrieve, Update, Delete) class. Handles the methods for making connections

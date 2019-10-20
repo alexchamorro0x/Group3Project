@@ -1,4 +1,4 @@
-package Resort;
+package Resort.ManagerViewScene;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class ManagerViewController {
     @FXML
     public void btnClickedHome5(ActionEvent actionEvent) throws IOException {
         Stage thisStage = (Stage) GoToScene1From5.getScene().getWindow();
-        Parent loginScene = FXMLLoader.load(getClass().getResource("Title.fxml"));
+        Parent loginScene = FXMLLoader.load(getClass().getResource("../TitleScene/Title.fxml"));
         thisStage.setScene(new Scene(loginScene, 750, 500));
     }
 

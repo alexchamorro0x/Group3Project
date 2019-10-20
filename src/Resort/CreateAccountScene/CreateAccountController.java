@@ -1,4 +1,4 @@
-package Resort;
+package Resort.CreateAccountScene;
 
 public class CreateAccountController {
 

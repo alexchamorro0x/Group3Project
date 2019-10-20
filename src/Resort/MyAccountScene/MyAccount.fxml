@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="703.0" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.MyAccountScene.MyAccountController">
+   <children>
+      <Label layoutX="275.0" layoutY="14.0" text="My Account">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="32.0" layoutY="121.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="First Name:" />
+            <Label text="Last Name:" GridPane.rowIndex="1" />
+            <Label text="User Name:" GridPane.rowIndex="2" />
+            <Label text="Email Address:" GridPane.rowIndex="3" />
+            <Label text="Address:" GridPane.rowIndex="4" />
+            <Label text="State:" GridPane.rowIndex="5" />
+            <Label text="Zip Code:" GridPane.rowIndex="6" />
+            <Label fx:id="lblFirstName" GridPane.columnIndex="1" />
+            <Label fx:id="lblLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lblUserName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lblEmail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="lblAddress" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="lblState" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="lblZipCode" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnEditAccount" layoutX="17.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#btnClickEditAccount" text="Edit Account" />
+      <TableView fx:id="tvBookings" layoutX="240.0" layoutY="120.0" prefHeight="161.0" prefWidth="439.0">
+        <columns>
+            <TableColumn fx:id="tvCheckIn" prefWidth="90.0" text="Check in " />
+            <TableColumn fx:id="tvCheckOut" prefWidth="99.0" text="Check out" />
+          <TableColumn fx:id="tvRoomType" prefWidth="87.0" text="Room Type" />
+            <TableColumn fx:id="tvRoomNumber" prefWidth="94.0" text="Room Number" />
+          <TableColumn fx:id="tvBookingId" prefWidth="68.0" text="Booking Id" />
+        </columns>
+      </TableView>
+      <Label layoutX="421.0" layoutY="76.0" text="Bookings">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnCancelBooking" layoutX="486.0" layoutY="289.0" mnemonicParsing="false" onMouseClicked="#btnClickCancelBooking" text="Cancel Booking" />
+      <Button fx:id="btnDeleteAccount" layoutX="113.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#btnClickDeleteAccount" text="Delete Account" />
+      <Label layoutX="50.0" layoutY="75.0" text="Account Information">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnBack" layoutX="627.0" layoutY="363.0" mnemonicParsing="false" text="Back" />
+   </children>
+</AnchorPane>
