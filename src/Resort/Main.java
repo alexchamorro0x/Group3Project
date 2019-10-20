@@ -16,12 +16,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        //Parent root = FXMLLoader.load(getClass().getResource("Title.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("MyAccount.fxml")); // set to myAccount for testing
+        Parent root = FXMLLoader.load(getClass().getResource("Title.fxml"));
         primaryStage.setTitle("Resort Reservations");
         root.getStylesheets().add
             (Main.class.getResource("login.css").toExternalForm());
-        primaryStage.setScene(new Scene(root, 700, 500));
+        primaryStage.setScene(new Scene(root, 750, 500));
         primaryStage.show();
     }
 
@@ -30,3 +29,8 @@ public class Main extends Application {
         launch(args);
     }
 }
+
+// yes
+
+
+// comment
