@@ -1,8 +1,25 @@
-Gridpane {
-  -fx-background-color: #ffe6cc;
+.root {
+  -fx-background-color: #1b1c1c;
+  -fx-border-color: white;
+  -fx-border-width: 5px;
 }
+.text {
+  -fx-text-fill: white;
+}
+
+#lblDescription {
+  -fx-padding: 2px;
+  /*-fx-border-color: white;
+  -fx-border-width: 5px;*/
+  -fx-text-fill: white;
+}
+
 .grid {
   -fx-border-color:  #b35900;
   -fx-border-width: 2px;
   -fx-border-style: solid;
+}
+
+#lblNewUser:hover {
+  -fx-background-color: #dae7f3;
 }

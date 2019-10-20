@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -45,7 +46,11 @@ public class TitleController {
   private Label lblLoginValidation;
 
   @FXML
+  private Label lblDescription;
+
+  @FXML
   void clickNewUser(MouseEvent event) throws IOException {
+
 // changing scenes code
     Stage thisStage = (Stage) lblNewUser.getScene().getWindow();
     Parent loggedInScene = FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
