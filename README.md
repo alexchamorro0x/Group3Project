@@ -10,6 +10,9 @@ Javadocs - comming soon
 ## Diagrams
 ### Class Digram
 
+### Use Case Diagram
+
+
 ### Database Diagram
 
 ## Getting Started
