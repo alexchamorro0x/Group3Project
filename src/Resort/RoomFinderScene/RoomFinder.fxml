@@ -26,11 +26,11 @@
             </font>
         </Label>
         <Button fx:id="GoToScene1From4" layoutX="28.0" layoutY="29.0" mnemonicParsing="false" onAction="#btnClickedHome4" text="Home" />
-        <RadioButton fx:id="RadioBtnRoomTypeA" layoutX="18.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomA" text="Room Type A" />
-        <RadioButton fx:id="RadioBtnRoomTypeB" layoutX="18.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomB" text="Room Type B" />
-        <RadioButton fx:id="RadioBtnRoomTypeC" layoutX="18.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomC" text="Room Type C" />
-        <RadioButton fx:id="RadioBtnRoomTypeD" layoutX="18.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomD" text="Room Type D" />
-        <Label layoutX="33.0" layoutY="310.0" text="Room Type">
+        <RadioButton fx:id="radioBtnRoomTypeA" layoutX="18.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomA" text="Room Type A" />
+        <RadioButton fx:id="radioBtnRoomTypeB" layoutX="18.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomB" text="Room Type B" />
+        <RadioButton fx:id="radioBtnRoomTypeC" layoutX="18.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomC" text="Room Type C" />
+        <RadioButton fx:id="radioBtnRoomTypeD" layoutX="18.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomD" text="Room Type D" />
+        <Label fx:id="lblAvailableRooms" layoutX="21.0" layoutY="311.0" text="Available Rooms">
             <font>
                 <Font size="18.0" />
             </font>
@@ -42,8 +42,8 @@
             </font>
         </Text>
         <Text fx:id="RoomDescription1" layoutX="545.0" layoutY="353.0" scaleX="1.0" scaleY="0.9999934445143697" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" styleClass="text" />
-        <DatePicker fx:id="datePickerStart" cacheHint="SPEED" editable="false" layoutX="25.0" layoutY="117.0" onAction="#datePickerStartSelection" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
-        <DatePicker fx:id="datePickerEnd" editable="false" layoutX="26.0" layoutY="214.0" onAction="#datePickerEndSelection" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
+        <DatePicker fx:id="datePickerStart" cacheHint="SPEED" editable="false" layoutX="25.0" layoutY="117.0" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
+        <DatePicker fx:id="datePickerEnd" editable="false" layoutX="26.0" layoutY="214.0" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
       <Label layoutX="97.0" layoutY="89.0" text="Start Date">
          <font>
             <Font name="Arial" size="20.0" />
@@ -54,6 +54,8 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="btnBookRoom" layoutX="139.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnClickedBookRoom" text="Book Room" />
+      <Label fx:id="lblInvalidDate" layoutX="37.0" layoutY="276.0" />
     </children>
     <stylesheets>
         <URL value="@roomFinder.css" />

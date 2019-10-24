@@ -102,10 +102,10 @@
         <Font name="Baskerville Old Face" size="21.0" />
       </font>
     </Label>
-    <RadioButton fx:id="RadioBtnRoomTypeA" layoutX="18.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomA" text="Room Type A" />
-    <RadioButton fx:id="RadioBtnRoomTypeB" layoutX="18.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomB" text="Room Type B" />
-    <RadioButton fx:id="RadioBtnRoomTypeC" layoutX="18.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomC" text="Room Type C" />
-    <RadioButton fx:id="RadioBtnRoomTypeD" layoutX="18.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomD" text="Room Type D" />
+    <RadioButton fx:id="radioBtnRoomTypeA" layoutX="18.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomA" text="Room Type A" />
+    <RadioButton fx:id="radioBtnRoomTypeB" layoutX="18.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomB" text="Room Type B" />
+    <RadioButton fx:id="radioBtnRoomTypeC" layoutX="18.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomC" text="Room Type C" />
+    <RadioButton fx:id="radioBtnRoomTypeD" layoutX="18.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomD" text="Room Type D" />
     <Label layoutX="33.0" layoutY="310.0" text="Room Type">
       <font>
         <Font size="18.0" />
