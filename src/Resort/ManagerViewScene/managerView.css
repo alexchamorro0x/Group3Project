@@ -1,3 +1,13 @@
 .tableViewText {
     -fx-text-fill: black;
 }
+
+
+.jfx-combo-box {
+    -fx-background-color:  lightgrey;
+}
+
+.jfx-combo-box .label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}

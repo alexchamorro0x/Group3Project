@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="Name" onDragDetected="#tfName" prefHeight="500.0" prefWidth="750.0" styleClass="background" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.ManagerViewScene.ManagerViewController">
    <children>
-      <TableView layoutX="14.0" layoutY="87.0" prefHeight="192.0" prefWidth="411.0">
+      <TableView layoutX="14.0" layoutY="87.0" prefHeight="192.0" prefWidth="411.0" styleClass="jfx-combo-box" stylesheets="@managerView.css">
         <columns>
             <TableColumn prefWidth="77.0" text="Name" />
           <TableColumn prefWidth="77.0" text="Date" />
@@ -33,7 +33,7 @@
       <Label layoutX="460.0" layoutY="117.0" text="Name" />
       <Label layoutX="460.0" layoutY="145.0" text="Date Occupied" />
       <CheckBox fx:id="enableEdit" layoutX="460.0" layoutY="47.0" mnemonicParsing="false" onAction="#cbEdit" styleClass="text" stylesheets="@../resortTemplate.css" text="Edit" />
-      <TableView layoutX="14.0" layoutY="308.0" prefHeight="192.0" prefWidth="411.0" styleClass="tableColumn" stylesheets="@../resortTemplate.css">
+      <TableView layoutX="14.0" layoutY="308.0" prefHeight="192.0" prefWidth="411.0" styleClass="jfx-combo-box" stylesheets="@managerView.css">
          <columns>
             <TableColumn prefWidth="89.0" styleClass="tableColumn" text="Room Number" />
             <TableColumn prefWidth="75.0" text="Room Type" />

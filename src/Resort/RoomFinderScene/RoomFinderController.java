@@ -7,16 +7,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class RoomFinderController implements Initializable {
@@ -30,9 +35,25 @@ public class RoomFinderController implements Initializable {
   @FXML private RadioButton RadioBtnRoomTypeB;
   @FXML private RadioButton RadioBtnRoomTypeC;
   @FXML private RadioButton RadioBtnRoomTypeD;
+  @FXML private DatePicker datePickerStart;
+  @FXML private DatePicker datePickerEnd;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
+
+  public void datePickerStartSelection() {
+    // https://stackoverflow.com/questions/20446026/get-value-from-date-picker
+
+    LocalDate dateStart = datePickerStart.getValue();
+    System.out.println(dateStart);
+    }
+
+    public void datePickerEndSelection() {
+      LocalDate dateEnd = datePickerEnd.getValue();
+      System.out.println(dateEnd);
+    }
+
+
 
   // Sets the Radio Button for 'Room Type A' to true, selected. Other Radio Buttons (B,C,D) are set
   // to false(deselected)
@@ -101,5 +122,5 @@ public class RoomFinderController implements Initializable {
     Stage thisStage = (Stage) GoToScene1From4.getScene().getWindow();
     Parent loginScene = FXMLLoader.load(getClass().getResource("../TitleScene/Title.fxml"));
     thisStage.setScene(new Scene(loginScene, 750, 500));
-  }
-}
+    }
+    }
