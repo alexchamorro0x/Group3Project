@@ -1,7 +1,10 @@
 package Resort.TitleScene;
 
+import Resort.ManagerViewScene.ManagerViewController;
 import Resort.MyAccountScene.MyAccountController;
-import Resort.Utility.DatabaseCrud;
+import Resort.RoomFinderScene.RoomFinderController;
+import Resort.Utility.DatabaseAgent;
+import Resort.Utility.SessionInformation;
 import java.io.IOException;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -12,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -49,6 +53,50 @@ public class TitleController {
   private Label lblDescription;
 
   @FXML
+  private AnchorPane apLoginPrompt;
+
+  @FXML
+  private AnchorPane apLoggedIn;
+
+  @FXML
+  private Label lblLoggedInUsername;
+
+
+  @FXML
+  private Button btnManagerView;
+
+
+  // Fields to hold the Username and if user is a manager
+  private SessionInformation sessionInformation = new SessionInformation();
+
+
+  // method for setting username if logged in
+  public void setSessionInformation(SessionInformation sessionInformation) {
+    this.sessionInformation = sessionInformation;
+    updateLoginPane();
+  }
+
+  // method for setting visibility of LoggedInPane or login prompt pane
+  void updateLoginPane() {
+    // if logged in, set prompt to not visible and set loggedInpane to visible and set username
+    if (sessionInformation.getUserName() != null) {
+      apLoggedIn.setVisible(true);
+      apLoginPrompt.setVisible(false);
+      lblLoggedInUsername.setText(sessionInformation.getUserName());
+    } else {
+      apLoginPrompt.setVisible(true);
+      apLoggedIn.setVisible(false);
+    }
+    // if the user is a manager show the Manager View button
+    if (sessionInformation.isManager()) {
+      btnManagerView.setVisible(true);
+    } else {
+      btnManagerView.setVisible(false);
+    }
+
+  }
+
+  @FXML
   void clickNewUser(MouseEvent event) throws IOException {
 
 // changing scenes code
@@ -62,63 +110,61 @@ public class TitleController {
   @FXML
   void clickRoomFinder(ActionEvent event) throws IOException {
 // changing scenes code
+    /*
     Stage thisStage = (Stage) btnRoomFinder.getScene().getWindow();
     Parent loggedInScene = FXMLLoader.load(getClass().getResource(
         "../RoomFinderScene/RoomFinder.fxml"));
     thisStage.setScene(new Scene(loggedInScene, 750, 500));
+    */
+    //get a reference to the window we are in
+    Stage window = (Stage) btnRoomFinder.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../RoomFinderScene/roomFinder.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent roomFinder = loader.load();
+
+    // get controller for Title page
+    RoomFinderController roomFinderController = loader.getController();
+
+    // if username is set, set in controller before changing scene
+    if (sessionInformation.getUserName() != null) {
+      roomFinderController.setSessionInformation(sessionInformation);
+    }
+    // make the new scene we are going to
+    Scene titleScene = new Scene(roomFinder);
+
+    // initiate the scene change (no need to make changes to controller)
+    window.setScene(titleScene);
+
   }
 
   @FXML
   void clickLogin(MouseEvent event) throws IOException {
-    DatabaseCrud updater = new DatabaseCrud();
     String username = tfFirstNameLogin.getText();
     String password = pfLoginPassword.getText();
 
     boolean managerCheck = ckbManagerLogin.isSelected();
 
-    if (!managerCheck && updater.checkLoginInformation(username, password)) {
+    if (!managerCheck && DatabaseAgent.checkLoginInformation(username, password)) {
       System.out.println("Logged in successfully");
 
-      // changing scenes code
-      //get a reference to the window we are in
-      Stage window = (Stage) lblLoginValidation.getScene().getWindow();
+      // set session information to include username and if is manager
+      sessionInformation.setUserName(username);
 
-      // declare and initialize a loader for the FXML scene we are going to
-      FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("../MyAccountScene/MyAccount.fxml"));
+      updateLoginPane();
 
-      // create a parent class with our loader pointing at the new scene
-      Parent myAccountParent = loader.load();
-      // make the new scene we are going to
-      Scene myAccountScene = new Scene(myAccountParent);
-
-      // get a reference to the controller for the scene we are going to
-      MyAccountController myAccountController = loader.getController();
-
-      // initialize necessary data in the controller before making the scene change
-      myAccountController.setUserInformation(username);
-
-      // initiate the scene change
-      window.setScene(myAccountScene);
-
-    } else if (managerCheck && updater.checkLoginInformation(username, password)) {
+    } else if (managerCheck && DatabaseAgent.checkLoginInformation(username, password)) {
       System.out.println("Manager Login");
 
-      // changing scenes code
-      //get a reference to the window we are in
-      Stage window = (Stage) ckbManagerLogin.getScene().getWindow();
+      // set session information
+      sessionInformation.setUserName(username);
+      sessionInformation.setManager(true);
 
-      // declare and initialize a loader for the FXML scene we are going to
-      FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("../ManagerViewScene/ManagerView.fxml"));
-
-      // create a parent class with our loader pointing at the new scene
-      Parent myAccountParent = loader.load();
-      // make the new scene we are going to
-      Scene myAccountScene = new Scene(myAccountParent);
-
-      // initiate the scene change
-      window.setScene(myAccountScene);
+      // change visibility for login pane and manager button
+      updateLoginPane();
 
     } else {
       System.out.println("Username or password incorrect");
@@ -142,6 +188,64 @@ public class TitleController {
 
   }
 
+  @FXML
+  void btnClickManagerView(MouseEvent event) throws IOException {
+    // changing scenes code
+    //get a reference to the window we are in
+    Stage window = (Stage) ckbManagerLogin.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../ManagerViewScene/ManagerView.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent myAccountParent = loader.load();
+    // make the new scene we are going to
+    Scene myAccountScene = new Scene(myAccountParent);
+
+    // get a reference to the controller for the scene we are going to
+    ManagerViewController managerViewController = loader.getController();
+
+    // initialize necessary data in the controller before making the scene change
+    managerViewController.setSessionInformation(sessionInformation);
+
+    // initiate the scene change
+    window.setScene(myAccountScene);
+  }
+
+
+  @FXML
+  void btnClickMyAccount(MouseEvent event) throws IOException {
+    // changing scenes code
+    //get a reference to the window we are in
+    Stage window = (Stage) lblLoginValidation.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../MyAccountScene/MyAccount.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent myAccountParent = loader.load();
+    // make the new scene we are going to
+    Scene myAccountScene = new Scene(myAccountParent);
+
+    // get a reference to the controller for the scene we are going to
+    MyAccountController myAccountController = loader.getController();
+
+    // initialize necessary data in the controller before making the scene change
+    myAccountController.setSessionInformation(sessionInformation);
+
+    // initiate the scene change
+    window.setScene(myAccountScene);
+  }
+
+  @FXML
+  void btnClickSignOut(MouseEvent event) {
+    sessionInformation.setManager(false);
+    sessionInformation.setUserName(null);
+    updateLoginPane();
+  }
+
   /**
    * Initialize method that gets called once the scene is open and the controller is initialized.
    */
@@ -154,6 +258,9 @@ public class TitleController {
     loginFadeOut.setToValue(0.0);
     loginFadeOut.setCycleCount(1);
     loginFadeOut.setAutoReverse(false);
+
+    // testing set visibility for loggedinPane or loginPrompt depending on if username is set
+    updateLoginPane();
 
 
   }

@@ -9,6 +9,7 @@ public class AccountInformation {
   private String state;
   private String zipCode;
   private String creditCardNumber;
+  private int userId;
 
   public String getCreditCardNumber() {
     return creditCardNumber;
@@ -72,5 +73,13 @@ public class AccountInformation {
 
   public void setZipCode(String zipCode) {
     this.zipCode = zipCode;
+  }
+
+  public int getUserId() {
+    return userId;
+  }
+
+  public void setUserId(int userId) {
+    this.userId = userId;
   }
 }
