@@ -1,6 +1,9 @@
 package Resort.EditAccountScene;
 
+import Resort.TitleScene.TitleController;
 import Resort.Utility.AccountInformation;
+import Resort.Utility.DatabaseAgent;
+import Resort.Utility.SessionInformation;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +56,14 @@ public class EditAccountController {
   @FXML
   private Label lblCreateIndicate;
 
+  // String to hold our username if logged in and if user is a manager
+  private SessionInformation sessionInformation = new SessionInformation();
+
+  // setter for session information
+  public void setSessionInformation(SessionInformation sessionInformation) {
+    this.sessionInformation = sessionInformation;
+  }
+
   @FXML
   void btnClickUpdateAccount(MouseEvent event) {
     //todo add logic to update the account in the database
@@ -61,7 +72,7 @@ public class EditAccountController {
   @FXML
   void btnClickHome(MouseEvent event) throws IOException {
     //get a reference to the window we are in
-    Stage window = (Stage) tfUsername.getScene().getWindow();
+    Stage window = (Stage) btnCreateAccount.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
     FXMLLoader loader = new FXMLLoader();
@@ -69,6 +80,10 @@ public class EditAccountController {
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
+
+    // get controller for Title page
+    TitleController titleController = loader.getController();
+    titleController.setSessionInformation(sessionInformation);
     // make the new scene we are going to
     Scene titleScene = new Scene(title);
 
@@ -76,7 +91,9 @@ public class EditAccountController {
     window.setScene(titleScene);
   }
 
-  public void setAccountInformation(AccountInformation userAccount) {
+  public void setSessionformation(SessionInformation sessionformation) {
+    this.sessionInformation = sessionformation;
+    AccountInformation userAccount = DatabaseAgent.getAccountInformation(sessionformation.getUserName());
     tfFirstName.setText(userAccount.getFirstName());
     tfLastName.setText(userAccount.getLastName());
     tfUsername.setText(userAccount.getUserName());

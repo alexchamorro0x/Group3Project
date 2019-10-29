@@ -1,12 +1,11 @@
 package Resort.CreateAccountScene;
 
-import Resort.Utility.DatabaseCrud;
+import Resort.Utility.DatabaseAgent;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -70,11 +69,11 @@ public class CreateAccountController {
 
   @FXML
   void btnClickCreateAccount(MouseEvent event) {
-    DatabaseCrud databaseUpdater = new DatabaseCrud();
+
 
     //todo add code to validate values and give appropriate error messages for incorrect values
 
-    databaseUpdater.addUser(tfUsername.getText(), tfFirstName.getText(), tfLastName.getText(),
+    DatabaseAgent.addUser(tfUsername.getText(), tfFirstName.getText(), tfLastName.getText(),
         tfPassword.getText(),tfEmail.getText(), tfAddress.getText(), tfState.getText(),
         tfzipcode.getText() , tfCreditCardNumber.getText(), tfCvv.getText());
   }

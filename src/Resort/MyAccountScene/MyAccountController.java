@@ -1,10 +1,13 @@
 package Resort.MyAccountScene;
 
 import Resort.EditAccountScene.EditAccountController;
+import Resort.TitleScene.TitleController;
 import Resort.Utility.AccountInformation;
 import Resort.Utility.Booking;
-import Resort.Utility.DatabaseCrud;
+import Resort.Utility.DatabaseAgent;
+import Resort.Utility.SessionInformation;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,8 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class MyAccountController {
-
-  private AccountInformation userAccount = new AccountInformation();
 
   @FXML
   private Label lblFirstName;
@@ -72,20 +73,61 @@ public class MyAccountController {
   @FXML
   private Button btnHome;
 
+  // String to hold our username if logged in and if user is a manager
+  private SessionInformation sessionInformation = new SessionInformation();
+
+  // setter for session information, updates information on the page
+  public void setSessionInformation(SessionInformation sessionInformation) {
+    this.sessionInformation = sessionInformation;
+    AccountInformation userInformation = DatabaseAgent.getAccountInformation(sessionInformation.getUserName());
+    lblUserName.setText(userInformation.getUserName());
+    lblFirstName.setText(userInformation.getFirstName());
+    lblLastName.setText(userInformation.getLastName());
+    lblEmail.setText(userInformation.getEmail());
+    lblAddress.setText(userInformation.getAddress());
+    lblState.setText(userInformation.getState());
+    lblZipCode.setText(userInformation.getZipCode());
+
+    // fill table with users bookings
+    // get bookings from database
+    ArrayList<Booking> usersBookings = DatabaseAgent.getUserBookings(sessionInformation.getUserName());
+    for (Booking booking : usersBookings) {
+      tvBookings.getItems().add(booking);
+    }
+
+  }
+
   @FXML
   void btnClickCancelBooking(MouseEvent event) {
-    /*
-      Todo: add code here to remove the selected booking from the database
-     */
+    Booking bookingToDelete = tvBookings.getSelectionModel().getSelectedItem();
+    DatabaseAgent.deleteReservation(Integer.parseInt(bookingToDelete.getBookingId()));
     int indexToRemove = tvBookings.getSelectionModel().getSelectedIndex();
     tvBookings.getItems().remove(indexToRemove);
   }
 
   @FXML
-  void btnClickDeleteAccount(MouseEvent event) {
-    /*
-      Todo: add code to remove this account from the database
-     */
+  void btnClickDeleteAccount(MouseEvent event) throws IOException {
+    AccountInformation accountToDelete = DatabaseAgent.getAccountInformation(sessionInformation.getUserName());
+    DatabaseAgent.deleteAccount(accountToDelete.getUserId());
+    sessionInformation.setUserName(null);
+    //get a reference to the window we are in
+    Stage window = (Stage) btnHome.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent title = loader.load();
+
+    // get controller for Title page
+    TitleController titleController = loader.getController();
+    titleController.setSessionInformation(sessionInformation);
+    // make the new scene we are going to
+    Scene titleScene = new Scene(title);
+
+    // initiate the scene change (no need to make changes to controller)
+    window.setScene(titleScene);
     System.out.println("Delete Account Entered");
   }
 
@@ -104,7 +146,7 @@ public class MyAccountController {
     Scene titleScene = new Scene(title);
 
     EditAccountController editAccountController = loader.getController();
-    editAccountController.setAccountInformation(userAccount);
+    editAccountController.setSessionformation(sessionInformation);
 
     // initiate the scene change (no need to make changes to controller)
     window.setScene(titleScene);
@@ -121,24 +163,15 @@ public class MyAccountController {
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
+
+    // get controller for Title page
+    TitleController titleController = loader.getController();
+    titleController.setSessionInformation(sessionInformation);
     // make the new scene we are going to
     Scene titleScene = new Scene(title);
 
     // initiate the scene change (no need to make changes to controller)
     window.setScene(titleScene);
-  }
-
-  public void setUserInformation(String userName) {
-    DatabaseCrud databaseAgent = new DatabaseCrud();
-    AccountInformation userInformation = databaseAgent.getAccountInformation(userName);
-    this.userAccount = userInformation;
-    lblUserName.setText(userInformation.getUserName());
-    lblFirstName.setText(userInformation.getFirstName());
-    lblLastName.setText(userInformation.getLastName());
-    lblEmail.setText(userInformation.getEmail());
-    lblAddress.setText(userInformation.getAddress());
-    lblState.setText(userInformation.getState());
-    lblZipCode.setText(userInformation.getZipCode());
   }
 
   public void initialize() {
@@ -148,8 +181,6 @@ public class MyAccountController {
     tvRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
     tvBookingId.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
 
-    // Test booking - will need to be replaced with code to get current accounts bookings
-    tvBookings.getItems().add(new Booking("1/12/19", "1/13/19", "Suite", "123", "A1"));
   }
 
 }

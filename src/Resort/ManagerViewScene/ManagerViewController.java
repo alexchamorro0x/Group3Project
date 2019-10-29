@@ -1,5 +1,7 @@
 package Resort.ManagerViewScene;
 
+import Resort.TitleScene.TitleController;
+import Resort.Utility.SessionInformation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,11 +32,34 @@ public class ManagerViewController {
     @FXML
     private CheckBox Occupied;
 
+    // String to hold our username if logged in and if user is a manager
+    private SessionInformation sessionInformation = new SessionInformation();
+
+    // setter for session information
+    public void setSessionInformation(SessionInformation sessionInformation) {
+        this.sessionInformation = sessionInformation;
+    }
+
     @FXML
     public void btnClickedHome5(ActionEvent actionEvent) throws IOException {
-        Stage thisStage = (Stage) GoToScene1From5.getScene().getWindow();
-        Parent loginScene = FXMLLoader.load(getClass().getResource("../TitleScene/Title.fxml"));
-        thisStage.setScene(new Scene(loginScene, 750, 500));
+        //get a reference to the window we are in
+        Stage window = (Stage) Name.getScene().getWindow();
+
+        // declare and initialize a loader for the FXML scene we are going to
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+
+        // create a parent class with our loader pointing at the new scene
+        Parent title = loader.load();
+
+        // get controller for Title page
+        TitleController titleController = loader.getController();
+        titleController.setSessionInformation(sessionInformation);
+        // make the new scene we are going to
+        Scene titleScene = new Scene(title);
+
+        // initiate the scene change (no need to make changes to controller)
+        window.setScene(titleScene);
     }
 
     @FXML
