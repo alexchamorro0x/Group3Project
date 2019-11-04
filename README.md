@@ -28,4 +28,5 @@ Alex Chamorro, Brian Ciszewski, Garett Flagg, Dylan Ingram, Alan Norman
 
 ## Key Programming Concepts Utilized
 GUI programming with JavaFX
-Database programming with the H2 embeded database
+
+Database programming with the H2 embedded database
