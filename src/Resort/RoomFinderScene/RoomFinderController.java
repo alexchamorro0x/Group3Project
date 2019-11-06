@@ -38,45 +38,26 @@ import javafx.util.Duration;
 
 public class RoomFinderController implements Initializable {
 
+  @FXML private Button btnHome;
+  @FXML private ImageView RoomLayoutPicture;
+  @FXML private Text RoomTypeText;
+  @FXML private Text RoomDescription1;
+  @FXML private Button btnBookRoom;
+  @FXML private Label lblAvailableRooms;
+  @FXML private Label lblInvalidDate;
 
-  @FXML
-  private Button btnHome;
-  @FXML
-  private ImageView RoomLayoutPicture;
-  @FXML
-  private Text RoomTypeText;
-  @FXML
-  private Text RoomDescription1;
-  @FXML
-  private Button btnBookRoom;
-  @FXML
-  private Label lblAvailableRooms;
-  @FXML
-  private Label lblInvalidDate;
+  @FXML private RadioButton radioBtnRoomTypeAll;
+  @FXML private RadioButton radioBtnRoomTypeAmbassador;
+  @FXML private RadioButton radioBtnRoomTypeEagleView;
+  @FXML private RadioButton radioBtnRoomTypePoolSide;
+  @FXML private RadioButton radioBtnRoomTypeJunior;
+  @FXML private DatePicker datePickerStart;
+  @FXML private DatePicker datePickerEnd;
 
-  @FXML
-  private RadioButton radioBtnRoomTypeAll;
-  @FXML
-  private RadioButton radioBtnRoomTypeAmbassador;
-  @FXML
-  private RadioButton radioBtnRoomTypeEagleView;
-  @FXML
-  private RadioButton radioBtnRoomTypePoolSide;
-  @FXML
-  private RadioButton radioBtnRoomTypeJunior;
-  @FXML
-  private DatePicker datePickerStart;
-  @FXML
-  private DatePicker datePickerEnd;
-
-  @FXML
-  private TableView<AvailableRoom> tvAvailableRooms;
-
-  @FXML
-  private TableColumn<?, ?> tvRoomType;
-
-  @FXML
-  private TableColumn<?, ?> tvRoomNumber;
+  @FXML private TableView<AvailableRoom> tvAvailableRooms;
+  @FXML private TableColumn<?, ?> tvRoomType;
+  @FXML private TableColumn<?, ?> tvRoomNumber;
+  @FXML private ImageView homeLogo;
 
   // variable to track what room type we are filtering by (default = all)
   String roomAvailabilityFilterType = "all";
@@ -90,18 +71,17 @@ public class RoomFinderController implements Initializable {
   }
 
   /*
-     runs this code at the start of the fxml file being launched. Hides the radio buttons and
-     'Available Rooms' label until the date is selected. In the near future this will be implemented
-     to show only the radio buttons for open rooms via communication with the Database. If no rooms
-     are available, the 'Available Rooms' label will output this message.
-    */
+   runs this code at the start of the fxml file being launched. Hides the radio buttons and
+   'Available Rooms' label until the date is selected. In the near future this will be implemented
+   to show only the radio buttons for open rooms via communication with the Database. If no rooms
+   are available, the 'Available Rooms' label will output this message.
+  */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // Not used now...my thinking is to use the radio buttons as a filter for the search results
     lblAvailableRooms.setVisible(false);
 
     // https://stackoverflow.com/questions/12717487/how-to-implement-a-transparent-pane-with-non-transparent-children
-
 
     // start by setting All filter to true
     radioBtnRoomTypeAll.setSelected(true);
@@ -111,31 +91,15 @@ public class RoomFinderController implements Initializable {
     tvRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
     tvRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
 
-
     // clears the 'No Content" message on the blank tableView.
     tvAvailableRooms.setPlaceholder(new Label(""));
     tvAvailableRooms.setVisible(false);
 
-    //tvRoomNumber.setStyle();
+    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
+    Image pineapple = new Image(RoomA.toURI().toString());
+    homeLogo.setImage(pineapple);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // tvRoomNumber.setStyle();
 
   }
 
@@ -166,29 +130,29 @@ public class RoomFinderController implements Initializable {
       timeline.play();
 
       // Outputs 'invalid date' if the start date is after the end date
-      }else if (dateStart.compareTo(dateEnd) >0){
+    } else if (dateStart.compareTo(dateEnd) > 0) {
 
       lblInvalidDate.setText("Invalid \n  Date");
       lblInvalidDate.setTextFill(Color.RED);
       btnBookRoom.setDisable(true);
       Timeline timeline =
-              new Timeline(
-                      new KeyFrame(Duration.seconds(0.8), evt -> lblInvalidDate.setVisible(false)),
-                      new KeyFrame(Duration.seconds(0.4), evt -> lblInvalidDate.setVisible(true)));
+          new Timeline(
+              new KeyFrame(Duration.seconds(0.8), evt -> lblInvalidDate.setVisible(false)),
+              new KeyFrame(Duration.seconds(0.4), evt -> lblInvalidDate.setVisible(true)));
       timeline.setCycleCount(3);
       timeline.play();
 
-      }
-
-     else {
+    } else {
       System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
       AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
-      DatabaseAgent.insertIntoReservations(sessionInformation.getUserName(),
-          roomToBook.getRoomNumber(), Date.valueOf(dateStart), Date.valueOf(dateEnd));
+      DatabaseAgent.insertIntoReservations(
+          sessionInformation.getUserName(),
+          roomToBook.getRoomNumber(),
+          Date.valueOf(dateStart),
+          Date.valueOf(dateEnd));
     }
     btnBookRoom.setDisable(false);
   }
-
 
   @FXML
   void updateAvailability(ActionEvent event) throws SQLException {
@@ -198,15 +162,15 @@ public class RoomFinderController implements Initializable {
     // shows the TableView of availble rooms if the date pickers are set up correctly
     LocalDate dateStart = datePickerStart.getValue();
     LocalDate dateEnd = datePickerEnd.getValue();
-    if (dateStart != null && dateEnd != null && dateStart.compareTo(dateEnd) < 0){
+    if (dateStart != null && dateEnd != null && dateStart.compareTo(dateEnd) < 0) {
       tvAvailableRooms.setVisible(true);
     }
 
     updateResults();
   }
 
-
-  // Sets the Radio Button for 'Room Type All' to true, selected. Other Radio Buttons (A,B,C,D) are set
+  // Sets the Radio Button for 'Room Type All' to true, selected. Other Radio Buttons (A,B,C,D) are
+  // set
   // to false(deselected)
   public void RadioBtnClickedRoomAll(MouseEvent mouseEvent) throws SQLException {
     // all selected so image and text is set to null
@@ -225,7 +189,8 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type A' to true, selected. Other Radio Buttons (All,B,C,D) are set
+  // Sets the Radio Button for 'Room Type A' to true, selected. Other Radio Buttons (All,B,C,D) are
+  // set
   // to false(deselected)
   public void RadioBtnClickedRoomAmbassador(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
@@ -246,7 +211,8 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type B' to true, selected. Other Radio Buttons (All,A,C,D) are set
+  // Sets the Radio Button for 'Room Type B' to true, selected. Other Radio Buttons (All,A,C,D) are
+  // set
   // to false(deselected)
   public void RadioBtnClickedRoomEagleView(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
@@ -267,7 +233,8 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type C' to true, selected. Other Radio Buttons (All,A,B,D) are set
+  // Sets the Radio Button for 'Room Type C' to true, selected. Other Radio Buttons (All,A,B,D) are
+  // set
   // to false(deselected)
   public void RadioBtnClickedRoomPoolSide(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
@@ -288,7 +255,8 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type D' to true, selected. Other Radio Buttons (All,A,B,C) are set
+  // Sets the Radio Button for 'Room Type D' to true, selected. Other Radio Buttons (All,A,B,C) are
+  // set
   // to false(deselected)
   public void RadioBtnClickedRoomJunior(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
@@ -317,7 +285,7 @@ public class RoomFinderController implements Initializable {
     Parent loginScene = FXMLLoader.load(getClass().getResource("../TitleScene/Title.fxml"));
     thisStage.setScene(new Scene(loginScene, 750, 500));
     */
-    //get a reference to the window we are in
+    // get a reference to the window we are in
     Stage window = (Stage) btnHome.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
@@ -342,7 +310,6 @@ public class RoomFinderController implements Initializable {
 
   // update method called every time a date change for checkin or checkout is made
 
-
   public void updateResults() throws SQLException {
     // only update if a start and end date have been selected
     if (datePickerStart.getValue() != null && datePickerEnd.getValue() != null) {
@@ -352,13 +319,12 @@ public class RoomFinderController implements Initializable {
       // clear list before each update
       tvAvailableRooms.getItems().clear();
 
-      ArrayList<AvailableRoom> results = DatabaseAgent
-          .getAvailableRooms(checkIn, checkOut, roomAvailabilityFilterType);
+      ArrayList<AvailableRoom> results =
+          DatabaseAgent.getAvailableRooms(checkIn, checkOut, roomAvailabilityFilterType);
 
       for (AvailableRoom availableRoom : results) {
         tvAvailableRooms.getItems().add(availableRoom);
       }
-
     }
   }
 }
