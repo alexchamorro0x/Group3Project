@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="btnCreateAccount" minHeight="0.0" minWidth="0.0" styleClass="root" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
+<AnchorPane fx:id="btnCreateAccount" minHeight="600.0" minWidth="1000.0" styleClass="root" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
    <children>
       <TextField fx:id="tfFirstName" layoutX="20.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
       <TextField fx:id="tfLastName" layoutX="20.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />

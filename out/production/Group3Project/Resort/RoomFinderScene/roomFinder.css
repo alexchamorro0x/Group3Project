@@ -4,17 +4,55 @@
 }
 
 .gridpaneLabel {
-    -fx-border-color: white;
+    -fx-border-color: transparent;
 }
 
 .jfx-combo-box {
-    -fx-background-color:  lightgrey;
+    -fx-background-color:  transparent;
 }
 
 .jfx-combo-box .label {
     -fx-text-fill: black;
     -fx-font-weight: bold;
+    -fx-background-image: url("blank.png");
+
 }
+.jfx-table-view .label {
+    -fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 10;
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+
 /*
-https://github.com/jfoenixadmin/JFoenix/issues/305
-*/
+https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in-tableview
+ */
+.jfx-table-view .scroll-bar  {
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+.jfx-table-view .
+
+
+
+#btnHome{
+    -fx-background-color: transparent;
+}
+
+#homeLogo {
+    -fx-background-image: URL("pineapple2.png");
+}
+
+#RoomFinderBackground {
+    -fx-background-image:url("beach.jpg");
+}
+
+.glass {
+    -fx-background-color: rgba(0, 100, 100, 0.5); -fx-background-radius: 10;
+}

@@ -12,7 +12,7 @@
 
 <!-- Palm.png found from http://www.publicdomainfiles.com/show_file.php?id=13925580619007 with no known copyright restrictions -->
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" styleClass="background" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.TitleScene.TitleController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.TitleScene.TitleController">
    <children>
        <AnchorPane fx:id="apLoginPrompt" layoutX="497.0" layoutY="215.0" minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="250.0" visible="false">
           <children>

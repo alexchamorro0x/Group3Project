@@ -103,7 +103,7 @@ public class TitleController {
     Stage thisStage = (Stage) btnNewUser.getScene().getWindow();
     Parent loggedInScene = FXMLLoader.load(getClass().getResource(
         "../CreateAccountScene/CreateAccount.fxml"));
-    thisStage.setScene(new Scene(loggedInScene, 750, 500));
+    thisStage.setScene(new Scene(loggedInScene, 1000, 600));
 
   }
 
@@ -118,6 +118,7 @@ public class TitleController {
     */
     //get a reference to the window we are in
     Stage window = (Stage) btnRoomFinder.getScene().getWindow();
+
 
     // declare and initialize a loader for the FXML scene we are going to
     FXMLLoader loader = new FXMLLoader();

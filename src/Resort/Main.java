@@ -20,7 +20,7 @@ public class Main extends Application {
         primaryStage.setTitle("Resort Reservations");
         root.getStylesheets().add
             (Main.class.getResource("resortTemplate.css").toExternalForm());
-        primaryStage.setScene(new Scene(root, 750, 500));
+        primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
     }
 

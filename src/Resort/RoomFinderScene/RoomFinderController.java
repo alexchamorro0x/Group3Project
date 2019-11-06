@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,10 +38,9 @@ import javafx.util.Duration;
 
 public class RoomFinderController implements Initializable {
 
+
   @FXML
   private Button btnHome;
-  @FXML
-  private Button GoToScene1From4;
   @FXML
   private ImageView RoomLayoutPicture;
   @FXML
@@ -98,11 +98,10 @@ public class RoomFinderController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // Not used now...my thinking is to use the radio buttons as a filter for the search results
-//    lblAvailableRooms.setVisible(false);
-//    radioBtnRoomTypeA.setVisible(false);
-//    radioBtnRoomTypeB.setVisible(false);
-//    radioBtnRoomTypeC.setVisible(false);
-//    radioBtnRoomTypeD.setVisible(false);
+    lblAvailableRooms.setVisible(false);
+
+    // https://stackoverflow.com/questions/12717487/how-to-implement-a-transparent-pane-with-non-transparent-children
+
 
     // start by setting All filter to true
     radioBtnRoomTypeAll.setSelected(true);
@@ -111,6 +110,32 @@ public class RoomFinderController implements Initializable {
     // class with the columns in the table
     tvRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
     tvRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+
+
+    // clears the 'No Content" message on the blank tableView.
+    tvAvailableRooms.setPlaceholder(new Label(""));
+    tvAvailableRooms.setVisible(false);
+
+    //tvRoomNumber.setStyle();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   }
 
@@ -130,7 +155,7 @@ public class RoomFinderController implements Initializable {
     LocalDate dateEnd = datePickerEnd.getValue();
     if (dateStart == null || dateEnd == null) {
 
-      lblInvalidDate.setText("Invalid Date");
+      lblInvalidDate.setText("Invalid \n  Date");
       lblInvalidDate.setTextFill(Color.RED);
       btnBookRoom.setDisable(true);
       Timeline timeline =
@@ -140,7 +165,22 @@ public class RoomFinderController implements Initializable {
       timeline.setCycleCount(3);
       timeline.play();
 
-    } else {
+      // Outputs 'invalid date' if the start date is after the end date
+      }else if (dateStart.compareTo(dateEnd) >0){
+
+      lblInvalidDate.setText("Invalid \n  Date");
+      lblInvalidDate.setTextFill(Color.RED);
+      btnBookRoom.setDisable(true);
+      Timeline timeline =
+              new Timeline(
+                      new KeyFrame(Duration.seconds(0.8), evt -> lblInvalidDate.setVisible(false)),
+                      new KeyFrame(Duration.seconds(0.4), evt -> lblInvalidDate.setVisible(true)));
+      timeline.setCycleCount(3);
+      timeline.play();
+
+      }
+
+     else {
       System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
       AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
       DatabaseAgent.insertIntoReservations(sessionInformation.getUserName(),
@@ -148,6 +188,23 @@ public class RoomFinderController implements Initializable {
     }
     btnBookRoom.setDisable(false);
   }
+
+
+  @FXML
+  void updateAvailability(ActionEvent event) throws SQLException {
+    // call method to update search results..method is separate so other actions on page can
+    // call the same update
+
+    // shows the TableView of availble rooms if the date pickers are set up correctly
+    LocalDate dateStart = datePickerStart.getValue();
+    LocalDate dateEnd = datePickerEnd.getValue();
+    if (dateStart != null && dateEnd != null && dateStart.compareTo(dateEnd) < 0){
+      tvAvailableRooms.setVisible(true);
+    }
+
+    updateResults();
+  }
+
 
   // Sets the Radio Button for 'Room Type All' to true, selected. Other Radio Buttons (A,B,C,D) are set
   // to false(deselected)
@@ -261,7 +318,7 @@ public class RoomFinderController implements Initializable {
     thisStage.setScene(new Scene(loginScene, 750, 500));
     */
     //get a reference to the window we are in
-    Stage window = (Stage) GoToScene1From4.getScene().getWindow();
+    Stage window = (Stage) btnHome.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
     FXMLLoader loader = new FXMLLoader();
@@ -284,12 +341,7 @@ public class RoomFinderController implements Initializable {
   }
 
   // update method called every time a date change for checkin or checkout is made
-  @FXML
-  void updateAvailability(ActionEvent event) throws SQLException {
-    // call method to update search results..method is separate so other actions on page can
-    // call the same update
-    updateResults();
-  }
+
 
   public void updateResults() throws SQLException {
     // only update if a start and end date have been selected

@@ -1,13 +1,50 @@
 
 .root {
     -fx-background-color: #1b1c1c;
+
+}
+.background {
+    -fx-background-color: #1b1c1c;
+}
+
+.infoBox {
+    -fx-font-family: Arial;
+}
+.title {
+    -fx-font-family: Arial;
+    -fx-font-size: 22px;
+    -fx-text-alignment: center;
+}
+.tableColumn {
+    -fx-font-family: Arial;
+}
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+}
+#lblDescription {
+    -fx-padding: 2px;
+    -fx-border-color: white;
+    -fx-border-width: 5px;
+}
+#lblNewUser:hover {
+    -fx-background-color: #dae7f3;
+}
+
+
+/*    Note: Much of this code seems to be overriding things in unexpected ways, seems better to set text
+colors in scenebuilder
+ */
+/*
+#labelTitle {
+    -fx-fill: white;
 }
 
 .infoBox {
     -fx-text-fill: white;
     -fx-font-family: Arial;
 }
-
+/*
 .title {
     -fx-text-fill: white;
     -fx-font-family: Arial;
@@ -18,10 +55,13 @@
 .radio-button {
     -fx-text-fill: white;
 }
-
-.label {
-    -fx-text-fill: white;
+.table-view.label{
+    -fx-text-fill: black;
 }
+#tableColumn {
+    -fx-text-fill: black;
+}
+
 
 .background {
     -fx-background-color: #1b1c1c;
@@ -51,8 +91,8 @@
 
 #lblDescription {
     -fx-padding: 2px;
-    /*-fx-border-color: white;
-    -fx-border-width: 5px;*/
+    -fx-border-color: white;
+    -fx-border-width: 5px;
     -fx-text-fill: white;
 }
 
@@ -61,7 +101,7 @@
     -fx-border-width: 2px;
     -fx-border-style: solid;
 }
+*/
 
-#lblNewUser:hover {
-    -fx-background-color: #dae7f3;
-}
+
+
