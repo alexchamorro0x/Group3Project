@@ -194,12 +194,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomAmbassador(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleD.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/ambassadorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Ambassador Suite");
-    RoomDescription1.setText("- 5 Bed Room \n\n- Kitchen \n\n- Living room");
+    RoomDescription1.setText("Luxurious 5 room\nocean view cabin");
     radioBtnRoomTypeAll.setSelected(false);
     radioBtnRoomTypeAmbassador.setSelected(true);
     radioBtnRoomTypeEagleView.setSelected(false);
@@ -216,12 +216,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomEagleView(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleB.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/eagleViewCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Eagle View Condo");
-    RoomDescription1.setText("- Kitchen \n\n- 4 Bed Room \n\n- Dining room");
+    RoomDescription1.setText("Extravagant 4 room condo\nshowcasing a bird's eye\nview of the city");
     radioBtnRoomTypeAll.setSelected(false);
     radioBtnRoomTypeAmbassador.setSelected(false);
     radioBtnRoomTypeEagleView.setSelected(true);
@@ -238,12 +238,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomPoolSide(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleC.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/poolSideCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Pool Side Condo");
-    RoomDescription1.setText("- 4 Bed Room \n\n- Dining room \n\n- Kitchen");
+    RoomDescription1.setText("4 room condo near\nthe pool with a\nkitchen and dining room");
     radioBtnRoomTypeAll.setSelected(false);
     radioBtnRoomTypeAmbassador.setSelected(false);
     radioBtnRoomTypeEagleView.setSelected(false);
@@ -260,12 +260,12 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomJunior(MouseEvent mouseEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/RoomLayoutSampleA.png");
+    File RoomA = new File("src/Resort/RoomFinderScene/juniorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Junior Condo");
-    RoomDescription1.setText("- 3 Bed Room \n\n- Kitchen \n\n- Living room");
+    RoomDescription1.setText("Economic 3 room condo\nfeaturing a kitchen and\nliving area");
     radioBtnRoomTypeAll.setSelected(false);
     radioBtnRoomTypeAmbassador.setSelected(false);
     radioBtnRoomTypeEagleView.setSelected(false);
@@ -328,3 +328,26 @@ public class RoomFinderController implements Initializable {
     }
   }
 }
+
+
+
+/*
+beach.png    Free to reuse from Pixabay.com, free-to-use website.
+https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_960_720.jpg
+
+poolsidecondo.jpg
+https://pixabay.com/photos/pool-tropical-people-person-1395069/
+
+eagleviewcondo.jpg
+https://pixabay.com/photos/hotel-living-room-indoors-595121/
+
+ambassadorSuite.jpg
+https://pixabay.com/photos/the-lodge-mar-beach-relax-water-4586948/
+
+juniorSuite.jpg
+https://pixabay.com/photos/hotel-guest-room-new-1330846/
+
+
+
+
+ */
