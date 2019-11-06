@@ -1,11 +1,3 @@
-.gridpane {
-    -fx-border-color: white;
-    -fx-fill: white;
-}
-
-.gridpaneLabel {
-    -fx-border-color: transparent;
-}
 
 .jfx-combo-box {
     -fx-background-color:  transparent;
@@ -15,6 +7,14 @@
     -fx-text-fill: black;
     -fx-font-weight: bold;
     -fx-background-image: url("blank.png");
+
+
+
+
+
+
+
+
 
 }
 .jfx-table-view .label {
@@ -40,19 +40,36 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
 .jfx-table-view .
 
 
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+
+
+
+
+
+
+.transparent {
+    -fx-background-color: transparent;
+}
+
+
 
 #btnHome{
     -fx-background-color: transparent;
 }
 
 #homeLogo {
-    -fx-background-image: URL("pineapple2.png");
+    -fx-background-image: URL("pineapple.png");
 }
 
 #RoomFinderBackground {
     -fx-background-image:url("beach.jpg");
 }
 
-.glass {
+.glassblue {
     -fx-background-color: rgba(0, 100, 100, 0.5); -fx-background-radius: 10;
+}
+.glasswhite {
+    -fx-background-color: rgba(75, 75, 75, 0.5); -fx-background-radius: 10;
 }

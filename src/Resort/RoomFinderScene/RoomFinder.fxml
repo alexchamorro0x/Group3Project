@@ -20,54 +20,74 @@
 
 <AnchorPane fx:id="RoomFinderBackground" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.RoomFinderScene.RoomFinderController">
     <children>
-        <Label layoutX="273.0" layoutY="14.0" text="Room Finder" textFill="WHITE">
+      <ImageView fx:id="homeLogo" fitHeight="123.0" fitWidth="146.0" layoutX="8.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane fx:id="glass1" layoutX="8.0" layoutY="398.0" prefHeight="193.0" prefWidth="208.0" styleClass="glasswhite" stylesheets="@roomFinder.css" />
+        <Label layoutX="369.0" layoutY="15.0" text="Room Finder" textFill="WHITE">
             <font>
-                <Font name="Times New Roman Bold" size="36.0" />
+                <Font name="Times New Roman Bold" size="46.0" />
             </font>
         </Label>
-        <Button fx:id="btnHome" layoutX="5.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnClickedHome4" prefHeight="57.0" prefWidth="151.0" stylesheets="@roomFinder.css" />
-        <RadioButton fx:id="radioBtnRoomTypeAmbassador" layoutX="21.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomAmbassador" text="Ambassador Suite" textFill="WHITE" />
-        <RadioButton fx:id="radioBtnRoomTypeEagleView" layoutX="21.0" layoutY="396.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomEagleView" text="Eagle View Condo" textFill="WHITE" />
-        <RadioButton fx:id="radioBtnRoomTypePoolSide" layoutX="21.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomPoolSide" text="Pool Side Condo" textFill="WHITE" />
-        <RadioButton fx:id="radioBtnRoomTypeJunior" layoutX="21.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomJunior" text="Junior Condo" textFill="WHITE" />
-        <Label fx:id="lblAvailableRooms" layoutX="21.0" layoutY="311.0" text="Filter Available Rooms" textFill="#fffafa">
+        <Button fx:id="btnHome" layoutX="5.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnClickedHome4" prefHeight="117.0" prefWidth="226.0" styleClass="transparent" stylesheets="@roomFinder.css" />
+        <RadioButton fx:id="radioBtnRoomTypeAmbassador" layoutX="14.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomAmbassador" text="Ambassador Suite" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></RadioButton>
+        <RadioButton fx:id="radioBtnRoomTypeEagleView" layoutX="14.0" layoutY="497.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomEagleView" text="Eagle View Condo" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></RadioButton>
+        <RadioButton fx:id="radioBtnRoomTypePoolSide" layoutX="14.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomPoolSide" text="Pool Side Condo" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></RadioButton>
+        <RadioButton fx:id="radioBtnRoomTypeJunior" layoutX="14.0" layoutY="555.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomJunior" text="Junior Condo" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></RadioButton>
+        <ImageView fx:id="RoomLayoutPicture" fitHeight="250.0" fitWidth="350.0" layoutX="339.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+        <Text fx:id="RoomTypeText" fill="WHITE" layoutX="408.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="">
             <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <ImageView fx:id="RoomLayoutPicture" fitHeight="220.0" fitWidth="220.0" layoutX="266.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
-        <Text fx:id="RoomTypeText" fill="WHITE" layoutX="284.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="">
-            <font>
-                <Font size="17.0" />
+                <Font size="25.0" />
             </font>
         </Text>
-        <Text fx:id="RoomDescription1" fill="WHITE" layoutX="308.0" layoutY="343.0" scaleX="1.0" scaleY="0.9999934445143697" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" styleClass="text" />
-      <Label fx:id="lblInvalidDate" layoutX="37.0" layoutY="249.0" prefHeight="57.0" prefWidth="84.0" textFill="WHITE">
+        <Text fx:id="RoomDescription1" fill="WHITE" layoutX="432.0" layoutY="400.0" scaleX="1.0" scaleY="0.9999934445143697" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" styleClass="text">
          <font>
-            <Font name="System Bold" size="20.0" />
-         </font></Label>
-      <TableView id="columnHead" fx:id="tvAvailableRooms" layoutX="528.0" layoutY="61.0" prefHeight="426.0" prefWidth="208.0" styleClass="jfx-table-view" stylesheets="@roomFinder.css">
+            <Font size="19.0" />
+         </font></Text>
+      <TableView id="columnHead" fx:id="tvAvailableRooms" layoutX="766.0" layoutY="52.0" prefHeight="509.0" prefWidth="208.0" styleClass="jfx-table-view" stylesheets="@roomFinder.css">
         <columns>
-          <TableColumn id="columnTitle" fx:id="tvRoomType" editable="false" minWidth="0.0" prefWidth="122.0" text="Room Type" />
-          <TableColumn fx:id="tvRoomNumber" editable="false" prefWidth="85.0" sortable="false" styleClass="-fx-background-color: transparent" text="Room #" />
+          <TableColumn id="columnTitle" fx:id="tvRoomType" editable="false" minWidth="0.0" prefWidth="122.0" styleClass=".table-row-cell" text="Room Type" />
+          <TableColumn fx:id="tvRoomNumber" editable="false" prefWidth="85.0" sortable="false" styleClass=".table-row-cell" text="Room #" />
         </columns>
       </TableView>
-      <RadioButton fx:id="radioBtnRoomTypeAll" layoutX="21.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomAll" text="All Rooms" textFill="WHITE" />
-      <AnchorPane fx:id="glass" layoutX="15.0" layoutY="77.0" prefHeight="173.0" prefWidth="226.0" styleClass="glass" stylesheets="@roomFinder.css" />
-      <Label layoutX="101.0" layoutY="189.0" text="End Date" textFill="WHITE">
+      <RadioButton fx:id="radioBtnRoomTypeAll" layoutX="14.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomAll" text="All Rooms" textFill="WHITE">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="System Bold" size="18.0" />
+         </font></RadioButton>
+      <AnchorPane fx:id="glass" layoutX="5.0" layoutY="128.0" prefHeight="187.0" prefWidth="226.0" styleClass="glassblue" stylesheets="@roomFinder.css" />
+      <Label layoutX="91.0" layoutY="240.0" text="End Date" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="97.0" layoutY="89.0" text="Start Date" textFill="WHITE">
+      <Label layoutX="87.0" layoutY="140.0" text="Start Date" textFill="WHITE">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="23.0" />
          </font>
       </Label>
-        <DatePicker fx:id="datePickerStart" cacheHint="SPEED" editable="false" layoutX="25.0" layoutY="117.0" onAction="#updateAvailability" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
-        <DatePicker fx:id="datePickerEnd" editable="false" layoutX="26.0" layoutY="214.0" onAction="#updateAvailability" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
-      <Button fx:id="btnBookRoom" layoutX="139.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnClickedBookRoom" text="Book Room" />
-      <AnchorPane fx:id="homeLogo" layoutX="28.0" layoutY="2.0" prefHeight="76.0" prefWidth="74.0" />
+        <DatePicker fx:id="datePickerStart" cacheHint="SPEED" editable="false" layoutX="15.0" layoutY="168.0" onAction="#updateAvailability" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
+        <DatePicker fx:id="datePickerEnd" editable="false" layoutX="16.0" layoutY="265.0" onAction="#updateAvailability" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
+      <Button fx:id="btnBookRoom" layoutX="129.0" layoutY="322.0" mnemonicParsing="false" onAction="#btnClickedBookRoom" text="Book Room" />
+        <Label fx:id="lblAvailableRooms" layoutX="17.0" layoutY="402.0" text="Filter Rooms" textFill="#c5f4ff">
+            <font>
+                <Font name="Times New Roman Bold" size="25.0" />
+            </font>
+        </Label>
+      <Label fx:id="lblInvalidDate" layoutX="10.0" layoutY="360.0" prefHeight="27.0" prefWidth="215.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@roomFinder.css" />
