@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Name" onDragDetected="#tfName" prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.ManagerViewScene.ManagerViewController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.ManagerViewScene.ManagerViewController">
    <children>
       <TableView fx:id="tvBooked" layoutX="14.0" layoutY="87.0" prefHeight="220.0" prefWidth="425.0" styleClass="jfx-combo-box" stylesheets="@managerView.css">
         <columns>
@@ -24,45 +24,51 @@
       </TableView>
       <Label layoutX="182.0" layoutY="50.0" styleClass="title" stylesheets="@../resortTemplate.css" text="Booked" textFill="WHITE" />
       <Label layoutX="185.0" layoutY="317.0" styleClass="title" stylesheets="@../resortTemplate.css" text="Vacant" textFill="WHITE" />
-      <Button fx:id="GoToScene1From5" layoutX="35.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnClickedHome5" text="Home" />
-      <Label layoutX="725.0" layoutY="50.0" text="First Name:" textFill="WHITE" />
-      <Label layoutX="455.0" layoutY="110.0" text="Check In" textFill="WHITE" />
+      <Button fx:id="GoToScene1From5" layoutX="35.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnClickedHome" text="Home" />
+      <Pane layoutX="787.0" layoutY="93.0">
+         <children>
+            <Label layoutY="3.0" text="First Name:" textFill="WHITE" />
+            <Label layoutY="53.0" text="Last Name:" textFill="WHITE" />
+            <Label layoutY="103.0" text="User Name:" textFill="WHITE" />
+            <Label layoutX="6.0" layoutY="341.0" text="CreditCard#:" textFill="WHITE" />
+            <Label layoutX="6.0" layoutY="291.0" text="ZipCode:" textFill="WHITE" />
+            <Label layoutX="6.0" layoutY="241.0" text="State:" textFill="WHITE" />
+            <Label layoutX="6.0" layoutY="191.0" text="Address:" textFill="WHITE" />
+            <Label layoutX="6.0" layoutY="141.0" text="Email:" textFill="WHITE" />
+            <Label fx:id="lblFirstName" layoutX="119.0" text="Label" textFill="WHITE" />
+            <Label fx:id="lblLastName" layoutX="119.0" layoutY="55.0" text="Label" textFill="WHITE" />
+            <Label fx:id="lblUserName" layoutX="119.0" layoutY="105.0" text="Label" textFill="WHITE" />
+            <Label fx:id="lblEmail" layoutX="125.0" layoutY="140.0" text="Label" textFill="WHITE" />
+            <Label fx:id="lblAddress" layoutX="125.0" layoutY="191.0" text="Label" textFill="WHITE" />
+            <Label fx:id="lblState" layoutX="125.0" layoutY="241.0" text="Label" textFill="WHITE" />
+            <Label fx:id="lblZipCode" layoutX="125.0" layoutY="291.0" text="Label" textFill="WHITE" />
+            <Label fx:id="lblCreditCard" layoutX="125.0" layoutY="341.0" text="Label" textFill="WHITE" />
+            <Button layoutX="24.0" layoutY="391.0" mnemonicParsing="false" onAction="#clickChangeAccountInfo" text="Change Account Info" />
+         </children>
+      </Pane>
       <TableView fx:id="tvVacant" layoutX="14.0" layoutY="354.0" prefHeight="220.0" prefWidth="425.0" styleClass="jfx-combo-box" stylesheets="@managerView.css">
          <columns>
             <TableColumn fx:id="tcRoomNumberVacant" prefWidth="101.0" styleClass="tableColumn" text="Room Number" />
             <TableColumn fx:id="tcRoomTypeVacant" prefWidth="94.0" text="Room Type" />
          </columns>
       </TableView>
-      <TextField fx:id="tfFirstName" layoutX="830.0" layoutY="50.0" />
-      <Button fx:id="btnBookRoom" layoutX="564.0" layoutY="470.0" mnemonicParsing="false" onAction="#btnUpdate" text="Book Room" />
-      <TextField fx:id="tfLastName" layoutX="830.0" layoutY="100.0" />
-      <Label layoutX="725.0" layoutY="100.0" text="Last Name:" textFill="WHITE" />
-      <Label layoutX="455.0" layoutY="160.0" text="Check Out" textFill="WHITE" />
-      <DatePicker fx:id="dpCheckInBooked" layoutX="515.0" layoutY="110.0" />
-      <DatePicker fx:id="dpCheckOutBooked" layoutX="515.0" layoutY="160.0" />
+      <Button fx:id="btnSwapBooking" layoutX="564.0" layoutY="470.0" mnemonicParsing="false" onAction="#clickSwapBooking" text="Swap Booking" />
       <Label layoutX="455.0" layoutY="370.0" text="Check In" textFill="WHITE" />
       <Label layoutX="455.0" layoutY="420.0" text="Check Out" textFill="WHITE" />
-      <DatePicker fx:id="dpCheckInVacant" layoutX="515.0" layoutY="370.0" />
-      <DatePicker fx:id="dpCheckOutVacant" layoutX="515.0" layoutY="420.0" />
-      <Button fx:id="btnCancelBooking" layoutX="593.0" layoutY="210.0" mnemonicParsing="false" text="Cancle Booking" />
-      <Label layoutX="725.0" layoutY="200.0" text="Room Number:" textFill="WHITE" />
-      <ChoiceBox fx:id="cbRoomNumber" layoutX="830.0" layoutY="200.0" prefWidth="150.0" />
-      <Label layoutX="725.0" layoutY="250.0" text="Room Type:" textFill="WHITE" />
-      <ChoiceBox fx:id="cbRoomType" layoutX="830.0" layoutY="250.0" prefWidth="150.0" />
-      <Label layoutX="725.0" layoutY="150.0" text="User Name:" textFill="WHITE" />
-      <TextField fx:id="tfUserName" layoutX="830.0" layoutY="150.0" />
-      <Label layoutX="725.0" layoutY="550.0" text="CVV:" textFill="WHITE" />
-      <Label layoutX="725.0" layoutY="500.0" text="CreditCard#:" textFill="WHITE" />
-      <Label layoutX="725.0" layoutY="450.0" text="ZipCode:" textFill="WHITE" />
-      <TextField fx:id="tfState" layoutX="830.0" layoutY="400.0" />
-      <TextField fx:id="tfEmail" layoutX="830.0" layoutY="300.0" />
-      <TextField fx:id="tfAddress" layoutX="830.0" layoutY="350.0" />
-      <Label layoutX="725.0" layoutY="400.0" text="State:" textFill="WHITE" />
-      <Label layoutX="725.0" layoutY="350.0" text="Address:" textFill="WHITE" />
-      <Label layoutX="725.0" layoutY="300.0" text="Email:" textFill="WHITE" />
-      <TextField fx:id="tfZipCode" layoutX="830.0" layoutY="450.0" />
-      <TextField fx:id="tfCreditCard" layoutX="830.0" layoutY="500.0" />
-      <TextField fx:id="tfCVV" layoutX="830.0" layoutY="550.0" />
-      <Button layoutX="474.0" layoutY="210.0" mnemonicParsing="false" text="Update Booking" />
+      <DatePicker fx:id="dpCheckInVacant" layoutX="515.0" layoutY="370.0" onAction="#updateVacancy" />
+      <DatePicker fx:id="dpCheckOutVacant" layoutX="515.0" layoutY="420.0" onAction="#updateVacancy" />
+      <Button fx:id="btnCancelBooking" layoutX="462.0" layoutY="288.0" mnemonicParsing="false" onAction="#clickCancelBooking" text="Cancle Booking" />
+      <Button layoutX="460.0" layoutY="252.0" mnemonicParsing="false" onAction="#clickViewAllBookings" text="View All Bookings" />
+      <TableView fx:id="tvUsers" layoutX="600.0" layoutY="77.0" prefHeight="201.0" prefWidth="127.0">
+        <columns>
+          <TableColumn fx:id="tcUsersUserName" prefWidth="110.0" text="Username" />
+        </columns>
+      </TableView>
+      <Label layoutX="627.0" layoutY="31.0" prefHeight="38.0" prefWidth="59.0" text="Users" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="657.0" layoutY="295.0" mnemonicParsing="false" onAction="#clickDeleteUser" text="Delete User" />
    </children>
 </AnchorPane>

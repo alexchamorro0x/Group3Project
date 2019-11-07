@@ -146,7 +146,7 @@ public class MyAccountController {
     Scene titleScene = new Scene(title);
 
     EditAccountController editAccountController = loader.getController();
-    editAccountController.setSessionformation(sessionInformation);
+    editAccountController.setSessioninformation(sessionInformation);
 
     // initiate the scene change (no need to make changes to controller)
     window.setScene(titleScene);

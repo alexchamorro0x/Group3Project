@@ -8,6 +8,7 @@ public class SessionInformation {
     return userName;
   }
 
+
   public void setUserName(String userName) {
     this.userName = userName;
   }
@@ -20,3 +21,4 @@ public class SessionInformation {
     isManager = manager;
   }
 }
+

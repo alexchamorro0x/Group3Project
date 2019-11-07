@@ -166,6 +166,9 @@ public class DatabaseAgent {
         returnAccountInformation.setState(resultSetForAccount.getString("STATE"));
         returnAccountInformation.setZipCode(resultSetForAccount.getString("ZIPCODE"));
         returnAccountInformation.setUserId(resultSetForAccount.getInt("ACCOUNTID"));
+        returnAccountInformation.setCreditCardNumber(resultSetForAccount.getString("CREDITCARDNUMBER"));
+        returnAccountInformation.setCvv(resultSetForAccount.getString("CVV"));
+        returnAccountInformation.setPassWord(resultSetForAccount.getString("PASSWORD"));
 
       }
     } catch (SQLException ex) {
@@ -260,6 +263,37 @@ public class DatabaseAgent {
       }
   }
 
+  public static ArrayList<Booking> getAllBookings() throws SQLException {
+    ArrayList<Booking> allBookings = new ArrayList<>();
+
+    Connection connection = getConnection();
+
+    try {
+      PreparedStatement preparedStatement;
+      preparedStatement = connection.prepareStatement("SELECT USERID, USERNAME, RESERVATIONS.ROOMNUMBER, "
+          + "CHECKIN, CHECKOUT, RESERVATIONID, ROOMTYPE from RESERVATIONS inner join ACCOUNTS on RESERVATIONS.USERID = ACCOUNTS.ACCOUNTID inner join ROOMS on RESERVATIONS.ROOMNUMBER = ROOMS.ROOMNUMBER");
+
+      ResultSet searchResult = preparedStatement.executeQuery();
+
+      while (searchResult.next()) {
+        String userName = searchResult.getString("USERNAME");
+        Date checkOut = searchResult.getDate("CHECKOUT");
+        Date checkIn = searchResult.getDate("CHECKIN");
+        String roomType = searchResult.getString("ROOMTYPE");
+        int roomNumber = searchResult.getInt("ROOMNUMBER");
+        int reservationId = searchResult.getInt("RESERVATIONID");
+        AccountInformation accountInformation = getAccountInformation(userName);
+        Booking booking = new Booking(checkIn.toString(), checkOut.toString(), roomType,
+            String.valueOf(roomNumber), String.valueOf(reservationId), accountInformation);
+        allBookings.add(booking);
+      }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return allBookings;
+  }
+
   public static ArrayList<Booking> getUserBookings(String userName) {
     AccountInformation accountInformation = getAccountInformation(userName);
     ArrayList<Booking> returnResults = new ArrayList<Booking>();
@@ -271,11 +305,13 @@ public class DatabaseAgent {
       // if room type is all execute this prepared statement
       PreparedStatement preparedStatement;
 
-        preparedStatement = connection.prepareStatement(
-            "SELECT USERID, RESERVATIONS.ROOMNUMBER, CHECKIN, CHECKOUT, RESERVATIONID, ROOMTYPE from RESERVATIONS inner join ROOMS on RESERVATIONS.ROOMNUMBER = ROOMS.ROOMNUMBER"
-                + " WHERE USERID = ?;"
-        );
-        preparedStatement.setInt(1, accountInformation.getUserId());
+      preparedStatement = connection.prepareStatement(
+          "SELECT USERID, RESERVATIONS.ROOMNUMBER, CHECKIN, CHECKOUT, RESERVATIONID, ROOMTYPE from RESERVATIONS inner join ROOMS on RESERVATIONS.ROOMNUMBER = ROOMS.ROOMNUMBER"
+              + " WHERE USERID = ?;"
+      );
+
+
+      preparedStatement.setInt(1, accountInformation.getUserId());
 
       ResultSet searchResult = preparedStatement.executeQuery();
 
@@ -286,7 +322,7 @@ public class DatabaseAgent {
         int roomNumber = searchResult.getInt("ROOMNUMBER");
         int reservationId = searchResult.getInt("RESERVATIONID");
         Booking userBooking = new Booking(checkIn.toString(), checkOut.toString(), roomType,
-            String.valueOf(roomNumber), String.valueOf(reservationId));
+            String.valueOf(roomNumber), String.valueOf(reservationId), accountInformation);
         returnResults.add(userBooking);
       }
 
@@ -336,6 +372,51 @@ public class DatabaseAgent {
       ex.printStackTrace();
     }
 
+  }
+
+  public static ArrayList<User> getUsers() throws SQLException {
+    Connection connection = getConnection();
+
+      ArrayList<User> userList = new ArrayList<>();
+
+      PreparedStatement preparedStatement;
+      preparedStatement = connection.prepareStatement("SELECT USERNAME from ACCOUNTS");
+
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while(resultSet.next()) {
+        String userName = resultSet.getString("USERNAME");
+        userList.add(new User(userName));
+      }
+
+      return userList;
+  }
+
+  public static void updateAccount(AccountInformation accountInformation) throws SQLException {
+    Connection connection = getConnection();
+
+    PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ACCOUNTS SET "
+        + "FIRSTNAME=?, LASTNAME=?, PASSWORD=?, USERNAME=?, EMAIL=?, ADDRESS=?, STATE=?, ZIPCODE=?, "
+        + "CREDITCARDNUMBER=?, CVV=? where ACCOUNTID=?;");
+
+    preparedStatement.setString(1, accountInformation.getFirstName());
+    preparedStatement.setString(2, accountInformation.getLastName());
+    preparedStatement.setString(3, accountInformation.getPassWord());
+    preparedStatement.setString(4, accountInformation.getUserName());
+    preparedStatement.setString(5, accountInformation.getEmail());
+    preparedStatement.setString(6, accountInformation.getAddress());
+    preparedStatement.setString(7, accountInformation.getState());
+    preparedStatement.setString(8, accountInformation.getZipCode());
+    preparedStatement.setString(9, accountInformation.getCreditCardNumber());
+    preparedStatement.setString(10, accountInformation.getCvv());
+    preparedStatement.setInt(11, accountInformation.getUserId());
+
+
+    preparedStatement.execute();
+
+    // close connections
+    connection.close();
+    preparedStatement.close();
   }
 
 }

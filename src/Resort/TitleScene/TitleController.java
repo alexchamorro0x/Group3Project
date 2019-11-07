@@ -152,7 +152,7 @@ public class TitleController {
     if (!managerCheck && DatabaseAgent.checkLoginInformation(username, password)) {
       System.out.println("Logged in successfully");
 
-      // set session information to include username and if is manager
+      // set session information to include username, userID and if is manager
       sessionInformation.setUserName(username);
 
       updateLoginPane();

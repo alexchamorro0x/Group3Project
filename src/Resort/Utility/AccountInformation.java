@@ -9,6 +9,25 @@ public class AccountInformation {
   private String state;
   private String zipCode;
   private String creditCardNumber;
+  private String cvv;
+  private String passWord;
+
+  public String getCvv() {
+    return cvv;
+  }
+
+  public void setCvv(String cvv) {
+    this.cvv = cvv;
+  }
+
+  public String getPassWord() {
+    return passWord;
+  }
+
+  public void setPassWord(String passWord) {
+    this.passWord = passWord;
+  }
+
   private int userId;
 
   public String getCreditCardNumber() {
@@ -82,4 +101,6 @@ public class AccountInformation {
   public void setUserId(int userId) {
     this.userId = userId;
   }
+
+
 }

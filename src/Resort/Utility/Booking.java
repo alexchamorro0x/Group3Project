@@ -7,18 +7,26 @@ public class Booking {
   private String roomType = new String("");
   private String roomNumber = new String("");
   private String bookingId = new String("");
+  // account info
+  private AccountInformation accountInformation;
+  private String firstName = new String("");
+  private String lastName = new String("");
 
   public Booking(String checkIn, String checkOut, String roomType, String roomNumber,
-      String reservationId) {
+      String reservationId, AccountInformation accountInformation) {
     setCheckIn(checkIn);
     setCheckOut(checkOut);
     setRoomType(roomType);
     setRoomNumber(roomNumber);
     setBookingId(reservationId);
+    setAccountInformation(accountInformation);
+    this.firstName = accountInformation.getFirstName();
+    this.lastName = accountInformation.getLastName();
   }
 
   public Booking() {
-    this("", "", "", "", "");
+    this("", "", "", "", "",
+        null);
   }
 
   public String getCheckIn() {
@@ -59,5 +67,31 @@ public class Booking {
 
   public void setBookingId(String bookingId) {
     this.bookingId = bookingId;
+  }
+
+  public AccountInformation getAccountInformation() {
+    return accountInformation;
+  }
+
+  public void setAccountInformation(AccountInformation accountInformation) {
+    this.accountInformation = accountInformation;
+    this.firstName = accountInformation.getFirstName();
+    this.lastName = accountInformation.getLastName();
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 }
