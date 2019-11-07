@@ -21,13 +21,17 @@
 <AnchorPane fx:id="RoomFinderBackground" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.RoomFinderScene.RoomFinderController">
     <children>
       <ImageView fx:id="homeLogo" fitHeight="123.0" fitWidth="146.0" layoutX="8.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="btnHome" layoutX="5.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnClickedHome4" prefHeight="117.0" prefWidth="226.0" stylesheets="@roomFinder.css">
+         <styleClass>
+            <String fx:value="transparent" />
+            <String fx:value="office-hours-pane" />
+         </styleClass></Button>
       <AnchorPane fx:id="glass1" layoutX="8.0" layoutY="398.0" prefHeight="193.0" prefWidth="208.0" styleClass="glasswhite" stylesheets="@roomFinder.css" />
         <Label layoutX="369.0" layoutY="15.0" text="Room Finder" textFill="WHITE">
             <font>
                 <Font name="Times New Roman Bold" size="46.0" />
             </font>
         </Label>
-        <Button fx:id="btnHome" layoutX="5.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnClickedHome4" prefHeight="117.0" prefWidth="226.0" styleClass="transparent" stylesheets="@roomFinder.css" />
         <RadioButton fx:id="radioBtnRoomTypeAmbassador" layoutX="14.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomAmbassador" text="Ambassador Suite" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
