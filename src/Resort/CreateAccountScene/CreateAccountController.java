@@ -4,6 +4,9 @@ import Resort.Main;
 import Resort.Utility.DatabaseAgent;
 import java.io.IOException;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
@@ -16,72 +19,59 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class CreateAccountController {
 
-  ObservableList<String> expireMonthList =  FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
-  ObservableList<String> expireYearList =  FXCollections.observableArrayList("2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030");
+  ObservableList<String> expireMonthList =
+      FXCollections.observableArrayList(
+          "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+  ObservableList<String> expireYearList =
+      FXCollections.observableArrayList(
+          "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
+          "2030");
 
+  @FXML private TextField tfFirstName;
 
-  @FXML
-  private TextField tfFirstName;
+  @FXML private TextField tfLastName;
 
-  @FXML
-  private TextField tfLastName;
+  @FXML private TextField tfUsername;
 
-  @FXML
-  private TextField tfUsername;
+  @FXML private TextField tfEmail;
 
-  @FXML
-  private TextField tfEmail;
+  @FXML private TextField tfPassword;
 
-  @FXML
-  private TextField tfPassword;
+  @FXML private TextField tfConfirmPassword;
 
-  @FXML
-  private TextField tfConfirmPassword;
+  @FXML private TextField tfAddress;
 
-  @FXML
-  private TextField tfAddress;
+  @FXML private TextField tfState;
 
-  @FXML
-  private TextField tfState;
+  @FXML private TextField tfzipcode;
 
-  @FXML
-  private TextField tfzipcode;
+  @FXML private TextField tfCreditCardNumber;
 
-  @FXML
-  private TextField tfCreditCardNumber;
+  @FXML private TextField tfCvv;
 
-  @FXML
-  private TextField tfCvv;
+  @FXML private Label lblCreateIndicate;
 
-  @FXML
-  private Label lblCreateIndicate;
+  @FXML private ComboBox expireMonth;
 
-  @FXML
-
-  private ComboBox expireMonth;
-
-  @FXML
-  private ComboBox expireYear;
+  @FXML private ComboBox expireYear;
 
   @FXML
   private void initialize() {
 
-
-   expireMonth.setItems(expireMonthList);
-
+    expireMonth.setItems(expireMonthList);
 
     expireYear.setItems(expireYearList);
 
+    lblCreateIndicate.setVisible(false);
   }
-
-
 
   @FXML
   void btnClickHome(MouseEvent event) throws IOException {
-    //get a reference to the window we are in
+    // get a reference to the window we are in
     Stage window = (Stage) tfUsername.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
@@ -100,27 +90,42 @@ public class CreateAccountController {
   @FXML
   void btnClickCreateAccount(MouseEvent event) {
 
+    // todo add code to validate values and give appropriate error messages for incorrect values
 
-    //todo add code to validate values and give appropriate error messages for incorrect values
+    DatabaseAgent.addUser(
+        tfUsername.getText(),
+        tfFirstName.getText(),
+        tfLastName.getText(),
+        tfPassword.getText(),
+        tfEmail.getText(),
+        tfAddress.getText(),
+        tfState.getText(),
+        tfzipcode.getText(),
+        tfCreditCardNumber.getText(),
+        tfCvv.getText());
 
-    DatabaseAgent.addUser(tfUsername.getText(), tfFirstName.getText(), tfLastName.getText(),
-        tfPassword.getText(),tfEmail.getText(), tfAddress.getText(), tfState.getText(),
-        tfzipcode.getText() , tfCreditCardNumber.getText(), tfCvv.getText());
+    // displays "Account Successful" label to blink three times when button clicked
+    lblCreateIndicate.setVisible(true);
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0.8), evt -> lblCreateIndicate.setVisible(false)),
+            new KeyFrame(Duration.seconds(0.4), evt -> lblCreateIndicate.setVisible(true)));
+    timeline.setCycleCount(3);
+    timeline.play();
+    lblCreateIndicate.setVisible(false);
   }
-/*
-  public CreateAccountController(Stage CreateAccount) throws IOException {
 
-    Parent root = FXMLLoader.load(getClass().getResource("CreateAccountScene/CreateAccount.fxml"));
-    CreateAccount.setTitle("Resort Reservations");
-    root.getStylesheets().add
-            (Main.class.getResource("resortTemplate.css").toExternalForm());
-    CreateAccount.setScene(new Scene(root, 850, 530));
-    CreateAccount.show();
-  }
+  /*
+   public CreateAccountController(Stage CreateAccount) throws IOException {
 
- */
+     Parent root = FXMLLoader.load(getClass().getResource("CreateAccountScene/CreateAccount.fxml"));
+     CreateAccount.setTitle("Resort Reservations");
+     root.getStylesheets().add
+             (Main.class.getResource("resortTemplate.css").toExternalForm());
+     CreateAccount.setScene(new Scene(root, 850, 530));
+     CreateAccount.show();
+   }
+
+  */
 
 }
-
-
-

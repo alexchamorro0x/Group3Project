@@ -1,24 +1,16 @@
 
 .jfx-combo-box {
-    -fx-background-color:  transparent;
+    -fx-background-color: transparent;
 }
 
 .jfx-combo-box .label {
     -fx-text-fill: black;
     -fx-font-weight: bold;
-    -fx-background-image: url("blank.png");
-
-
-
-
-
-
-
-
-
 }
+
 .jfx-table-view .label {
-    -fx-background-color: rgba(255, 255, 255, 0.5); -fx-background-radius: 10;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-radius: 10;
     -fx-text-fill: black;
     -fx-fill: black;
 }
@@ -27,7 +19,7 @@
 /*
 https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in-tableview
  */
-.jfx-table-view .scroll-bar  {
+.jfx-table-view .scroll-bar {
     -fx-min-width: 0;
     -fx-pref-width: 0;
     -fx-max-width: 0;
@@ -38,15 +30,9 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
 }
 
 .jfx-table-view .
-
-
 .table-row-cell {
     -fx-background-color: transparent;
 }
-
-
-
-
 
 
 .transparent {
@@ -54,8 +40,39 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
 }
 
 
+.glassblue {
+    -fx-background-color: rgba(0, 100, 100, 0.5);
+    -fx-background-radius: 10;
+}
 
-#btnHome{
+.glassdark {
+    -fx-background-color: rgba(75, 75, 75, 0.5);
+    -fx-background-radius: 10;
+}
+
+.glasswhite {
+    -fx-background-color: rgba(240, 240,240, 0.5);
+    -fx-background-radius: 10;
+}
+
+.glassblack {
+    -fx-background-color: rgba(0, 0,0, 0.7);
+    -fx-background-radius: 10;
+}
+
+
+.image-view {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 50;
+}
+
+
+/*
+            To set images fxml objects, needs css file attributed to object, Use "#" and the fx:id
+            of the AnchorPane/Button...      #btnHome  // btnHome = fx:id of home button
+ */
+#btnHome {
     -fx-background-color: transparent;
 }
 
@@ -64,12 +81,5 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
 }
 
 #RoomFinderBackground {
-    -fx-background-image:url("beach.jpg");
-}
-
-.glassblue {
-    -fx-background-color: rgba(0, 100, 100, 0.5); -fx-background-radius: 10;
-}
-.glasswhite {
-    -fx-background-color: rgba(75, 75, 75, 0.5); -fx-background-radius: 10;
+    -fx-background-image: url("beach.jpg");
 }

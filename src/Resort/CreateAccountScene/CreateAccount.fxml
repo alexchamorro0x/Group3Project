@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -12,46 +14,129 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" styleClass="root" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.CreateAccountScene.CreateAccountController">
+<AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.CreateAccountScene.CreateAccountController">
    <children>
-      <TextField fx:id="tfFirstName" layoutX="208.0" layoutY="259.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfLastName" layoutX="208.0" layoutY="307.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfUsername" layoutX="208.0" layoutY="354.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfEmail" layoutX="208.0" layoutY="404.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfPassword" layoutX="208.0" layoutY="451.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfConfirmPassword" layoutX="208.0" layoutY="500.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfAddress" layoutX="396.0" layoutY="259.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfState" layoutX="396.0" layoutY="307.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfzipcode" layoutX="396.0" layoutY="358.0" prefHeight="25.0" prefWidth="85.0" />
-      <TextField fx:id="tfCreditCardNumber" layoutX="591.0" layoutY="259.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCvv" layoutX="591.0" layoutY="358.0" prefHeight="25.0" prefWidth="149.0" />
-      <ComboBox fx:id="expireMonth" layoutX="573.0" layoutY="307.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
-      <ComboBox fx:id="expireYear" layoutX="698.0" layoutY="307.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
-      <Button layoutX="428.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#btnClickCreateAccount" text="Create Account" />
-      <Label layoutX="208.0" layoutY="242.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="First Name" textFill="WHITE" />
-      <Label layoutX="209.0" layoutY="292.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Last Name" textFill="WHITE" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="393.0" layoutY="24.0" prefHeight="41.0" prefWidth="168.0" styleClass="title" text="Create Account" textFill="WHITE" />
-      <Label layoutX="208.0" layoutY="431.0" prefHeight="17.0" prefWidth="67.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Password" textFill="WHITE" />
-      <Label fx:id="lblCreateIndicate" layoutX="638.0" layoutY="496.0" text="Success" textFill="WHITE" />
-      <Label layoutX="208.0" layoutY="483.0" prefHeight="17.0" prefWidth="134.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Confirm Password" textFill="WHITE" />
-      <Label layoutX="208.0" layoutY="337.0" prefHeight="17.0" prefWidth="125.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Username" textFill="WHITE" />
-      <Label layoutX="396.0" layoutY="242.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Address " textFill="WHITE" />
-      <Label layoutX="396.0" layoutY="292.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="State" textFill="WHITE" />
-      <Label layoutX="396.0" layoutY="337.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Zipcode" textFill="WHITE" />
-      <Label layoutX="591.0" layoutY="242.0" prefHeight="17.0" prefWidth="168.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Credit card number" textFill="WHITE" />
-      <Label layoutX="573.0" layoutY="292.0" prefHeight="17.0" prefWidth="98.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Expiration Month" textFill="WHITE" />
-      <Label layoutX="698.0" layoutY="292.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Expiration Year" textFill="WHITE" />
-      <Label layoutX="593.0" layoutY="337.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="CVV number" textFill="WHITE" />
-      <Label alignment="CENTER" layoutX="252.0" layoutY="206.0" prefHeight="20.0" prefWidth="67.0" styleClass="head" text="Name" textFill="WHITE" />
-      <Label alignment="CENTER" layoutX="428.0" layoutY="206.0" prefHeight="20.0" prefWidth="85.0" styleClass="head" text="Address" textFill="WHITE" />
-      <Label alignment="CENTER" layoutX="560.0" layoutY="206.0" prefHeight="20.0" prefWidth="239.0" styleClass="head" text="Credit/Debit Card Payment" textFill="WHITE" />
-      <Label layoutX="208.0" layoutY="384.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Email address" textFill="WHITE" />
-      <ImageView fitHeight="95.0" fitWidth="210.0" layoutX="574.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true" styleClass="image">
-         <image>
-            <!-- HELLO -->
-            <Image url="@Creditcard.PNG" />
-         </image>
-      </ImageView>
+      <AnchorPane fx:id="createAccountCenterBorder" layoutX="183.0" layoutY="116.0" prefHeight="368.0" prefWidth="638.0" styleClass="glasswhite" stylesheets="@CreateAccount.css">
+         <children>
+            <Label alignment="CENTER" layoutX="68.0" layoutY="14.0" prefHeight="20.0" prefWidth="67.0" text="Name">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="50.0" stylesheets="@../resortTemplate.css" text="First Name">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="102.0" stylesheets="@../resortTemplate.css" text="Last Name">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="151.0" prefHeight="17.0" prefWidth="125.0" stylesheets="@../resortTemplate.css" text="Username">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="202.0" stylesheets="@../resortTemplate.css" text="Email address">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="250.0" prefHeight="17.0" prefWidth="67.0" stylesheets="@../resortTemplate.css" text="Password">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="302.0" prefHeight="17.0" prefWidth="134.0" stylesheets="@../resortTemplate.css" text="Confirm Password">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="244.0" layoutY="14.0" prefHeight="20.0" prefWidth="85.0" text="Address">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="216.0" layoutY="50.0" prefHeight="17.0" prefWidth="95.0" stylesheets="@../resortTemplate.css" text="Address ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="216.0" layoutY="100.0" prefHeight="17.0" prefWidth="95.0" stylesheets="@../resortTemplate.css" text="State">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="216.0" layoutY="150.0" prefHeight="17.0" prefWidth="95.0" stylesheets="@../resortTemplate.css" text="Zipcode">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="376.0" layoutY="14.0" prefHeight="20.0" prefWidth="239.0" text="Credit/Debit Card Payment">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="407.0" layoutY="50.0" prefHeight="17.0" prefWidth="168.0" stylesheets="@../resortTemplate.css" text="Credit card number">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="407.0" layoutY="113.0" prefHeight="25.0" prefWidth="55.0" stylesheets="@../resortTemplate.css" text="Month">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="533.0" layoutY="113.0" prefHeight="25.0" prefWidth="38.0" stylesheets="@../resortTemplate.css" text="Year">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="433.0" layoutY="172.0" prefHeight="17.0" prefWidth="95.0" stylesheets="@../resortTemplate.css" text="CVV number">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="95.0" fitWidth="210.0" layoutX="377.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" styleClass="image">
+               <image>
+                  <!-- HELLO -->
+                  <Image url="@Creditcard.PNG" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblCreateIndicate" layoutX="450.0" layoutY="283.0" text=" Account&#10;Successful ">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfFirstName" layoutX="23.0" layoutY="72.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfLastName" layoutX="23.0" layoutY="122.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfUsername" layoutX="23.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfEmail" layoutX="23.0" layoutY="222.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfPassword" layoutX="23.0" layoutY="272.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfConfirmPassword" layoutX="23.0" layoutY="322.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfAddress" layoutX="212.0" layoutY="75.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfState" layoutX="212.0" layoutY="125.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="tfzipcode" layoutX="212.0" layoutY="175.0" prefHeight="25.0" prefWidth="85.0" />
+            <TextField fx:id="tfCreditCardNumber" layoutX="401.0" layoutY="72.0" prefHeight="25.0" prefWidth="149.0" />
+            <ComboBox fx:id="expireMonth" layoutX="395.0" layoutY="135.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
+            <ComboBox fx:id="expireYear" layoutX="509.0" layoutY="135.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
+            <TextField fx:id="tfCvv" layoutX="406.0" layoutY="196.0" prefHeight="25.0" prefWidth="149.0" />
+            <Button layoutX="241.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#btnClickCreateAccount" styleClass="glassgray" stylesheets="@CreateAccount.css" text="Create Account">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="24.0" prefHeight="49.0" prefWidth="239.0" text="Create Account" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font></Label>
       <Button layoutX="26.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#btnClickHome" prefHeight="47.0" prefWidth="125.0" text="Home" />
    </children>
+   <stylesheets>
+      <URL value="@../resortTemplate.css" />
+      <URL value="@CreateAccount.css" />
+   </stylesheets>
 </AnchorPane>

@@ -8,11 +8,13 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -20,11 +22,15 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -39,10 +45,11 @@ import javafx.util.Duration;
 public class RoomFinderController implements Initializable {
 
   @FXML private Button btnHome;
+  @FXML private Button btnBookRoom;
   @FXML private ImageView RoomLayoutPicture;
+  @FXML private ImageView homeLogo;
   @FXML private Text RoomTypeText;
   @FXML private Text RoomDescription1;
-  @FXML private Button btnBookRoom;
   @FXML private Label lblAvailableRooms;
   @FXML private Label lblInvalidDate;
 
@@ -57,7 +64,7 @@ public class RoomFinderController implements Initializable {
   @FXML private TableView<AvailableRoom> tvAvailableRooms;
   @FXML private TableColumn<?, ?> tvRoomType;
   @FXML private TableColumn<?, ?> tvRoomNumber;
-  @FXML private ImageView homeLogo;
+  @FXML private AnchorPane roomDescriptionBorder;
 
   // variable to track what room type we are filtering by (default = all)
   String roomAvailabilityFilterType = "all";
@@ -99,8 +106,14 @@ public class RoomFinderController implements Initializable {
     Image pineapple = new Image(RoomA.toURI().toString());
     homeLogo.setImage(pineapple);
 
+    File Room = new File("src/Resort/RoomFinderScene/allRooms.png");
+    Image RoomAImage = new Image(Room.toURI().toString());
+    RoomLayoutPicture.setImage(RoomAImage);
+    pictureBorder(RoomLayoutPicture);
+
     // tvRoomNumber.setStyle();
 
+    roomDescriptionBorder.setVisible(false);
   }
 
   /*
@@ -118,29 +131,13 @@ public class RoomFinderController implements Initializable {
     LocalDate dateStart = datePickerStart.getValue();
     LocalDate dateEnd = datePickerEnd.getValue();
     if (dateStart == null || dateEnd == null) {
-
-      lblInvalidDate.setText("Invalid \n  Date");
-      lblInvalidDate.setTextFill(Color.RED);
       btnBookRoom.setDisable(true);
-      Timeline timeline =
-          new Timeline(
-              new KeyFrame(Duration.seconds(0.8), evt -> lblInvalidDate.setVisible(false)),
-              new KeyFrame(Duration.seconds(0.4), evt -> lblInvalidDate.setVisible(true)));
-      timeline.setCycleCount(3);
-      timeline.play();
+      displayInavlid(dateStart, dateEnd, lblInvalidDate);
 
       // Outputs 'invalid date' if the start date is after the end date
     } else if (dateStart.compareTo(dateEnd) > 0) {
-
-      lblInvalidDate.setText("Invalid \n  Date");
-      lblInvalidDate.setTextFill(Color.RED);
       btnBookRoom.setDisable(true);
-      Timeline timeline =
-          new Timeline(
-              new KeyFrame(Duration.seconds(0.8), evt -> lblInvalidDate.setVisible(false)),
-              new KeyFrame(Duration.seconds(0.4), evt -> lblInvalidDate.setVisible(true)));
-      timeline.setCycleCount(3);
-      timeline.play();
+      displayInavlid(dateStart, dateEnd, lblInvalidDate);
 
     } else {
       System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
@@ -174,8 +171,10 @@ public class RoomFinderController implements Initializable {
   // to false(deselected)
   public void RadioBtnClickedRoomAll(MouseEvent mouseEvent) throws SQLException {
     // all selected so image and text is set to null
-    RoomLayoutPicture.setImage(null);
-    // sets the room title and 3 description text boxes
+    File RoomA = new File("src/Resort/RoomFinderScene/allRooms.png");
+    Image RoomAImage = new Image(RoomA.toURI().toString());
+    RoomLayoutPicture.setImage(RoomAImage);
+    pictureBorder(RoomLayoutPicture); // sets the room title and 3 description text boxes
     RoomTypeText.setText("");
     RoomDescription1.setText("");
     radioBtnRoomTypeAll.setSelected(true);
@@ -183,6 +182,7 @@ public class RoomFinderController implements Initializable {
     radioBtnRoomTypeEagleView.setSelected(false);
     radioBtnRoomTypePoolSide.setSelected(false);
     radioBtnRoomTypeJunior.setSelected(false);
+    roomDescriptionBorder.setVisible(false);
     // set filter type
     roomAvailabilityFilterType = "all";
     // call method to update search results
@@ -197,6 +197,8 @@ public class RoomFinderController implements Initializable {
     File RoomA = new File("src/Resort/RoomFinderScene/ambassadorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
+    pictureBorder(RoomLayoutPicture);
+
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Ambassador Suite");
     RoomDescription1.setText("Luxurious 5 room\nocean view cabin");
@@ -205,6 +207,7 @@ public class RoomFinderController implements Initializable {
     radioBtnRoomTypeEagleView.setSelected(false);
     radioBtnRoomTypePoolSide.setSelected(false);
     radioBtnRoomTypeJunior.setSelected(false);
+    roomDescriptionBorder.setVisible(true);
     // set filter type
     roomAvailabilityFilterType = "Ambassador Suite";
     // call method to update search results
@@ -219,6 +222,8 @@ public class RoomFinderController implements Initializable {
     File RoomA = new File("src/Resort/RoomFinderScene/eagleViewCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
+    pictureBorder(RoomLayoutPicture);
+
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Eagle View Condo");
     RoomDescription1.setText("Extravagant 4 room condo\nshowcasing a bird's eye\nview of the city");
@@ -227,6 +232,7 @@ public class RoomFinderController implements Initializable {
     radioBtnRoomTypeEagleView.setSelected(true);
     radioBtnRoomTypePoolSide.setSelected(false);
     radioBtnRoomTypeJunior.setSelected(false);
+    roomDescriptionBorder.setVisible(true);
     // set filter type
     roomAvailabilityFilterType = "Eagle View Condo";
     // call method to update search results
@@ -241,14 +247,18 @@ public class RoomFinderController implements Initializable {
     File RoomA = new File("src/Resort/RoomFinderScene/poolSideCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
+    pictureBorder(RoomLayoutPicture);
+
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Pool Side Condo");
-    RoomDescription1.setText("4 room condo near\nthe pool with a\nkitchen and dining room");
+    RoomDescription1.setText(
+        "Relaxing 4 room condo\nnear the pool with a\nkitchen and dining room");
     radioBtnRoomTypeAll.setSelected(false);
     radioBtnRoomTypeAmbassador.setSelected(false);
     radioBtnRoomTypeEagleView.setSelected(false);
     radioBtnRoomTypePoolSide.setSelected(true);
     radioBtnRoomTypeJunior.setSelected(false);
+    roomDescriptionBorder.setVisible(true);
     // set filter type
     roomAvailabilityFilterType = "Pool Side Condo";
     // call method to update search results
@@ -263,6 +273,8 @@ public class RoomFinderController implements Initializable {
     File RoomA = new File("src/Resort/RoomFinderScene/juniorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
     RoomLayoutPicture.setImage(RoomAImage);
+    pictureBorder(RoomLayoutPicture);
+
     // sets the room title and 3 description text boxes
     RoomTypeText.setText("Junior Condo");
     RoomDescription1.setText("Economic 3 room condo\nfeaturing a kitchen and\nliving area");
@@ -271,6 +283,7 @@ public class RoomFinderController implements Initializable {
     radioBtnRoomTypeEagleView.setSelected(false);
     radioBtnRoomTypePoolSide.setSelected(false);
     radioBtnRoomTypeJunior.setSelected(true);
+    roomDescriptionBorder.setVisible(true);
     // set filter type
     roomAvailabilityFilterType = "Junior Condo";
     // call method to update search results
@@ -327,9 +340,36 @@ public class RoomFinderController implements Initializable {
       }
     }
   }
+
+  // adds a shadow border to pictures from ImageView objects.
+  public static void pictureBorder(ImageView RoomLayoutPicture) {
+    // https://stackoverflow.com/questions/20489908/border-radius-and-shadow-on-imageview
+    Rectangle clip =
+        new Rectangle(RoomLayoutPicture.getFitWidth(), RoomLayoutPicture.getFitHeight());
+    clip.setArcWidth(35);
+    clip.setArcHeight(35);
+    RoomLayoutPicture.setClip(clip);
+
+    SnapshotParameters parameters = new SnapshotParameters();
+    parameters.setFill(Color.TRANSPARENT);
+    WritableImage image = RoomLayoutPicture.snapshot(parameters, null);
+
+    RoomLayoutPicture.setClip(null);
+    RoomLayoutPicture.setEffect(new DropShadow(20, Color.BLACK));
+    RoomLayoutPicture.setImage(image);
+  }
+
+  private static void displayInavlid(LocalDate dateStart, LocalDate dateEnd, Label lblInvalidDate) {
+    lblInvalidDate.setText("Invalid Date");
+    lblInvalidDate.setTextFill(Color.RED);
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0.8), evt -> lblInvalidDate.setVisible(false)),
+            new KeyFrame(Duration.seconds(0.4), evt -> lblInvalidDate.setVisible(true)));
+    timeline.setCycleCount(3);
+    timeline.play();
+  }
 }
-
-
 
 /*
 beach.png    Free to reuse from Pixabay.com, free-to-use website.

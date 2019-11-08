@@ -1,0 +1,20 @@
+#btnCreateAccount {
+    -fx-background-image: url("../CreateAccountScene/beachBoat.jpg");
+/*   https://pixabay.com/photos/isla-diablo-san-blas-panama-1994798/    */
+}
+
+.glasswhite {
+    -fx-background-color: rgba(235, 235, 235, 0.72);
+    -fx-background-radius: 10;
+}
+
+.glassgray {
+    -fx-background-color: rgba(135, 135, 135, 0.63);
+    -fx-background-radius: 10;
+}
+
+.btnCreateAccount {
+    -fx-focus-color: lightblue;
+    -fx-background-insets: 0, 1, 2;
+    -fx-focus-radius: 5,4,3;
+}

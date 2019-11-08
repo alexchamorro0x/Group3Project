@@ -20,13 +20,14 @@
 
 <AnchorPane fx:id="RoomFinderBackground" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.RoomFinderScene.RoomFinderController">
     <children>
+      <AnchorPane fx:id="roomDescriptionBorder" layoutX="397.0" layoutY="330.0" prefHeight="144.0" prefWidth="262.0" styleClass="glasswhite" stylesheets="@roomFinder.css" />
       <ImageView fx:id="homeLogo" fitHeight="123.0" fitWidth="146.0" layoutX="8.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
         <Button fx:id="btnHome" layoutX="5.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnClickedHome4" prefHeight="117.0" prefWidth="226.0" stylesheets="@roomFinder.css">
          <styleClass>
             <String fx:value="transparent" />
             <String fx:value="office-hours-pane" />
          </styleClass></Button>
-      <AnchorPane fx:id="glass1" layoutX="8.0" layoutY="398.0" prefHeight="193.0" prefWidth="208.0" styleClass="glasswhite" stylesheets="@roomFinder.css" />
+      <AnchorPane fx:id="glass1" layoutX="8.0" layoutY="398.0" prefHeight="193.0" prefWidth="208.0" styleClass="glassdark" stylesheets="@roomFinder.css" />
         <Label layoutX="369.0" layoutY="15.0" text="Room Finder" textFill="WHITE">
             <font>
                 <Font name="Times New Roman Bold" size="46.0" />
@@ -48,13 +49,13 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></RadioButton>
-        <ImageView fx:id="RoomLayoutPicture" fitHeight="250.0" fitWidth="350.0" layoutX="339.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
-        <Text fx:id="RoomTypeText" fill="WHITE" layoutX="408.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="">
+        <ImageView fx:id="RoomLayoutPicture" fitHeight="250.0" fitWidth="350.0" layoutX="339.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view" />
+        <Text fx:id="RoomTypeText" fontSmoothingType="LCD" layoutX="408.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="">
             <font>
                 <Font size="25.0" />
             </font>
         </Text>
-        <Text fx:id="RoomDescription1" fill="WHITE" layoutX="432.0" layoutY="400.0" scaleX="1.0" scaleY="0.9999934445143697" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" styleClass="text">
+        <Text fx:id="RoomDescription1" fontSmoothingType="LCD" layoutX="432.0" layoutY="400.0" scaleX="1.0" scaleY="0.9999934445143697" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="19.0" />
          </font></Text>
@@ -89,7 +90,7 @@
         </Label>
       <Label fx:id="lblInvalidDate" layoutX="10.0" layoutY="360.0" prefHeight="27.0" prefWidth="215.0" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Label>
     </children>
