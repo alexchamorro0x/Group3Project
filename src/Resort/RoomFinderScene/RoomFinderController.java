@@ -12,6 +12,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -22,6 +23,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,8 +52,11 @@ public class RoomFinderController implements Initializable {
   @FXML private ImageView homeLogo;
   @FXML private Text RoomTypeText;
   @FXML private Text RoomDescription1;
-  @FXML private Label lblAvailableRooms;
   @FXML private Label lblInvalidDate;
+  @FXML private Label RoomFinderTitle;
+
+  @FXML private AnchorPane APdates;
+  @FXML private AnchorPane AProoms;
 
   @FXML private RadioButton radioBtnRoomTypeAll;
   @FXML private RadioButton radioBtnRoomTypeAmbassador;
@@ -86,7 +91,6 @@ public class RoomFinderController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // Not used now...my thinking is to use the radio buttons as a filter for the search results
-    lblAvailableRooms.setVisible(false);
 
     // https://stackoverflow.com/questions/12717487/how-to-implement-a-transparent-pane-with-non-transparent-children
 
@@ -111,9 +115,20 @@ public class RoomFinderController implements Initializable {
     RoomLayoutPicture.setImage(RoomAImage);
     pictureBorder(RoomLayoutPicture);
 
-    // tvRoomNumber.setStyle();
+    fadeIn(RoomLayoutPicture);
+    fadeIn(RoomFinderTitle);
+    fadeIn(APdates);
+    fadeIn(AProoms);
+    fadeIn(btnBookRoom);
+    fadeIn2(homeLogo);
+
+    pictureBorder(homeLogo);
+
 
     roomDescriptionBorder.setVisible(false);
+
+    // TODO: lock the 'book room' button unless someone is logged in
+    // TODO: make pineapple Logo highlight/grow when hovered over
   }
 
   /*
@@ -364,10 +379,43 @@ public class RoomFinderController implements Initializable {
     lblInvalidDate.setTextFill(Color.RED);
     Timeline timeline =
         new Timeline(
-            new KeyFrame(Duration.seconds(0.8), evt -> lblInvalidDate.setVisible(false)),
-            new KeyFrame(Duration.seconds(0.4), evt -> lblInvalidDate.setVisible(true)));
+            new KeyFrame(Duration.seconds(0.75), evt -> lblInvalidDate.setVisible(false)),
+            new KeyFrame(Duration.seconds(0.35), evt -> lblInvalidDate.setVisible(true)));
     timeline.setCycleCount(3);
     timeline.play();
+  }
+
+  private static void fadeIn(Object x) {
+    // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
+    FadeTransition ft = new FadeTransition(Duration.millis(650), (Node) x);
+    ft.setToValue(1);
+    ft.setFromValue(0);
+    //ft.setCycleCount(4);
+    //ft.setAutoReverse(true);
+    ft.play();
+  }
+  private static void fadeIn2(Object x) {
+    FadeTransition ft = new FadeTransition(Duration.millis(550), (Node) x);
+    ft.setToValue(1);
+    ft.setFromValue(0);
+    //ft.setCycleCount(4);
+    //ft.setAutoReverse(true);
+    ft.play();
+  }
+
+  public void btnHomeEntered(MouseEvent mouseEvent) {
+    homeLogo.setFitHeight(160);
+    homeLogo.setFitHeight(135);
+
+    pictureBorder(homeLogo);
+  }
+
+  public void btnHomeExited(MouseEvent mouseEvent) {
+    homeLogo.setFitHeight(150);
+    homeLogo.setFitHeight(125);
+    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
+    Image pineapple = new Image(RoomA.toURI().toString());
+    homeLogo.setImage(pineapple);
   }
 }
 

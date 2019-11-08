@@ -122,10 +122,14 @@
             <ComboBox fx:id="expireMonth" layoutX="395.0" layoutY="135.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
             <ComboBox fx:id="expireYear" layoutX="509.0" layoutY="135.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
             <TextField fx:id="tfCvv" layoutX="406.0" layoutY="196.0" prefHeight="25.0" prefWidth="149.0" />
-            <Button layoutX="241.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#btnClickCreateAccount" styleClass="glassgray" stylesheets="@CreateAccount.css" text="Create Account">
+            <Button layoutX="241.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#btnClickCreateAccount" stylesheets="@CreateAccount.css" text="Create Account">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <styleClass>
+                  <String fx:value="glassgray" />
+                  <String fx:value="btnCreateAccount" />
+               </styleClass>
             </Button>
          </children>
       </AnchorPane>

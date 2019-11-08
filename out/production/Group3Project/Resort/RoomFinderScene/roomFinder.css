@@ -60,6 +60,15 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
     -fx-background-radius: 10;
 }
 
+.glassgray {
+    -fx-background-color: rgba(135, 135, 135, 0.63);
+    -fx-background-radius: 10;
+}
+
+.glassgreen {
+    -fx-background-color: rgba(50, 168, 129, .6);
+    -fx-background-radius: 10;
+}
 
 .image-view {
     -fx-border-color: black;
@@ -72,6 +81,9 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
             To set images fxml objects, needs css file attributed to object, Use "#" and the fx:id
             of the AnchorPane/Button...      #btnHome  // btnHome = fx:id of home button
  */
+
+
+
 #btnHome {
     -fx-background-color: transparent;
 }
@@ -83,3 +95,4 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
 #RoomFinderBackground {
     -fx-background-image: url("beach.jpg");
 }
+
