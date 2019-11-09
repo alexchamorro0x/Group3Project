@@ -20,14 +20,14 @@
 
 <AnchorPane fx:id="RoomFinderBackground" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.RoomFinderScene.RoomFinderController">
     <children>
-        <Label fx:id="RoomFinderTitle" layoutX="369.0" layoutY="15.0" text="Room Finder" textFill="WHITE">
+        <Label fx:id="RoomFinderTitle" layoutX="315.0" layoutY="1.0" styleClass="header" stylesheets="@roomFinder.css" text="Room Finder" textFill="WHITE">
             <font>
                 <Font name="Times New Roman Bold" size="46.0" />
             </font>
         </Label>
         <AnchorPane fx:id="APdates" layoutX="5.0" layoutY="128.0" prefHeight="187.0" prefWidth="226.0" styleClass="glassblue" stylesheets="@roomFinder.css">
             <children>
-                <DatePicker fx:id="datePickerStart" cacheHint="SPEED" editable="false" layoutX="9.0" layoutY="38.0" onAction="#updateAvailability" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
+                <DatePicker fx:id="datePickerStart" cacheHint="SPEED" editable="false" layoutX="9.0" layoutY="38.0" onAction="#updateAvailability" />
                 <DatePicker fx:id="datePickerEnd" editable="false" layoutX="14.0" layoutY="127.0" onAction="#updateAvailability" styleClass="jfx-combo-box" stylesheets="@roomFinder.css" />
                 <Label layoutX="78.0" layoutY="11.0" text="Start Date" textFill="WHITE">
                     <font>
@@ -102,7 +102,7 @@
         </AnchorPane>
         <TableView id="columnHead" fx:id="tvAvailableRooms" layoutX="766.0" layoutY="52.0" prefHeight="509.0" prefWidth="208.0" styleClass="jfx-table-view" stylesheets="@roomFinder.css">
             <columns>
-                <TableColumn id="columnTitle" fx:id="tvRoomType" editable="false" minWidth="0.0" prefWidth="122.0" styleClass=".table-row-cell" text="Room Type" />
+                <TableColumn id="columnTitle" fx:id="tvRoomType" editable="false" minWidth="0.0" prefWidth="125.0" styleClass=".table-row-cell" text="Room Type" />
                 <TableColumn fx:id="tvRoomNumber" editable="false" prefWidth="85.0" sortable="false" styleClass=".table-row-cell" text="Room #" />
             </columns>
         </TableView>

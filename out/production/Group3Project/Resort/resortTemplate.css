@@ -24,8 +24,6 @@
 }
 #lblDescription {
     -fx-padding: 2px;
-    -fx-border-color: white;
-    -fx-border-width: 5px;
 }
 #lblNewUser:hover {
     -fx-background-color: #dae7f3;

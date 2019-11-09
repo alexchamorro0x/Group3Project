@@ -25,9 +25,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -109,6 +111,8 @@ public class RoomFinderController implements Initializable {
     File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
     Image pineapple = new Image(RoomA.toURI().toString());
     homeLogo.setImage(pineapple);
+    homeLogo.setFitHeight(65);
+    homeLogo.setFitHeight(100);
 
     File Room = new File("src/Resort/RoomFinderScene/allRooms.png");
     Image RoomAImage = new Image(Room.toURI().toString());
@@ -128,7 +132,6 @@ public class RoomFinderController implements Initializable {
     roomDescriptionBorder.setVisible(false);
 
     // TODO: lock the 'book room' button unless someone is logged in
-    // TODO: make pineapple Logo highlight/grow when hovered over
   }
 
   /*
@@ -404,15 +407,19 @@ public class RoomFinderController implements Initializable {
   }
 
   public void btnHomeEntered(MouseEvent mouseEvent) {
-    homeLogo.setFitHeight(160);
-    homeLogo.setFitHeight(135);
+    homeLogo.setFitHeight(70);
+    homeLogo.setFitHeight(105);
+
+    Glow glow = new Glow();
+    glow.setLevel(.15);
+    homeLogo.setEffect(glow);
 
     pictureBorder(homeLogo);
   }
 
   public void btnHomeExited(MouseEvent mouseEvent) {
-    homeLogo.setFitHeight(150);
-    homeLogo.setFitHeight(125);
+    homeLogo.setFitHeight(65);
+    homeLogo.setFitHeight(100);
     File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
     Image pineapple = new Image(RoomA.toURI().toString());
     homeLogo.setImage(pineapple);

@@ -3,11 +3,28 @@
 }
 
 
-.jfx-combo-box {
+.jfx-table-view {
     -fx-background-color:  lightgrey;
 }
 
-.jfx-combo-box .label {
+.jfx-table-view .label {
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
+
+.jfx-table-view .scroll-bar {
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+.transparent {
+    -fx-background-color: transparent;
+}
+
+
+

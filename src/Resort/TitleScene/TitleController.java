@@ -26,54 +26,30 @@ import javafx.util.Duration;
  */
 public class TitleController {
 
-  @FXML
-  private Label lblTempDescription;
 
-  @FXML
-  private ImageView ivRoomFinder;
+  @FXML private AnchorPane apLoginPrompt;
+  @FXML private AnchorPane apLoggedIn;
 
-  @FXML
-  private Pane titleBackGround;
+  @FXML private Button btnRoomFinder;
+  @FXML private Button btnNewUser;
+  @FXML private Button btnManagerView;
 
-  @FXML
-  private Button btnRoomFinder;
+  @FXML private CheckBox ckbManagerLogin;
 
-  @FXML
-  private Button btnNewUser;
+  @FXML private ImageView ivRoomFinder;
+  @FXML private ImageView ivTitlePage;
 
-  @FXML
-  private Label lblTitleLabel;
+  @FXML private Label lblLoginValidation;
+  @FXML private Label lblLoggedInUsername;
 
-  @FXML
-  private ImageView ivTitlePage;
+  @FXML private PasswordField pfLoginPassword;
 
-  @FXML
-  private TextField tfFirstNameLogin;
+  @FXML private TextField tfFirstNameLogin;
 
-  @FXML
-  private PasswordField pfLoginPassword;
-
-  @FXML
-  private CheckBox ckbManagerLogin;
-
-  @FXML
-  private Label lblLoginValidation;
-
-  @FXML
-  private Label lblDescription;
-
-  @FXML
-  private AnchorPane apLoginPrompt;
-
-  @FXML
-  private AnchorPane apLoggedIn;
-
-  @FXML
-  private Label lblLoggedInUsername;
-
-
-  @FXML
-  private Button btnManagerView;
+  @FXML private Label lblDescription;
+  @FXML private Label lblTempDescription;
+  @FXML private Label lblTitleLabel;
+  @FXML private Pane titleBackGround;
 
 
   // Fields to hold the Username and if user is a manager

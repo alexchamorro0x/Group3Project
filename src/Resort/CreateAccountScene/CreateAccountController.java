@@ -2,6 +2,8 @@ package Resort.CreateAccountScene;
 
 import Resort.Main;
 import Resort.Utility.DatabaseAgent;
+
+import java.io.File;
 import java.io.IOException;
 
 import javafx.animation.FadeTransition;
@@ -17,11 +19,34 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class CreateAccountController {
+
+  @FXML private ComboBox expireMonth;
+  @FXML private ComboBox expireYear;
+
+  @FXML private ImageView homeLogo;
+
+  @FXML private Label lblCreateIndicate;
+
+  @FXML private TextField tfFirstName;
+  @FXML private TextField tfLastName;
+  @FXML private TextField tfUsername;
+  @FXML private TextField tfEmail;
+  @FXML private TextField tfPassword;
+  @FXML private TextField tfAddress;
+  @FXML private TextField tfState;
+  @FXML private TextField tfzipcode;
+  @FXML private TextField tfCreditCardNumber;
+  @FXML private TextField tfCvv;
+
+  @FXML private TextField tfConfirmPassword;
 
   ObservableList<String> expireMonthList =
       FXCollections.observableArrayList(
@@ -31,46 +56,21 @@ public class CreateAccountController {
           "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
           "2030");
 
-  @FXML private TextField tfFirstName;
 
-  @FXML private TextField tfLastName;
-
-  @FXML private TextField tfUsername;
-
-  @FXML private TextField tfEmail;
-
-  @FXML private TextField tfPassword;
-
-  @FXML private TextField tfConfirmPassword;
-
-  @FXML private TextField tfAddress;
-
-  @FXML private TextField tfState;
-
-  @FXML private TextField tfzipcode;
-
-  @FXML private TextField tfCreditCardNumber;
-
-  @FXML private TextField tfCvv;
-
-  @FXML private Label lblCreateIndicate;
-
-  @FXML private ComboBox expireMonth;
-
-  @FXML private ComboBox expireYear;
-
-  @FXML
-  private void initialize() {
-
+  public void initialize() {
     expireMonth.setItems(expireMonthList);
-
     expireYear.setItems(expireYearList);
 
     lblCreateIndicate.setVisible(false);
+
+    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
+    Image pineapple = new Image(RoomA.toURI().toString());
+    homeLogo.setImage(pineapple);
+    homeLogo.setFitWidth(65);
+    homeLogo.setFitHeight(100);
   }
 
-  @FXML
-  void btnClickHome(MouseEvent event) throws IOException {
+  @FXML void btnClickHome(MouseEvent event) throws IOException {
     // get a reference to the window we are in
     Stage window = (Stage) tfUsername.getScene().getWindow();
 
@@ -87,9 +87,7 @@ public class CreateAccountController {
     window.setScene(titleScene);
   }
 
-  @FXML
-  void btnClickCreateAccount(MouseEvent event) {
-
+  @FXML void btnClickCreateAccount(MouseEvent event) {
     // todo add code to validate values and give appropriate error messages for incorrect values
 
     DatabaseAgent.addUser(
@@ -114,6 +112,26 @@ public class CreateAccountController {
     timeline.play();
     lblCreateIndicate.setVisible(false);
   }
+
+  public void btnHomeEntered(MouseEvent mouseEvent) {
+    homeLogo.setFitHeight(70);
+    homeLogo.setFitHeight(105);
+
+    Glow glow = new Glow();
+    glow.setLevel(.15);
+    homeLogo.setEffect(glow);
+
+    Resort.RoomFinderScene.RoomFinderController.pictureBorder(homeLogo);
+  }
+
+  public void btnHomeExited(MouseEvent mouseEvent) {
+    homeLogo.setFitHeight(65);
+    homeLogo.setFitHeight(100);
+    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
+    Image pineapple = new Image(RoomA.toURI().toString());
+    homeLogo.setImage(pineapple);
+  }
+
 
   /*
    public CreateAccountController(Stage CreateAccount) throws IOException {
