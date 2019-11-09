@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -24,6 +25,15 @@ import javafx.util.Duration;
  * separate controllers for each scene of the application.
  */
 public class TitleController {
+
+  @FXML
+  private Label lblTempDescription;
+
+  @FXML
+  private ImageView ivRoomFinder;
+
+  @FXML
+  private Pane titleBackGround;
 
   @FXML
   private Button btnRoomFinder;
@@ -77,7 +87,7 @@ public class TitleController {
   }
 
   // method for setting visibility of LoggedInPane or login prompt pane
-  void updateLoginPane() {
+  private void updateLoginPane() {
     // if logged in, set prompt to not visible and set loggedInpane to visible and set username
     if (sessionInformation.getUserName() != null) {
       apLoggedIn.setVisible(true);
@@ -119,7 +129,6 @@ public class TitleController {
     //get a reference to the window we are in
     Stage window = (Stage) btnRoomFinder.getScene().getWindow();
 
-
     // declare and initialize a loader for the FXML scene we are going to
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("../RoomFinderScene/roomFinder.fxml"));
@@ -143,7 +152,7 @@ public class TitleController {
   }
 
   @FXML
-  void clickLogin(MouseEvent event) throws IOException {
+  void clickLogin(MouseEvent event) {
     String username = tfFirstNameLogin.getText();
     String password = pfLoginPassword.getText();
 
@@ -172,6 +181,7 @@ public class TitleController {
       createLoginValidator(false);
     }
   }
+
   private FadeTransition loginFadeOut = new FadeTransition(Duration.millis(2000));
 
   // Transition effect for fading out Success/Failed indicators
@@ -260,6 +270,9 @@ public class TitleController {
     loginFadeOut.setCycleCount(1);
     loginFadeOut.setAutoReverse(false);
 
+    Resort.RoomFinderScene.RoomFinderController.pictureBorder(ivTitlePage);
+    Resort.RoomFinderScene.RoomFinderController.pictureBorder(ivRoomFinder);
+
     // testing set visibility for loggedinPane or loginPrompt depending on if username is set
     updateLoginPane();
 
@@ -267,3 +280,6 @@ public class TitleController {
   }
 
 }
+
+ /* dock.jpg    Free to reuse from Pixabay.com, free-to-use website.
+    https://pixabay.com/photos/pier-jetty-ocean-sea-water-way-569314/*/

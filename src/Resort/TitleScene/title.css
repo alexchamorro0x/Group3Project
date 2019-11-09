@@ -1,3 +1,51 @@
-.hyperlinkLabel {
-    -fx-text-fill: #000EE;
+
+.head {
+  -fx-text-fill: white;
+  -fx-font-family: Arial;
+  -fx-font-size: 64px;
+}
+
+#lblTitleLabel .text {
+  -fx-stroke: black;
+  -fx-stroke-width: 2px;
+}
+
+.glassblue {
+  -fx-background-color: rgba(0, 100, 100, 0.5);
+  -fx-background-radius: 10;
+}
+
+.glassdark {
+  -fx-background-color: rgba(75, 75, 75, 0.5);
+  -fx-background-radius: 10;
+}
+
+.glasswhite {
+  -fx-background-color: rgba(240, 240, 240, 0.5);
+  -fx-background-radius: 10;
+}
+
+.glassblack {
+  -fx-background-color: rgba(0, 0, 0, 0.7);
+  -fx-background-radius: 10;
+}
+
+.glassgray {
+  -fx-background-color: rgba(135, 135, 135, 0.63);
+  -fx-background-radius: 10;
+}
+
+.glassgreen {
+  -fx-background-color: rgba(50, 168, 129, .6);
+  -fx-background-radius: 10;
+}
+
+#titleBackGround {
+  -fx-background-image: url("dock.jpg");
+}
+
+.image-view {
+  -fx-border-color: black;
+  -fx-border-style: solid;
+  -fx-border-width: 50;
 }
