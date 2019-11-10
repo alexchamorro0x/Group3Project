@@ -7,16 +7,12 @@ import Resort.Utility.DatabaseAgent;
 import Resort.Utility.SessionInformation;
 import java.io.IOException;
 import java.sql.SQLException;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -25,57 +21,56 @@ import javafx.stage.Stage;
 
 public class EditAccountController {
 
-  @FXML private ComboBox expireMonth;
+  @FXML
+  private AnchorPane btnCreateAccount;
 
-  @FXML private ComboBox expireYear;
+  @FXML
+  private TextField tfFirstName;
 
-  @FXML private AnchorPane btnCreateAccount;
+  @FXML
+  private TextField tfLastName;
 
-  @FXML private TextField tfFirstName;
+  @FXML
+  private TextField tfUsername;
 
-  @FXML private TextField tfLastName;
+  @FXML
+  private TextField tfEmail;
 
-  @FXML private TextField tfUsername;
+  @FXML
+  private TextField tfPassword;
 
-  @FXML private TextField tfEmail;
+  @FXML
+  private TextField tfConfirmPassword;
 
-  @FXML private TextField tfPassword;
+  @FXML
+  private TextField tfAddress;
 
-  @FXML private TextField tfConfirmPassword;
+  @FXML
+  private TextField tfState;
 
-  @FXML private TextField tfAddress;
+  @FXML
+  private TextField tfzipcode;
 
-  @FXML private TextField tfState;
+  @FXML
+  private TextField tfCreditCardNumber;
 
-  @FXML private TextField tfzipcode;
+  @FXML
+  private TextField tfCvv;
 
-  @FXML private TextField tfCreditCardNumber;
+  @FXML
+  private Label lblCreateIndicate;
 
-  @FXML private TextField tfCvv;
-
-  @FXML private Label lblCreateIndicate;
-
-  @FXML private Button btnReturnToManager;
+  @FXML
+  private Button btnReturnToManager;
 
   // String to hold our username if logged in and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
 
   private String userNameForManagerEdit;
 
-  ObservableList<String> expireMonthList =
-      FXCollections.observableArrayList(
-          "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-  ObservableList<String> expireYearList =
-      FXCollections.observableArrayList(
-          "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
-          "2030");
-
   public void initialize() {
     // For users editing their own account managerView button will be disabled
     btnReturnToManager.setVisible(false);
-
-    expireMonth.setItems(expireMonthList);
-    expireYear.setItems(expireYearList);
   }
   // Setter so that when called from manager view to edit another users account this can be set
   public void setUserNameForManagerEdit(String userNameForManagerEdit) {
@@ -95,6 +90,7 @@ public class EditAccountController {
     tfPassword.setText(userAccount.getPassWord());
     tfConfirmPassword.setText(userAccount.getPassWord());
     tfCvv.setText(userAccount.getCvv());
+
   }
 
   // setter for session information
@@ -110,12 +106,12 @@ public class EditAccountController {
 
   @FXML
   void btnClickUpdateAccount(MouseEvent event) {
-    // todo add logic to update the account in the database
+    //todo add logic to update the account in the database
   }
 
   @FXML
   void btnClickHome(MouseEvent event) throws IOException {
-    // get a reference to the window we are in
+    //get a reference to the window we are in
     Stage window = (Stage) btnCreateAccount.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
@@ -138,10 +134,8 @@ public class EditAccountController {
   public void setSessioninformation(SessionInformation sessionformation) {
     this.sessionInformation = sessionformation;
 
-    // If this is called from the manager view to edit another users information set info for that
-    // user
-    AccountInformation userAccount =
-        DatabaseAgent.getAccountInformation(sessionformation.getUserName());
+    // If this is called from the manager view to edit another users information set info for that user
+    AccountInformation userAccount = DatabaseAgent.getAccountInformation(sessionformation.getUserName());
 
     System.out.println("Test");
 
@@ -159,7 +153,7 @@ public class EditAccountController {
 
   @FXML
   void clickReturnToManager(ActionEvent event) throws IOException {
-    Stage window = (Stage) tfUsername.getScene().getWindow();
+    Stage window = (Stage)  tfUsername.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
     FXMLLoader loader = new FXMLLoader();
@@ -172,6 +166,7 @@ public class EditAccountController {
     ManagerViewController managerViewController = loader.getController();
 
     managerViewController.setSessionInformation(sessionInformation);
+
 
     // make the new scene we are going to
     Scene managerScene = new Scene(managerView);
@@ -202,4 +197,5 @@ public class EditAccountController {
 
     DatabaseAgent.updateAccount(accountInformation);
   }
+
 }

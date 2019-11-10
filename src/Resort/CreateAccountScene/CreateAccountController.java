@@ -30,8 +30,11 @@ public class CreateAccountController {
 
   @FXML private ComboBox expireMonth;
   @FXML private ComboBox expireYear;
+
   @FXML private ImageView homeLogo;
+
   @FXML private Label lblCreateIndicate;
+
   @FXML private TextField tfFirstName;
   @FXML private TextField tfLastName;
   @FXML private TextField tfUsername;
@@ -53,6 +56,7 @@ public class CreateAccountController {
           "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
           "2030");
 
+
   public void initialize() {
     expireMonth.setItems(expireMonthList);
     expireYear.setItems(expireYearList);
@@ -66,8 +70,7 @@ public class CreateAccountController {
     homeLogo.setFitHeight(100);
   }
 
-  @FXML
-  void btnClickHome(MouseEvent event) throws IOException {
+  @FXML void btnClickHome(MouseEvent event) throws IOException {
     // get a reference to the window we are in
     Stage window = (Stage) tfUsername.getScene().getWindow();
 
@@ -84,8 +87,7 @@ public class CreateAccountController {
     window.setScene(titleScene);
   }
 
-  @FXML
-  void btnClickCreateAccount(MouseEvent event) {
+  @FXML void btnClickCreateAccount(MouseEvent event) {
     // todo add code to validate values and give appropriate error messages for incorrect values
 
     DatabaseAgent.addUser(
@@ -129,6 +131,7 @@ public class CreateAccountController {
     Image pineapple = new Image(RoomA.toURI().toString());
     homeLogo.setImage(pineapple);
   }
+
 
   /*
    public CreateAccountController(Stage CreateAccount) throws IOException {
