@@ -7,13 +7,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://C:/Program Files (x86)/H2/bin/h2-1.4.200.jar!/" />
+          <root url="file://C:/Program Files (x86)/H2/bin" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://C:/Program Files (x86)/H2/bin" recursive="false" />
       </library>
     </orderEntry>
   </component>
