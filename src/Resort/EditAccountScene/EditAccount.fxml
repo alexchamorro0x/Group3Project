@@ -1,54 +1,177 @@
-<?xml version="1.0" encoding="UTF-8"?>
+  @FXML private ComboBox expireMonth;
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+  @FXML private ComboBox expireYear;
 
-<AnchorPane fx:id="btnCreateAccount" minHeight="600.0" minWidth="1000.0" styleClass="root" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
-   <children>
-      <TextField fx:id="tfFirstName" layoutX="20.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfLastName" layoutX="20.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfUsername" layoutX="20.0" layoutY="195.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfEmail" layoutX="20.0" layoutY="245.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfPassword" layoutX="20.0" layoutY="292.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfConfirmPassword" layoutX="20.0" layoutY="341.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfAddress" layoutX="208.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfState" layoutX="208.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfzipcode" layoutX="208.0" layoutY="199.0" prefHeight="25.0" prefWidth="85.0" />
-      <TextField fx:id="tfCreditCardNumber" layoutX="403.0" layoutY="100.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="tfCvv" layoutX="403.0" layoutY="199.0" prefHeight="25.0" prefWidth="149.0" />
-      <ComboBox layoutX="385.0" layoutY="148.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
-      <ComboBox layoutX="510.0" layoutY="148.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
-      <Button layoutX="240.0" layoutY="333.0" mnemonicParsing="false" onAction="#clickUpdateAccount" onMouseClicked="#btnClickUpdateAccount" text="Update Account" />
-      <Label layoutX="20.0" layoutY="83.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="First Name" textFill="WHITE" />
-      <Label layoutX="21.0" layoutY="133.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Last Name" textFill="WHITE" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="6.0" prefHeight="41.0" prefWidth="168.0" styleClass="title" text="Update Account" textFill="WHITE" />
-      <Label layoutX="20.0" layoutY="272.0" prefHeight="17.0" prefWidth="67.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Password" textFill="WHITE" />
-      <Label fx:id="lblCreateIndicate" layoutX="450.0" layoutY="337.0" text="Success" textFill="WHITE" />
-      <Label layoutX="20.0" layoutY="324.0" prefHeight="17.0" prefWidth="134.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Confirm Password" textFill="WHITE" />
-      <Label layoutX="20.0" layoutY="178.0" prefHeight="17.0" prefWidth="125.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Username" textFill="WHITE" />
-      <Label layoutX="208.0" layoutY="83.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Address " textFill="WHITE" />
-      <Label layoutX="208.0" layoutY="133.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="State" textFill="WHITE" />
-      <Label layoutX="208.0" layoutY="178.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Zipcode" textFill="WHITE" />
-      <Label layoutX="403.0" layoutY="83.0" prefHeight="17.0" prefWidth="168.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Credit card number" textFill="WHITE" />
-      <Label layoutX="385.0" layoutY="133.0" prefHeight="17.0" prefWidth="98.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Expiration Month" textFill="WHITE" />
-      <Label layoutX="510.0" layoutY="133.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Expiration Year" textFill="WHITE" />
-      <Label layoutX="405.0" layoutY="178.0" prefHeight="17.0" prefWidth="95.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="CVV number" textFill="WHITE" />
-      <Label alignment="CENTER" layoutX="64.0" layoutY="47.0" prefHeight="20.0" prefWidth="67.0" text="Name" textFill="WHITE" />
-      <Label alignment="CENTER" layoutX="240.0" layoutY="47.0" prefHeight="20.0" prefWidth="85.0" text="Address" textFill="WHITE" />
-      <Label alignment="CENTER" layoutX="372.0" layoutY="47.0" prefHeight="20.0" prefWidth="239.0" text="Credit/Debit Card Payment" textFill="WHITE" />
-      <Label layoutX="20.0" layoutY="225.0" styleClass="infoBox" stylesheets="@../resortTemplate.css" text="Email address" textFill="WHITE" />
-      <ImageView fitHeight="95.0" fitWidth="210.0" layoutX="386.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" styleClass="image">
-         <image>
-            <!-- HELLO -->
-            <Image url="@Creditcard.PNG" />
-         </image>
-      </ImageView>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnClickHome" text="Home" />
-      <Button fx:id="btnReturnToManager" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickReturnToManager" text="Return to Manager View" />
-   </children>
-</AnchorPane>
+  @FXML private AnchorPane btnCreateAccount;
+
+  @FXML private TextField tfFirstName;
+
+  @FXML private TextField tfLastName;
+
+  @FXML private TextField tfUsername;
+
+  @FXML private TextField tfEmail;
+
+  @FXML private TextField tfPassword;
+
+  @FXML private TextField tfConfirmPassword;
+
+  @FXML private TextField tfAddress;
+
+  @FXML private TextField tfState;
+
+  @FXML private TextField tfzipcode;
+
+  @FXML private TextField tfCreditCardNumber;
+
+  @FXML private TextField tfCvv;
+
+  @FXML private Label lblCreateIndicate;
+
+  @FXML private Button btnReturnToManager;
+
+  // String to hold our username if logged in and if user is a manager
+  private SessionInformation sessionInformation = new SessionInformation();
+
+  private String userNameForManagerEdit;
+
+  ObservableList<String> expireMonthList =
+      FXCollections.observableArrayList(
+          "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+  ObservableList<String> expireYearList =
+      FXCollections.observableArrayList(
+          "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
+          "2030");
+
+  public void initialize() {
+    // For users editing their own account managerView button will be disabled
+    btnReturnToManager.setVisible(false);
+
+    expireMonth.setItems(expireMonthList);
+    expireYear.setItems(expireYearList);
+  }
+  // Setter so that when called from manager view to edit another users account this can be set
+  public void setUserNameForManagerEdit(String userNameForManagerEdit) {
+    this.userNameForManagerEdit = userNameForManagerEdit;
+
+    btnReturnToManager.setVisible(true);
+
+    AccountInformation userAccount = DatabaseAgent.getAccountInformation(userNameForManagerEdit);
+
+    tfFirstName.setText(userAccount.getFirstName());
+    tfLastName.setText(userAccount.getLastName());
+    tfUsername.setText(userAccount.getUserName());
+    tfEmail.setText(userAccount.getEmail());
+    tfAddress.setText(userAccount.getAddress());
+    tfState.setText(userAccount.getState());
+    tfzipcode.setText(userAccount.getZipCode());
+    tfPassword.setText(userAccount.getPassWord());
+    tfConfirmPassword.setText(userAccount.getPassWord());
+    tfCvv.setText(userAccount.getCvv());
+  }
+
+  // setter for session information
+  public void setSessionInformation(SessionInformation sessionInformation) {
+    this.sessionInformation = sessionInformation;
+  }
+
+  // setter for session information
+  public void setSessionInformation(SessionInformation sessionInformation, String targetUser) {
+    this.sessionInformation = sessionInformation;
+    userNameForManagerEdit = targetUser;
+  }
+
+  @FXML
+  void btnClickUpdateAccount(MouseEvent event) {
+    // todo add logic to update the account in the database
+  }
+
+  @FXML
+  void btnClickHome(MouseEvent event) throws IOException {
+    // get a reference to the window we are in
+    Stage window = (Stage) btnCreateAccount.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent title = loader.load();
+
+    // get controller for Title page
+    TitleController titleController = loader.getController();
+    titleController.setSessionInformation(sessionInformation);
+    // make the new scene we are going to
+    Scene titleScene = new Scene(title);
+
+    // initiate the scene change (no need to make changes to controller)
+    window.setScene(titleScene);
+  }
+
+  public void setSessioninformation(SessionInformation sessionformation) {
+    this.sessionInformation = sessionformation;
+
+    // If this is called from the manager view to edit another users information set info for that
+    // user
+    AccountInformation userAccount =
+        DatabaseAgent.getAccountInformation(sessionformation.getUserName());
+
+    System.out.println("Test");
+
+    tfFirstName.setText(userAccount.getFirstName());
+    tfLastName.setText(userAccount.getLastName());
+    tfUsername.setText(userAccount.getUserName());
+    tfEmail.setText(userAccount.getEmail());
+    tfAddress.setText(userAccount.getAddress());
+    tfState.setText(userAccount.getState());
+    tfzipcode.setText(userAccount.getZipCode());
+    tfPassword.setText(userAccount.getPassWord());
+    tfConfirmPassword.setText(userAccount.getPassWord());
+    tfCvv.setText(userAccount.getCvv());
+  }
+
+  @FXML
+  void clickReturnToManager(ActionEvent event) throws IOException {
+    Stage window = (Stage) tfUsername.getScene().getWindow();
+
+    // declare and initialize a loader for the FXML scene we are going to
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../ManagerViewScene/ManagerView.fxml"));
+
+    // create a parent class with our loader pointing at the new scene
+    Parent managerView = loader.load();
+
+    // get controller for Title page
+    ManagerViewController managerViewController = loader.getController();
+
+    managerViewController.setSessionInformation(sessionInformation);
+
+    // make the new scene we are going to
+    Scene managerScene = new Scene(managerView);
+
+    // initiate the scene change (no need to make changes to controller)
+    window.setScene(managerScene);
+  }
+
+  @FXML
+  void clickUpdateAccount(ActionEvent event) throws SQLException {
+    int userId = DatabaseAgent.getAccountInformation(sessionInformation.getUserName()).getUserId();
+    // if a manager is editing someones account username needs to be reassigned
+    if (userNameForManagerEdit != null) {
+      userId = DatabaseAgent.getAccountInformation(userNameForManagerEdit).getUserId();
+    }
+    AccountInformation accountInformation = new AccountInformation();
+    accountInformation.setFirstName(tfFirstName.getText());
+    accountInformation.setLastName(tfLastName.getText());
+    accountInformation.setPassWord(tfPassword.getText());
+    accountInformation.setUserName(tfUsername.getText());
+    accountInformation.setEmail(tfEmail.getText());
+    accountInformation.setAddress(tfAddress.getText());
+    accountInformation.setState(tfState.getText());
+    accountInformation.setZipCode(tfzipcode.getText());
+    accountInformation.setCreditCardNumber(tfCreditCardNumber.getText());
+    accountInformation.setCvv(tfCvv.getText());
+    accountInformation.setUserId(userId);
+
+    DatabaseAgent.updateAccount(accountInformation);
+  }
