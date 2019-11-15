@@ -263,6 +263,37 @@ public class DatabaseAgent {
       }
   }
 
+  public static void insertIntoReservations(String userName, String roomNumber, Date checkin, Date checkOut) {
+
+    AccountInformation accountInformation = getAccountInformation(userName);
+    Connection connection = getConnection();
+    try {
+      PreparedStatement ps = connection.prepareStatement(
+          "INSERT into RESERVATIONS(USERID, ROOMNUMBER, CHECKIN, CHECKOUT) "
+              + "VALUES ( ?,?,?,? );");
+      ps.setInt(1, accountInformation.getUserId());
+      ps.setString(2, roomNumber);
+      ps.setDate(3, checkin);
+      ps.setDate(4, checkOut);
+      ps.executeUpdate();
+
+      //close the prepared statement
+      ps.close();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      // close the connection
+      try {
+        if (connection != null) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
   public static ArrayList<Booking> getAllBookings() throws SQLException {
     ArrayList<Booking> allBookings = new ArrayList<>();
 
