@@ -29,9 +29,6 @@
     -fx-background-color: #dae7f3;
 }
 
-#createAccountCenterBorder {
-    -fx-background-image: url("beach.jpg");
-}
 
 
 /*    Note: Much of this code seems to be overriding things in unexpected ways, seems better to set text

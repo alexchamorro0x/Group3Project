@@ -96,7 +96,7 @@ https://stackoverflow.com/questions/55093764/javafx-how-to-disable-scrollbars-in
 }
 
 #homeLogo {
-    -fx-background-image: URL("pineapple.png");
+    -fx-background-image: url("./pineapple.png");
 }
 
 #RoomFinderBackground {
