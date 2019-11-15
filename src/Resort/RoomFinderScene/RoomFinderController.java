@@ -129,7 +129,6 @@ public class RoomFinderController implements Initializable {
     pictureBorder(homeLogo);
 
     roomDescriptionBorder.setVisible(false);
-
   }
 
   /*
@@ -145,35 +144,33 @@ public class RoomFinderController implements Initializable {
     // label animation
 
     // if not logged in, display message, else, code below
-    if (sessionInformation.getUserName() == null) {
+    LocalDate dateStart = datePickerStart.getValue();
+    LocalDate dateEnd = datePickerEnd.getValue();
+    if (dateStart == null || dateEnd == null) {
+      btnBookRoom.setDisable(true);
+      displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+      // Outputs 'invalid date' if the start date is after the end date
+    } else if (dateStart.compareTo(dateEnd) > 0) {
+      btnBookRoom.setDisable(true);
+      displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+    } else if (sessionInformation.getUserName() == null) {
       System.out.println("Please LogIn.");
       String message = "Please Log In.";
       displayInavlid(lblInvalidDate, message);
+
     } else {
-
-      LocalDate dateStart = datePickerStart.getValue();
-      LocalDate dateEnd = datePickerEnd.getValue();
-      if (dateStart == null || dateEnd == null) {
-        btnBookRoom.setDisable(true);
-        displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
-        // Outputs 'invalid date' if the start date is after the end date
-      } else if (dateStart.compareTo(dateEnd) > 0) {
-        btnBookRoom.setDisable(true);
-        displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
-      } else {
-        System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
-        AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
-        DatabaseAgent.insertIntoReservations(
-            sessionInformation.getUserName(),
-            roomToBook.getRoomNumber(),
-            Date.valueOf(dateStart),
-            Date.valueOf(dateEnd));
-      }
-      btnBookRoom.setDisable(false);
-      updateResults();
+      System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
+      AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
+      DatabaseAgent.insertIntoReservations(
+          sessionInformation.getUserName(),
+          roomToBook.getRoomNumber(),
+          Date.valueOf(dateStart),
+          Date.valueOf(dateEnd));
     }
+    btnBookRoom.setDisable(false);
+    updateResults();
   }
 
   @FXML

@@ -31,7 +31,7 @@
 
 
 
-.root {
+#btnCreateAccount {
     -fx-background-image: url("../CreateAccountScene/beachBoat.jpg");
 
 }

@@ -12,6 +12,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -57,7 +59,6 @@ public class CreateAccountController {
           "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
           "2030");
 
-
   public void initialize() {
     expireMonth.setItems(expireMonthList);
     expireYear.setItems(expireYearList);
@@ -71,7 +72,8 @@ public class CreateAccountController {
     homeLogo.setFitHeight(100);
   }
 
-  @FXML void btnClickHome(MouseEvent event) throws IOException {
+  @FXML
+  void btnClickHome(MouseEvent event) throws IOException {
     // get a reference to the window we are in
     Stage window = (Stage) tfUsername.getScene().getWindow();
 
@@ -88,30 +90,79 @@ public class CreateAccountController {
     window.setScene(titleScene);
   }
 
-  @FXML void btnClickCreateAccount(MouseEvent event) {
+  @FXML
+  public void btnClickCreateAccount(ActionEvent actionEvent) {
+    // void btnClickCreateAccount() {
     // todo add code to validate values and give appropriate error messages for incorrect values
+    Boolean blankEntry = false;
+    if (tfUsername.getText().length() == 0) {
+      tfUsername.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfFirstName.getText().length() == 0) {
+      tfFirstName.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfLastName.getText().length() == 0) {
+      tfLastName.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfPassword.getText().length() == 0) {
+      tfPassword.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfConfirmPassword.getText().length() == 0) {
+      tfConfirmPassword.setStyle("-fx-background-color: orangered");
+    }
+    if (tfEmail.getText().length() == 0) {
+      tfEmail.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfAddress.getText().length() == 0) {
+      tfAddress.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfState.getText().length() == 0) {
+      tfState.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfzipcode.getText().length() == 0) {
+      tfzipcode.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfCreditCardNumber.getText().length() == 0) {
+      tfCreditCardNumber.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfCvv.getText().length() == 0) {
+      tfCvv.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
 
-    DatabaseAgent.addUser(
-        tfUsername.getText(),
-        tfFirstName.getText(),
-        tfLastName.getText(),
-        tfPassword.getText(),
-        tfEmail.getText(),
-        tfAddress.getText(),
-        tfState.getText(),
-        tfzipcode.getText(),
-        tfCreditCardNumber.getText(),
-        tfCvv.getText());
+    if (blankEntry == false) {
+      DatabaseAgent.addUser(
+          tfUsername.getText(),
+          tfFirstName.getText(),
+          tfLastName.getText(),
+          tfPassword.getText(),
+          tfEmail.getText(),
+          tfAddress.getText(),
+          tfState.getText(),
+          tfzipcode.getText(),
+          tfCreditCardNumber.getText(),
+          tfCvv.getText());
 
-    // displays "Account Successful" label to blink three times when button clicked
-    lblCreateIndicate.setVisible(true);
-    Timeline timeline =
-        new Timeline(
-            new KeyFrame(Duration.seconds(0.8), evt -> lblCreateIndicate.setVisible(false)),
-            new KeyFrame(Duration.seconds(0.4), evt -> lblCreateIndicate.setVisible(true)));
-    timeline.setCycleCount(3);
-    timeline.play();
-    lblCreateIndicate.setVisible(false);
+      // displays "Account Successful" label to blink three times when button clicked
+      lblCreateIndicate.setVisible(true);
+      Timeline timeline =
+          new Timeline(
+              new KeyFrame(Duration.seconds(0.8), evt -> lblCreateIndicate.setVisible(false)),
+              new KeyFrame(Duration.seconds(0.4), evt -> lblCreateIndicate.setVisible(true)));
+      timeline.setCycleCount(3);
+      timeline.play();
+      lblCreateIndicate.setVisible(false);
+    } else {
+    }
   }
 
   public void btnHomeEntered(MouseEvent mouseEvent) {
@@ -133,6 +184,93 @@ public class CreateAccountController {
     homeLogo.setImage(pineapple);
   }
 
+  public void tfFirstNameClicked(MouseEvent mouseEvent) {
+    tfFirstName.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfFirstNameKey(KeyEvent keyEvent) {
+    tfFirstName.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfLastNameClicked(MouseEvent mouseEvent) {
+    tfLastName.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfLastNameKey(KeyEvent keyEvent) {
+    tfLastName.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfUsernameClicked(MouseEvent mouseEvent) {
+    tfUsername.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfUsernameKey(KeyEvent keyEvent) {
+    tfUsername.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfEmailClicked(MouseEvent mouseEvent) {
+    tfEmail.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfEmailKey(KeyEvent keyEvent) {
+    tfEmail.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfPasswordClicked(MouseEvent mouseEvent) {
+    tfPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfPasswordKey(KeyEvent keyEvent) {
+    tfPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfConfirmPasswordClicked(MouseEvent mouseEvent) {
+    tfConfirmPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfConfirmPasswordKey(KeyEvent keyEvent) {
+    tfConfirmPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfAddressClicked(MouseEvent mouseEvent) {
+    tfAddress.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfAddressKey(KeyEvent keyEvent) {
+    tfAddress.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfStateClicked(MouseEvent mouseEvent) {
+    tfState.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfStateKey(KeyEvent keyEvent) {
+    tfState.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfzipcodeClicked(MouseEvent mouseEvent) {
+    tfzipcode.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfzipcodeKey(KeyEvent keyEvent) {
+    tfzipcode.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCreditCardNumberClicked(MouseEvent mouseEvent) {
+    tfCreditCardNumber.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCreditCardNumberKey(KeyEvent keyEvent) {
+    tfCreditCardNumber.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCvvClicked(MouseEvent mouseEvent) {
+    tfCvv.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCvvKey(KeyEvent keyEvent) {
+    tfCvv.setStyle("-fx-background-color: whitesmoke");
+  }
 
   /*
    public CreateAccountController(Stage CreateAccount) throws IOException {

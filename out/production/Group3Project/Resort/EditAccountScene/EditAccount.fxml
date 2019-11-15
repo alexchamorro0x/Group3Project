@@ -7,8 +7,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
+<AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
    <children>
       <Button fx:id="btnReturnToManager" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickReturnToManager" text="Return to Manager View" />
       <ImageView fx:id="homeLogo" fitHeight="120.0" fitWidth="125.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
