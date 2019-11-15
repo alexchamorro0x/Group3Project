@@ -8,7 +8,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,14 +22,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -84,6 +80,10 @@ public class RoomFinderController implements Initializable {
     this.sessionInformation = sessionInformation;
   }
 
+  public SessionInformation getSessionInformation(SessionInformation sessionInformation) {
+    return sessionInformation;
+  }
+
   /*
    runs this code at the start of the fxml file being launched. Hides the radio buttons and
    'Available Rooms' label until the date is selected. In the near future this will be implemented
@@ -128,10 +128,8 @@ public class RoomFinderController implements Initializable {
 
     pictureBorder(homeLogo);
 
-
     roomDescriptionBorder.setVisible(false);
 
-    // TODO: lock the 'book room' button unless someone is logged in
   }
 
   /*
@@ -140,33 +138,42 @@ public class RoomFinderController implements Initializable {
    * DatePicker fields are empty, the button will blink "Invalid Date" 3 times in red text directly
    * to the left of the button
    */
-  public void btnClickedBookRoom() {
+  public void btnClickedBookRoom() throws SQLException {
     // https://stackoverflow.com/questions/20446026/get-value-from-date-picker
     // date picker
     // https://stackoverflow.com/questions/43084698/flashing-label-in-javafx-gui
     // label animation
 
-    LocalDate dateStart = datePickerStart.getValue();
-    LocalDate dateEnd = datePickerEnd.getValue();
-    if (dateStart == null || dateEnd == null) {
-      btnBookRoom.setDisable(true);
-      displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
-      // Outputs 'invalid date' if the start date is after the end date
-    } else if (dateStart.compareTo(dateEnd) > 0) {
-      btnBookRoom.setDisable(true);
-      displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
+    // if not logged in, display message, else, code below
+    if (sessionInformation.getUserName() == null) {
+      System.out.println("Please LogIn.");
+      String message = "Please Log In.";
+      displayInavlid(lblInvalidDate, message);
     } else {
-      System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
-      AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
-      DatabaseAgent.insertIntoReservations(
-          sessionInformation.getUserName(),
-          roomToBook.getRoomNumber(),
-          Date.valueOf(dateStart),
-          Date.valueOf(dateEnd));
+
+      LocalDate dateStart = datePickerStart.getValue();
+      LocalDate dateEnd = datePickerEnd.getValue();
+      if (dateStart == null || dateEnd == null) {
+        btnBookRoom.setDisable(true);
+        displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+        // Outputs 'invalid date' if the start date is after the end date
+      } else if (dateStart.compareTo(dateEnd) > 0) {
+        btnBookRoom.setDisable(true);
+        displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+      } else {
+        System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
+        AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
+        DatabaseAgent.insertIntoReservations(
+            sessionInformation.getUserName(),
+            roomToBook.getRoomNumber(),
+            Date.valueOf(dateStart),
+            Date.valueOf(dateEnd));
+      }
+      btnBookRoom.setDisable(false);
+      updateResults();
     }
-    btnBookRoom.setDisable(false);
   }
 
   @FXML
@@ -388,21 +395,33 @@ public class RoomFinderController implements Initializable {
     timeline.play();
   }
 
+  private static void displayInavlid(Label lblInvalidDate, String message) {
+    lblInvalidDate.setText(message);
+    lblInvalidDate.setTextFill(Color.RED);
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0.75), evt -> lblInvalidDate.setVisible(false)),
+            new KeyFrame(Duration.seconds(0.35), evt -> lblInvalidDate.setVisible(true)));
+    timeline.setCycleCount(3);
+    timeline.play();
+  }
+
   private static void fadeIn(Object x) {
     // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
     FadeTransition ft = new FadeTransition(Duration.millis(650), (Node) x);
     ft.setToValue(1);
     ft.setFromValue(0);
-    //ft.setCycleCount(4);
-    //ft.setAutoReverse(true);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
     ft.play();
   }
+
   private static void fadeIn2(Object x) {
     FadeTransition ft = new FadeTransition(Duration.millis(550), (Node) x);
     ft.setToValue(1);
     ft.setFromValue(0);
-    //ft.setCycleCount(4);
-    //ft.setAutoReverse(true);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
     ft.play();
   }
 
