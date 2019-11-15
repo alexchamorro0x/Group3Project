@@ -50,7 +50,6 @@ public class TitleController {
   @FXML private Label lblTitleLabel;
   @FXML private Pane titleBackGround;
 
-
   // Fields to hold the Username and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
 
