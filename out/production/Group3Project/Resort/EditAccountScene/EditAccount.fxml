@@ -6,13 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+
 
 <AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
    <children>
@@ -116,8 +110,8 @@
             <TextField fx:id="tfLastName" layoutX="23.0" layoutY="122.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfUsername" layoutX="23.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfEmail" layoutX="23.0" layoutY="222.0" prefHeight="25.0" prefWidth="149.0" />
-            <TextField fx:id="tfPassword" layoutX="23.0" layoutY="272.0" prefHeight="25.0" prefWidth="149.0" />
-            <TextField fx:id="tfConfirmPassword" layoutX="23.0" layoutY="322.0" prefHeight="25.0" prefWidth="149.0" />
+            <PasswordField fx:id="tfPassword" layoutX="23.0" layoutY="272.0" prefHeight="25.0" prefWidth="149.0" />
+            <PasswordField fx:id="tfConfirmPassword" layoutX="23.0" layoutY="322.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfAddress" layoutX="212.0" layoutY="75.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfState" layoutX="212.0" layoutY="125.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfzipcode" layoutX="212.0" layoutY="175.0" prefHeight="25.0" prefWidth="85.0" />

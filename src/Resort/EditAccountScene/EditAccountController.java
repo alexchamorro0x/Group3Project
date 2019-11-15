@@ -11,9 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,7 +21,6 @@ import Resort.ManagerViewScene.ManagerViewController;
 import Resort.TitleScene.TitleController;
 import Resort.Utility.AccountInformation;
 import Resort.Utility.SessionInformation;
-import javafx.scene.control.Button;
 
 public class EditAccountController {
 
@@ -35,13 +32,13 @@ public class EditAccountController {
   @FXML private TextField tfLastName;
   @FXML private TextField tfUsername;
   @FXML private TextField tfEmail;
-  @FXML private TextField tfPassword;
+  @FXML private PasswordField tfPassword;
   @FXML private TextField tfAddress;
   @FXML private TextField tfState;
   @FXML private TextField tfzipcode;
   @FXML private TextField tfCreditCardNumber;
   @FXML private TextField tfCvv;
-  @FXML private TextField tfConfirmPassword;
+  @FXML private PasswordField tfConfirmPassword;
   @FXML private Button btnReturnToManager;
   ObservableList<String> expireMonthList =
       FXCollections.observableArrayList(
@@ -93,13 +90,13 @@ public class EditAccountController {
   // setter for session information
   public void setSessionInformation(SessionInformation sessionInformation) {
     this.sessionInformation = sessionInformation;
-  }
+ }
 
   // setter for session information
-  public void setSessionInformation(SessionInformation sessionInformation, String targetUser) {
-    this.sessionInformation = sessionInformation;
-    userNameForManagerEdit = targetUser;
-  }
+  //public void setSessionInformation(SessionInformation sessionInformation, String targetUser) {
+   // this.sessionInformation = sessionInformation;
+  //  userNameForManagerEdit = targetUser;
+ // }
 
   @FXML
   void btnClickUpdateAccount(MouseEvent event) {

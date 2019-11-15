@@ -115,8 +115,8 @@
             <TextField fx:id="tfLastName" layoutX="23.0" layoutY="122.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfUsername" layoutX="23.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfEmail" layoutX="23.0" layoutY="222.0" prefHeight="25.0" prefWidth="149.0" />
-            <TextField fx:id="tfPassword" layoutX="23.0" layoutY="272.0" prefHeight="25.0" prefWidth="149.0" />
-            <TextField fx:id="tfConfirmPassword" layoutX="23.0" layoutY="322.0" prefHeight="25.0" prefWidth="149.0" />
+            <PasswordField fx:id="tfPassword" layoutX="23.0" layoutY="272.0" prefHeight="25.0" prefWidth="149.0" />
+            <PasswordField fx:id="tfConfirmPassword" layoutX="23.0" layoutY="322.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfAddress" layoutX="212.0" layoutY="75.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfState" layoutX="212.0" layoutY="125.0" prefHeight="25.0" prefWidth="149.0" />
             <TextField fx:id="tfzipcode" layoutX="212.0" layoutY="175.0" prefHeight="25.0" prefWidth="85.0" />

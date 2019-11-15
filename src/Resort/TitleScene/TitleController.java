@@ -45,7 +45,6 @@ public class TitleController {
   @FXML private PasswordField pfLoginPassword;
 
   @FXML private TextField tfFirstNameLogin;
-
   @FXML private Label lblDescription;
   @FXML private Label lblTempDescription;
   @FXML private Label lblTitleLabel;

@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -39,14 +40,14 @@ public class CreateAccountController {
   @FXML private TextField tfLastName;
   @FXML private TextField tfUsername;
   @FXML private TextField tfEmail;
-  @FXML private TextField tfPassword;
+  @FXML private PasswordField tfPassword;
   @FXML private TextField tfAddress;
   @FXML private TextField tfState;
   @FXML private TextField tfzipcode;
   @FXML private TextField tfCreditCardNumber;
   @FXML private TextField tfCvv;
 
-  @FXML private TextField tfConfirmPassword;
+  @FXML private PasswordField tfConfirmPassword;
 
   ObservableList<String> expireMonthList =
       FXCollections.observableArrayList(
