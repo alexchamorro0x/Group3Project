@@ -226,6 +226,7 @@ public class ManagerViewController {
     dpCheckOutVacant.setValue(LOCAL_DATE().plusDays(1));
     updateVacancySearch();
 
+    tvBooked.setPlaceholder(new Label("No Booked Rooms."));
   }
 
   @FXML

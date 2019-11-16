@@ -4,7 +4,7 @@
 
 
 .jfx-table-view {
-    -fx-background-color:  lightgrey;
+    -fx-background-color:  whitesmoke;
 }
 
 .jfx-table-view .label {
@@ -27,4 +27,7 @@
 }
 
 
+#ManagerViewImage {
+    -fx-background-image: url("rocks.jpg");
+}
 

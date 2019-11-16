@@ -5,6 +5,8 @@ import Resort.Utility.DatabaseAgent;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -70,6 +72,9 @@ public class CreateAccountController {
     homeLogo.setImage(pineapple);
     homeLogo.setFitWidth(65);
     homeLogo.setFitHeight(100);
+
+    expireYear.getSelectionModel().selectFirst();
+    expireMonth.getSelectionModel().selectFirst();
   }
 
   @FXML
@@ -92,8 +97,10 @@ public class CreateAccountController {
 
   @FXML
   public void btnClickCreateAccount(ActionEvent actionEvent) {
-    // void btnClickCreateAccount() {
-    // todo add code to validate values and give appropriate error messages for incorrect values
+    /*
+        The If statements below check if the user entered information into all text fields, if not then the text box
+        will be colored red until clicked on to show that the information is incorrect
+    */
     Boolean blankEntry = false;
     if (tfUsername.getText().length() == 0) {
       tfUsername.setStyle("-fx-background-color: orangered");
@@ -139,6 +146,26 @@ public class CreateAccountController {
       blankEntry = true;
     }
 
+    if (tfPassword.getText().equals(tfConfirmPassword.getText()) == true) {
+    } else {
+      tfPassword.setStyle("-fx-background-color: orangered");
+      tfConfirmPassword.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    if (tfCvv.getText().length() == 3 && tfCvv.getText().matches("[0-9]+")) {
+    } else {
+      tfCvv.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    if (tfCreditCardNumber.getText().length() == 16
+        && tfCreditCardNumber.getText().matches("[0-9]+")) {
+    } else {
+      tfCreditCardNumber.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
     if (blankEntry == false) {
       DatabaseAgent.addUser(
           tfUsername.getText(),
@@ -161,7 +188,6 @@ public class CreateAccountController {
       timeline.setCycleCount(3);
       timeline.play();
       lblCreateIndicate.setVisible(false);
-    } else {
     }
   }
 

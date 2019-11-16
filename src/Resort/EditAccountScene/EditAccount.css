@@ -24,6 +24,11 @@
     -fx-background-radius: 10;
 }
 
+.glassblue {
+    -fx-background-color: rgba(20, 68, 200, 0.7);
+    -fx-background-radius: 10;
+}
+
 .glassgray {
     -fx-background-color: rgba(135, 135, 135, 0.63);
     -fx-background-radius: 10;

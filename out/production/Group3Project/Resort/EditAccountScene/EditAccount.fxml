@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
    <children>
-      <Button fx:id="btnReturnToManager" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickReturnToManager" text="Return to Manager View" />
+      <Button fx:id="btnReturnToManager" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickReturnToManager" styleClass="glassblue" stylesheets="@EditAccount.css" text="Return to Manager View" textFill="WHITE" />
       <ImageView fx:id="homeLogo" fitHeight="120.0" fitWidth="125.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="btnHome" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnClickHome" onMouseEntered="#btnHomeEntered" onMouseExited="#btnHomeExited" prefHeight="109.0" prefWidth="85.0" styleClass="transparent" stylesheets="@EditAccount.css" />
       <AnchorPane fx:id="createAccountCenterBorder" layoutX="183.0" layoutY="116.0" prefHeight="368.0" prefWidth="638.0" styleClass="glasswhite" stylesheets="@EditAccount.css">

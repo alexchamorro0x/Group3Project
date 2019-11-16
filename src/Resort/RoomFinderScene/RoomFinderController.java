@@ -191,7 +191,7 @@ public class RoomFinderController implements Initializable {
   // Sets the Radio Button for 'Room Type All' to true, selected. Other Radio Buttons (A,B,C,D) are
   // set
   // to false(deselected)
-  public void RadioBtnClickedRoomAll(MouseEvent mouseEvent) throws SQLException {
+  public void RadioBtnClickedRoomAll(ActionEvent actionEvent) throws SQLException {
     // all selected so image and text is set to null
     File RoomA = new File("src/Resort/RoomFinderScene/allRooms.png");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -214,7 +214,7 @@ public class RoomFinderController implements Initializable {
   // Sets the Radio Button for 'Room Type A' to true, selected. Other Radio Buttons (All,B,C,D) are
   // set
   // to false(deselected)
-  public void RadioBtnClickedRoomAmbassador(MouseEvent mouseEvent) throws SQLException {
+  public void RadioBtnClickedRoomAmbassador(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/ambassadorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -239,7 +239,7 @@ public class RoomFinderController implements Initializable {
   // Sets the Radio Button for 'Room Type B' to true, selected. Other Radio Buttons (All,A,C,D) are
   // set
   // to false(deselected)
-  public void RadioBtnClickedRoomEagleView(MouseEvent mouseEvent) throws SQLException {
+  public void RadioBtnClickedRoomEagleView(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/eagleViewCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -264,7 +264,7 @@ public class RoomFinderController implements Initializable {
   // Sets the Radio Button for 'Room Type C' to true, selected. Other Radio Buttons (All,A,B,D) are
   // set
   // to false(deselected)
-  public void RadioBtnClickedRoomPoolSide(MouseEvent mouseEvent) throws SQLException {
+  public void RadioBtnClickedRoomPoolSide(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/poolSideCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -290,7 +290,7 @@ public class RoomFinderController implements Initializable {
   // Sets the Radio Button for 'Room Type D' to true, selected. Other Radio Buttons (All,A,B,C) are
   // set
   // to false(deselected)
-  public void RadioBtnClickedRoomJunior(MouseEvent mouseEvent) throws SQLException {
+  public void RadioBtnClickedRoomJunior(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/juniorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -440,6 +440,7 @@ public class RoomFinderController implements Initializable {
     Image pineapple = new Image(RoomA.toURI().toString());
     homeLogo.setImage(pineapple);
   }
+
 }
 
 /*

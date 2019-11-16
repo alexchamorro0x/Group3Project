@@ -25,19 +25,6 @@
     <URL value="@../resortTemplate.css" />
   </stylesheets>
    <children>
-     <AnchorPane fx:id="apLoginPrompt" layoutX="740.0" layoutY="310.0" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="250.0" styleClass="glassgray" stylesheets="@title.css" visible="false">
-        <children>
-          <Label layoutX="97.0" layoutY="15.0" styleClass="text" text="Login:" textFill="WHITE" />
-          <TextField fx:id="tfFirstNameLogin" layoutX="84.0" layoutY="56.0" prefHeight="25.0" prefWidth="140.0" />
-          <PasswordField fx:id="pfLoginPassword" layoutX="84.0" layoutY="116.0" prefHeight="25.0" prefWidth="140.0" />
-          <Label layoutX="11.0" layoutY="60.0" styleClass="text" text="UserName:" textFill="WHITE" />
-          <Label layoutX="14.0" layoutY="120.0" styleClass="text" text="Password:" textFill="WHITE" />
-          <Button layoutX="178.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#clickLogin" text="Login" />
-          <Label fx:id="lblLoginValidation" layoutX="38.0" layoutY="14.0" styleClass="text" text="Incorrect UserName or Password" textFill="WHITE" />
-          <Button fx:id="btnNewUser" layoutX="3.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#clickNewUser" text="New User? Create Account" />
-          <CheckBox fx:id="ckbManagerLogin" layoutX="79.0" layoutY="205.0" mnemonicParsing="false" styleClass="text" text="Manager Login" textFill="WHITE" />
-        </children>
-     </AnchorPane>
      <AnchorPane layoutY="27.0" prefHeight="574.0" prefWidth="744.0">
         <children>
           <Label fx:id="lblTitleLabel" layoutX="119.0" layoutY="14.0" prefHeight="89.0" prefWidth="507.0" styleClass="head" stylesheets="@title.css" text="Pineapple Resort" textFill="WHITE" />
@@ -52,23 +39,36 @@
                </font></TextArea>
         </children>
      </AnchorPane>
-     <AnchorPane fx:id="apLoggedIn" layoutX="740.0" layoutY="310.0" prefHeight="280.0" prefWidth="250.0" styleClass="glassgray" stylesheets="@title.css">
-        <children>
-          <Label layoutX="49.0" layoutY="53.0" text="Welcome: " textFill="WHITE" />
-          <Label fx:id="lblLoggedInUsername" layoutX="121.0" layoutY="53.0" text="Label" textFill="WHITE" />
-          <Button layoutX="18.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#btnClickSignOut" text="Sign Out" />
-          <Button layoutX="102.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#btnClickMyAccount" text="My Account" />
-          <Button fx:id="btnManagerView" layoutX="96.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#btnClickManagerView" text="Manager View" />
-        </children>
-     </AnchorPane>
      <AnchorPane layoutX="740.0" layoutY="27.0" prefHeight="280.0" prefWidth="250.0" styleClass="glassgray" stylesheets="@title.css">
         <children>
-          <Button fx:id="btnRoomFinder" layoutX="79.0" layoutY="198.0" mnemonicParsing="false" onAction="#clickRoomFinder" prefHeight="36.0" prefWidth="92.0" styleClass="glassgreen" stylesheets="@title.css" text="Room Finder" />
+          <Button fx:id="btnRoomFinder" layoutX="79.0" layoutY="198.0" mnemonicParsing="false" onAction="#clickRoomFinder" prefHeight="36.0" prefWidth="102.0" styleClass="glassgreen" stylesheets="@title.css" text="Room Finder" />
           <ImageView fx:id="ivRoomFinder" fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
              <image>
                <Image url="@roomFinderButton.jpg" />
              </image>
           </ImageView>
+        </children>
+     </AnchorPane>
+     <AnchorPane fx:id="apLoginPrompt" layoutX="740.0" layoutY="310.0" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="250.0" styleClass="glassgray" stylesheets="@title.css" visible="false">
+        <children>
+          <Label layoutX="97.0" layoutY="15.0" styleClass="text" text="Login:" textFill="WHITE" />
+          <TextField fx:id="tfFirstNameLogin" layoutX="84.0" layoutY="56.0" prefHeight="25.0" prefWidth="140.0" />
+          <PasswordField fx:id="pfLoginPassword" layoutX="84.0" layoutY="116.0" prefHeight="25.0" prefWidth="140.0" />
+          <Label layoutX="11.0" layoutY="60.0" styleClass="text" text="UserName:" textFill="WHITE" />
+          <Label layoutX="14.0" layoutY="120.0" styleClass="text" text="Password:" textFill="WHITE" />
+          <Button layoutX="178.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#clickLogin" styleClass="glasswhite" stylesheets="@title.css" text="Login" />
+          <Label fx:id="lblLoginValidation" layoutX="38.0" layoutY="14.0" styleClass="text" text="Incorrect UserName or Password" textFill="WHITE" />
+          <Button fx:id="btnNewUser" layoutX="3.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#clickNewUser" styleClass="glasswhite" stylesheets="@title.css" text="New User? Create Account" />
+          <CheckBox fx:id="ckbManagerLogin" layoutX="79.0" layoutY="205.0" mnemonicParsing="false" styleClass="text" text="Manager Login" textFill="WHITE" />
+        </children>
+     </AnchorPane>
+     <AnchorPane fx:id="apLoggedIn" layoutX="740.0" layoutY="310.0" prefHeight="280.0" prefWidth="250.0" styleClass="glassgray" stylesheets="@title.css">
+        <children>
+          <Label layoutX="49.0" layoutY="53.0" text="Welcome: " textFill="WHITE" />
+          <Label fx:id="lblLoggedInUsername" layoutX="121.0" layoutY="53.0" text="Label" textFill="WHITE" />
+          <Button layoutX="18.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#btnClickSignOut" styleClass="glasswhite" stylesheets="@title.css" text="Sign Out" />
+          <Button layoutX="102.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#btnClickMyAccount" styleClass="glasswhite" stylesheets="@title.css" text="My Account" />
+          <Button fx:id="btnManagerView" layoutX="96.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#btnClickManagerView" styleClass="glasswhite" stylesheets="@title.css" text="Manager View" />
         </children>
      </AnchorPane>
    </children>

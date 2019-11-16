@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@../resortTemplate.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.ManagerViewScene.ManagerViewController">
+<AnchorPane fx:id="ManagerViewImage" prefHeight="600.0" prefWidth="1000.0" stylesheets="@managerView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.ManagerViewScene.ManagerViewController">
   <children>
     <ImageView fx:id="homeLogo" fitHeight="120.0" fitWidth="125.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
     <Button fx:id="btnHome" mnemonicParsing="false" onMouseClicked="#btnClickHome" onMouseEntered="#btnHomeEntered" onMouseExited="#btnHomeExited" prefHeight="90.0" prefWidth="92.0" styleClass="transparent" stylesheets="@managerView.css" />
@@ -32,7 +36,7 @@
         <TableColumn fx:id="tcRoomTypeVacant" prefWidth="147.0" text="Room Type" />
       </columns>
     </TableView>
-    <TableView fx:id="tvUsers" layoutX="668.0" layoutY="115.0" prefHeight="242.0" prefWidth="137.0">
+    <TableView fx:id="tvUsers" layoutX="639.0" layoutY="109.0" prefHeight="242.0" prefWidth="137.0">
       <columns>
         <TableColumn fx:id="tcUsersUserName" prefWidth="136.0" text="Users" />
       </columns>
@@ -45,7 +49,7 @@
     <Label layoutX="254.0" layoutY="419.0" text="Check Out" textFill="WHITE" />
     <DatePicker fx:id="dpCheckOutVacant" layoutX="327.0" layoutY="414.0" onAction="#updateVacancy" />
     <Button fx:id="btnSwapBooking" layoutX="253.0" layoutY="469.0" mnemonicParsing="false" onAction="#clickSwapBooking" stylesheets="@managerView.css" text="Swap Booking" />
-    <Pane layoutX="825.0" layoutY="111.0">
+    <Pane layoutX="789.0" layoutY="112.0">
       <children>
         <Label text="First Name:" textFill="WHITE" />
         <Label layoutY="25.0" text="Last Name:" textFill="WHITE" />
@@ -55,14 +59,14 @@
         <Label layoutY="125.0" text="State:" textFill="WHITE" />
         <Label layoutY="100.0" text="Address:" textFill="WHITE" />
         <Label layoutY="75.0" text="Email:" textFill="WHITE" />
-        <Label fx:id="lblFirstName" layoutX="119.0" text="Label" textFill="WHITE" />
-        <Label fx:id="lblLastName" layoutX="119.0" layoutY="25.0" text="Label" textFill="WHITE" />
-        <Label fx:id="lblUserName" layoutX="119.0" layoutY="50.0" text="Label" textFill="WHITE" />
-        <Label fx:id="lblEmail" layoutX="119.0" layoutY="75.0" text="Label" textFill="WHITE" />
-        <Label fx:id="lblAddress" layoutX="119.0" layoutY="100.0" text="Label" textFill="WHITE" />
-        <Label fx:id="lblState" layoutX="119.0" layoutY="125.0" text="Label" textFill="WHITE" />
-        <Label fx:id="lblZipCode" layoutX="119.0" layoutY="150.0" text="Label" textFill="WHITE" />
-        <Label fx:id="lblCreditCard" layoutX="119.0" layoutY="175.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblFirstName" layoutX="85.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblLastName" layoutX="85.0" layoutY="25.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblUserName" layoutX="85.0" layoutY="50.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblEmail" layoutX="85.0" layoutY="75.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblAddress" layoutX="85.0" layoutY="100.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblState" layoutX="85.0" layoutY="125.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblZipCode" layoutX="85.0" layoutY="150.0" text="Label" textFill="WHITE" />
+        <Label fx:id="lblCreditCard" layoutX="85.0" layoutY="175.0" text="Label" textFill="WHITE" />
         <Button fx:id="btnChangeAccountInfo" layoutX="2.0" layoutY="207.0" mnemonicParsing="false" onAction="#clickChangeAccountInfo" prefHeight="26.0" prefWidth="150.0" text="Change Account Info" />
       </children>
     </Pane>
