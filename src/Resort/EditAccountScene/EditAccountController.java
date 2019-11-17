@@ -100,7 +100,14 @@ public class EditAccountController {
 
   @FXML
   void btnClickUpdateAccount(MouseEvent event) {
-    // todo add logic to update the account in the database
+    System.out.println("Account Updated. (I'm lying, this button does nothing)");
+    if (tfPassword.getText().equals(tfConfirmPassword.getText()) == true) {
+      System.out.println("Passwords do not match!");
+    }
+    else{
+      // todo add logic to update the account in the database
+
+    }
   }
 
   @FXML
