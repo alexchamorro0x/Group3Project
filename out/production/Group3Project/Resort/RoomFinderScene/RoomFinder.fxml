@@ -46,7 +46,7 @@
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Button>
-        <Label fx:id="lblInvalidDate" layoutX="10.0" layoutY="360.0" prefHeight="27.0" prefWidth="215.0" textFill="WHITE">
+        <Label fx:id="lblInvalidDate" layoutX="10.0" layoutY="360.0" prefHeight="36.0" prefWidth="385.0" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="25.0" />
             </font>

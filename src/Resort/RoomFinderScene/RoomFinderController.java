@@ -144,33 +144,40 @@ public class RoomFinderController implements Initializable {
     // label animation
 
     // if not logged in, display message, else, code below
-    LocalDate dateStart = datePickerStart.getValue();
-    LocalDate dateEnd = datePickerEnd.getValue();
-    if (dateStart == null || dateEnd == null) {
-      btnBookRoom.setDisable(true);
-      displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
-      // Outputs 'invalid date' if the start date is after the end date
-    } else if (dateStart.compareTo(dateEnd) > 0) {
-      btnBookRoom.setDisable(true);
-      displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
-    } else if (sessionInformation.getUserName() == null) {
-      System.out.println("Please LogIn.");
-      String message = "Please Log In.";
-      displayInavlid(lblInvalidDate, message);
-
+    if (tvAvailableRooms.getSelectionModel().getSelectedItem() == null) {
+      lblInvalidDate.setStyle("-fx-font-size: 16");
+      lblInvalidDate.setStyle("-fx-fill: red");
+        fadeOut(lblInvalidDate,"Please select a room from the list");
+        lblInvalidDate.setStyle("-fx-font-size: 25");
     } else {
-      System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
-      AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
-      DatabaseAgent.insertIntoReservations(
-          sessionInformation.getUserName(),
-          roomToBook.getRoomNumber(),
-          Date.valueOf(dateStart),
-          Date.valueOf(dateEnd));
+      LocalDate dateStart = datePickerStart.getValue();
+      LocalDate dateEnd = datePickerEnd.getValue();
+      if (dateStart == null || dateEnd == null) {
+        btnBookRoom.setDisable(true);
+        displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+        // Outputs 'invalid date' if the start date is after the end date
+      } else if (dateStart.compareTo(dateEnd) > 0) {
+        btnBookRoom.setDisable(true);
+        displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+      } else if (sessionInformation.getUserName() == null) {
+        System.out.println("Please LogIn.");
+        String message = "Please Log In.";
+        displayInavlid(lblInvalidDate, message);
+
+      } else {
+        System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
+        AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
+        DatabaseAgent.insertIntoReservations(
+            sessionInformation.getUserName(),
+            roomToBook.getRoomNumber(),
+            Date.valueOf(dateStart),
+            Date.valueOf(dateEnd));
+      }
+      btnBookRoom.setDisable(false);
+      updateResults();
     }
-    btnBookRoom.setDisable(false);
-    updateResults();
   }
 
   @FXML
@@ -403,6 +410,18 @@ public class RoomFinderController implements Initializable {
     timeline.play();
   }
 
+  private static void fadeOut(Label x, String message) {
+    // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
+    x.setText(message);
+    x.setVisible(true);
+    FadeTransition ft = new FadeTransition(Duration.millis(2400), (Node) x);
+    ft.setToValue(0);
+    ft.setFromValue(1);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
+    ft.play();
+  }
+
   private static void fadeIn(Object x) {
     // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
     FadeTransition ft = new FadeTransition(Duration.millis(650), (Node) x);
@@ -440,7 +459,6 @@ public class RoomFinderController implements Initializable {
     Image pineapple = new Image(RoomA.toURI().toString());
     homeLogo.setImage(pineapple);
   }
-
 }
 
 /*

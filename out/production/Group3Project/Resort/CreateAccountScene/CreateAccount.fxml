@@ -112,10 +112,10 @@
                 <TextField fx:id="tfFirstName" layoutX="23.0" layoutY="72.0" onKeyReleased="#tfFirstNameKey" onMouseClicked="#tfFirstNameClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
                 <TextField fx:id="tfLastName" layoutX="23.0" layoutY="122.0" onKeyReleased="#tfLastNameKey" onMouseClicked="#tfLastNameClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
                 <TextField fx:id="tfUsername" layoutX="23.0" layoutY="172.0" onKeyReleased="#tfUsernameKey" onMouseClicked="#tfUsernameClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
-                <TextField fx:id="tfEmail" layoutX="23.0" layoutY="222.0" onAction="#tfEmailClicked" onKeyReleased="#tfEmailKey" onMouseClicked="#tfEmailClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
+                <TextField fx:id="tfEmail" layoutX="23.0" layoutY="222.0" onKeyReleased="#tfEmailKey" onMouseClicked="#tfEmailClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
                 <PasswordField fx:id="tfPassword" layoutX="23.0" layoutY="272.0" onKeyReleased="#tfPasswordKey" onMouseClicked="#tfPasswordClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
                 <PasswordField fx:id="tfConfirmPassword" layoutX="23.0" layoutY="322.0" onKeyReleased="#tfConfirmPasswordKey" onMouseClicked="#tfConfirmPasswordClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
-                <TextField fx:id="tfAddress" layoutX="212.0" layoutY="75.0" onAction="#tfAddressClicked" onKeyReleased="#tfAddressKey" onMouseClicked="#tfAddressClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
+                <TextField fx:id="tfAddress" layoutX="212.0" layoutY="75.0" onKeyReleased="#tfAddressKey" onMouseClicked="#tfAddressClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
                 <TextField fx:id="tfState" layoutX="212.0" layoutY="125.0" onKeyReleased="#tfStateKey" onMouseClicked="#tfStateClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
                 <TextField fx:id="tfzipcode" layoutX="212.0" layoutY="175.0" onKeyReleased="#tfzipcodeKey" onMouseClicked="#tfzipcodeClicked" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
                 <TextField fx:id="tfCreditCardNumber" layoutX="401.0" layoutY="72.0" onKeyReleased="#tfCreditCardNumberKey" onMouseClicked="#tfCreditCardNumberClicked" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: whitesmoke;" stylesheets="@CreateAccount.css" />
@@ -131,6 +131,11 @@
                         <String fx:value="btnCreateAccount" />
                     </styleClass>
                 </Button>
+            <Label fx:id="lblInvalid" layoutX="196.0" layoutY="335.0" prefHeight="25.0" prefWidth="203.0" text="Please check all RED areas" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
         <Label fx:id="CreateAccountTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="21.0" prefHeight="74.0" prefWidth="499.0" styleClass="header" stylesheets="@CreateAccount.css" text="Create Account" textFill="WHITE">

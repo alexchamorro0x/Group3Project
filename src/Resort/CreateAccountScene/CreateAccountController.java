@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sun.corba.se.impl.encoding.CodeSetConversion;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -39,6 +41,7 @@ public class CreateAccountController {
   @FXML private ImageView homeLogo;
 
   @FXML private Label lblCreateIndicate;
+  @FXML private Label lblInvalid;
 
   @FXML private TextField tfFirstName;
   @FXML private TextField tfLastName;
@@ -75,6 +78,8 @@ public class CreateAccountController {
 
     expireYear.getSelectionModel().selectFirst();
     expireMonth.getSelectionModel().selectFirst();
+
+    lblInvalid.setVisible(false);
   }
 
   @FXML
@@ -116,15 +121,14 @@ public class CreateAccountController {
     }
     if (tfPassword.getText().length() == 0) {
       tfPassword.setStyle("-fx-background-color: orangered");
+      tfPassword.setText("");
       blankEntry = true;
     }
     if (tfConfirmPassword.getText().length() == 0) {
       tfConfirmPassword.setStyle("-fx-background-color: orangered");
+      tfConfirmPassword.setText("");
     }
-    if (tfEmail.getText().length() == 0) {
-      tfEmail.setStyle("-fx-background-color: orangered");
-      blankEntry = true;
-    }
+
     if (tfAddress.getText().length() == 0) {
       tfAddress.setStyle("-fx-background-color: orangered");
       blankEntry = true;
@@ -146,10 +150,17 @@ public class CreateAccountController {
       blankEntry = true;
     }
 
+    if (tfzipcode.getText().length() != 5 || tfzipcode.getText().matches("[0-9]+") == false) {
+      tfzipcode.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
     if (tfPassword.getText().equals(tfConfirmPassword.getText()) == true) {
     } else {
       tfPassword.setStyle("-fx-background-color: orangered");
       tfConfirmPassword.setStyle("-fx-background-color: orangered");
+      tfPassword.setText("");
+      tfConfirmPassword.setText("");
       blankEntry = true;
     }
 
@@ -163,6 +174,17 @@ public class CreateAccountController {
         && tfCreditCardNumber.getText().matches("[0-9]+")) {
     } else {
       tfCreditCardNumber.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    final String regex = "\\w+@\\w+\\.\\w+";
+    String emailEntry = tfEmail.getText();
+    final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+    final Matcher matcher = pattern.matcher(emailEntry);
+    boolean EMAILVALID = matcher.find();
+
+    if (EMAILVALID == false) {
+      tfEmail.setStyle("-fx-background-color: orangered");
       blankEntry = true;
     }
 
@@ -188,6 +210,10 @@ public class CreateAccountController {
       timeline.setCycleCount(3);
       timeline.play();
       lblCreateIndicate.setVisible(false);
+    } else {
+      // sout "please check RED Labels." -Label message
+      lblInvalid.setVisible(true);
+      fadeOut(lblInvalid);
     }
   }
 
@@ -298,17 +324,14 @@ public class CreateAccountController {
     tfCvv.setStyle("-fx-background-color: whitesmoke");
   }
 
-  /*
-   public CreateAccountController(Stage CreateAccount) throws IOException {
-
-     Parent root = FXMLLoader.load(getClass().getResource("CreateAccountScene/CreateAccount.fxml"));
-     CreateAccount.setTitle("Resort Reservations");
-     root.getStylesheets().add
-             (Main.class.getResource("resortTemplate.css").toExternalForm());
-     CreateAccount.setScene(new Scene(root, 850, 530));
-     CreateAccount.show();
-   }
-
-  */
+  private static void fadeOut(Object x) {
+    // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
+    FadeTransition ft = new FadeTransition(Duration.millis(2200), (Node) x);
+    ft.setToValue(0);
+    ft.setFromValue(1);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
+    ft.play();
+  }
 
 }
