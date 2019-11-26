@@ -144,14 +144,19 @@ public class RoomFinderController implements Initializable {
     // label animation
 
     // if not logged in, display message, else, code below
-    if (tvAvailableRooms.getSelectionModel().getSelectedItem() == null) {
+    LocalDate dateStart = datePickerStart.getValue();
+    LocalDate dateEnd = datePickerEnd.getValue();
+    if (tvAvailableRooms.getSelectionModel().getSelectedItem() == null
+        && dateStart != null
+        && dateEnd != null
+        && dateStart.compareTo(dateEnd) < 0) {
       lblInvalidDate.setStyle("-fx-font-size: 16");
       lblInvalidDate.setStyle("-fx-fill: red");
-        fadeOut(lblInvalidDate,"Please select a room from the list");
-        lblInvalidDate.setStyle("-fx-font-size: 25");
+      fadeOut(lblInvalidDate, "Please select a room from the list");
+      lblInvalidDate.setStyle("-fx-font-size: 25");
     } else {
-      LocalDate dateStart = datePickerStart.getValue();
-      LocalDate dateEnd = datePickerEnd.getValue();
+      // LocalDate dateStart = datePickerStart.getValue();
+      // LocalDate dateEnd = datePickerEnd.getValue();
       if (dateStart == null || dateEnd == null) {
         btnBookRoom.setDisable(true);
         displayInavlid(dateStart, dateEnd, lblInvalidDate);
