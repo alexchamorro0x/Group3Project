@@ -4,42 +4,56 @@ import Resort.Utility.DatabaseAgent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import Resort.ManagerViewScene.ManagerViewController;
 import Resort.TitleScene.TitleController;
 import Resort.Utility.AccountInformation;
 import Resort.Utility.SessionInformation;
+import javafx.util.Duration;
 
 public class EditAccountController {
 
+  @FXML private Button btnReturnToManager;
+
   @FXML private ComboBox expireMonth;
   @FXML private ComboBox expireYear;
+
   @FXML private ImageView homeLogo;
+
   @FXML private Label lblCreateIndicate;
+  @FXML private Label lblInvalid;
+
+  @FXML private PasswordField tfPassword;
+  @FXML private PasswordField tfConfirmPassword;
+
   @FXML private TextField tfFirstName;
   @FXML private TextField tfLastName;
   @FXML private TextField tfUsername;
   @FXML private TextField tfEmail;
-  @FXML private PasswordField tfPassword;
   @FXML private TextField tfAddress;
   @FXML private TextField tfState;
   @FXML private TextField tfzipcode;
   @FXML private TextField tfCreditCardNumber;
   @FXML private TextField tfCvv;
-  @FXML private PasswordField tfConfirmPassword;
-  @FXML private Button btnReturnToManager;
+
   ObservableList<String> expireMonthList =
       FXCollections.observableArrayList(
           "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
@@ -54,6 +68,7 @@ public class EditAccountController {
   private String userNameForManagerEdit;
 
   public void initialize() {
+    // initalizes the combo-boxes for (mm/yyyy)
     expireMonth.setItems(expireMonthList);
     expireYear.setItems(expireYearList);
 
@@ -65,6 +80,8 @@ public class EditAccountController {
     homeLogo.setImage(pineapple);
     homeLogo.setFitWidth(65);
     homeLogo.setFitHeight(100);
+
+    lblInvalid.setVisible(false);
   }
 
   // Setter so that when called from manager view to edit another users account this can be set
@@ -85,28 +102,112 @@ public class EditAccountController {
     tfPassword.setText(userAccount.getPassWord());
     tfConfirmPassword.setText(userAccount.getPassWord());
     tfCvv.setText(userAccount.getCvv());
+    tfCreditCardNumber.setText(userAccount.getCreditCardNumber());
+   // expireMonth.setSelectionModel(5);
   }
 
   // setter for session information
   public void setSessionInformation(SessionInformation sessionInformation) {
     this.sessionInformation = sessionInformation;
- }
+  }
 
   // setter for session information
-  //public void setSessionInformation(SessionInformation sessionInformation, String targetUser) {
-   // this.sessionInformation = sessionInformation;
+  // public void setSessionInformation(SessionInformation sessionInformation, String targetUser) {
+  // this.sessionInformation = sessionInformation;
   //  userNameForManagerEdit = targetUser;
- // }
+  // }
 
   @FXML
   void btnClickUpdateAccount(MouseEvent event) {
-    System.out.println("Account Updated. (I'm lying, this button does nothing)");
-    if (tfPassword.getText().equals(tfConfirmPassword.getText()) == true) {
-      System.out.println("Passwords do not match!");
+    boolean blankEntry = false;
+    if (tfUsername.getText().length() == 0) {
+      tfUsername.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
     }
-    else{
-      // todo add logic to update the account in the database
+    if (tfFirstName.getText().length() == 0) {
+      tfFirstName.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfLastName.getText().length() == 0) {
+      tfLastName.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfPassword.getText().length() == 0) {
+      tfPassword.setStyle("-fx-background-color: orangered");
+      tfPassword.setText("");
+      blankEntry = true;
+    }
+    if (tfConfirmPassword.getText().length() == 0) {
+      tfConfirmPassword.setStyle("-fx-background-color: orangered");
+      tfConfirmPassword.setText("");
+    }
 
+    if (tfAddress.getText().length() == 0) {
+      tfAddress.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfState.getText().length() == 0) {
+      tfState.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfzipcode.getText().length() == 0) {
+      tfzipcode.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfCreditCardNumber.getText().length() == 0) {
+      tfCreditCardNumber.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+    if (tfCvv.getText().length() == 0) {
+      tfCvv.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    if (tfzipcode.getText().length() != 5 || tfzipcode.getText().matches("[0-9]+") == false) {
+      tfzipcode.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    if (tfPassword.getText().equals(tfConfirmPassword.getText()) == true) {
+    } else {
+      tfPassword.setStyle("-fx-background-color: orangered");
+      tfConfirmPassword.setStyle("-fx-background-color: orangered");
+      tfPassword.setText("");
+      tfConfirmPassword.setText("");
+      blankEntry = true;
+    }
+
+    if (tfCvv.getText().length() == 3 && tfCvv.getText().matches("[0-9]+")) {
+    } else {
+      tfCvv.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    if (tfCreditCardNumber.getText().length() == 16
+        && tfCreditCardNumber.getText().matches("[0-9]+")) {
+    } else {
+      tfCreditCardNumber.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    final String regex = "\\w+@\\w+\\.\\w+";
+    String emailEntry = tfEmail.getText();
+    final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+    final Matcher matcher = pattern.matcher(emailEntry);
+    boolean EMAILVALID = matcher.find();
+
+    if (EMAILVALID == false) {
+      tfEmail.setStyle("-fx-background-color: orangered");
+      blankEntry = true;
+    }
+
+    if (blankEntry == false) {
+
+      // todo add logic to update the account in the database
+    } else {
+      // sout "please check RED Labels." -Label message
+      lblInvalid.setVisible(true);
+      fadeOut(lblInvalid);
     }
   }
 
@@ -219,17 +320,101 @@ public class EditAccountController {
     DatabaseAgent.updateAccount(accountInformation);
   }
 
-  /*
-   public CreateAccountController(Stage CreateAccount) throws IOException {
+  private static void fadeOut(Object x) {
+    // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
+    FadeTransition ft = new FadeTransition(Duration.millis(2200), (Node) x);
+    ft.setToValue(0);
+    ft.setFromValue(1);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
+    ft.play();
+  }
 
-     Parent root = FXMLLoader.load(getClass().getResource("CreateAccountScene/CreateAccount.fxml"));
-     CreateAccount.setTitle("Resort Reservations");
-     root.getStylesheets().add
-             (Main.class.getResource("resortTemplate.css").toExternalForm());
-     CreateAccount.setScene(new Scene(root, 850, 530));
-     CreateAccount.show();
-   }
+  public void tfFirstNameClicked(MouseEvent mouseEvent) {
+    tfFirstName.setStyle("-fx-background-color: whitesmoke");
+  }
 
-  */
+  public void tfFirstNameKey(KeyEvent keyEvent) {
+    tfFirstName.setStyle("-fx-background-color: whitesmoke");
+  }
 
+  public void tfLastNameClicked(MouseEvent mouseEvent) {
+    tfLastName.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfLastNameKey(KeyEvent keyEvent) {
+    tfLastName.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfUsernameClicked(MouseEvent mouseEvent) {
+    tfUsername.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfUsernameKey(KeyEvent keyEvent) {
+    tfUsername.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfEmailClicked(MouseEvent mouseEvent) {
+    tfEmail.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfEmailKey(KeyEvent keyEvent) {
+    tfEmail.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfPasswordClicked(MouseEvent mouseEvent) {
+    tfPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfPasswordKey(KeyEvent keyEvent) {
+    tfPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfConfirmPasswordClicked(MouseEvent mouseEvent) {
+    tfConfirmPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfConfirmPasswordKey(KeyEvent keyEvent) {
+    tfConfirmPassword.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfAddressClicked(MouseEvent mouseEvent) {
+    tfAddress.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfAddressKey(KeyEvent keyEvent) {
+    tfAddress.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfStateClicked(MouseEvent mouseEvent) {
+    tfState.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfStateKey(KeyEvent keyEvent) {
+    tfState.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfzipcodeClicked(MouseEvent mouseEvent) {
+    tfzipcode.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfzipcodeKey(KeyEvent keyEvent) {
+    tfzipcode.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCreditCardNumberClicked(MouseEvent mouseEvent) {
+    tfCreditCardNumber.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCreditCardNumberKey(KeyEvent keyEvent) {
+    tfCreditCardNumber.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCvvClicked(MouseEvent mouseEvent) {
+    tfCvv.setStyle("-fx-background-color: whitesmoke");
+  }
+
+  public void tfCvvKey(KeyEvent keyEvent) {
+    tfCvv.setStyle("-fx-background-color: whitesmoke");
+  }
 }
