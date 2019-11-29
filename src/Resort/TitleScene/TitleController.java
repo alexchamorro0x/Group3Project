@@ -27,28 +27,41 @@ import javafx.util.Duration;
 public class TitleController {
 
 
-  @FXML private AnchorPane apLoginPrompt;
-  @FXML private AnchorPane apLoggedIn;
+  @FXML
+  private AnchorPane apLoginPrompt;
+  @FXML
+  private AnchorPane apLoggedIn;
 
-  @FXML private Button btnRoomFinder;
-  @FXML private Button btnNewUser;
-  @FXML private Button btnManagerView;
+  @FXML
+  private Button btnRoomFinder;
+  @FXML
+  private Button btnNewUser;
+  @FXML
+  private Button btnManagerView;
 
-  @FXML private CheckBox ckbManagerLogin;
+  @FXML
+  private ImageView ivRoomFinder;
+  @FXML
+  private ImageView ivTitlePage;
 
-  @FXML private ImageView ivRoomFinder;
-  @FXML private ImageView ivTitlePage;
+  @FXML
+  private Label lblLoginValidation;
+  @FXML
+  private Label lblLoggedInUsername;
 
-  @FXML private Label lblLoginValidation;
-  @FXML private Label lblLoggedInUsername;
+  @FXML
+  private PasswordField pfLoginPassword;
 
-  @FXML private PasswordField pfLoginPassword;
-
-  @FXML private TextField tfFirstNameLogin;
-  @FXML private Label lblDescription;
-  @FXML private Label lblTempDescription;
-  @FXML private Label lblTitleLabel;
-  @FXML private Pane titleBackGround;
+  @FXML
+  private TextField tfFirstNameLogin;
+  @FXML
+  private Label lblDescription;
+  @FXML
+  private Label lblTempDescription;
+  @FXML
+  private Label lblTitleLabel;
+  @FXML
+  private Pane titleBackGround;
 
   // Fields to hold the Username and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
@@ -130,31 +143,31 @@ public class TitleController {
     String username = tfFirstNameLogin.getText();
     String password = pfLoginPassword.getText();
 
-    boolean managerCheck = ckbManagerLogin.isSelected();
+    System.out.println(username);
+    System.out.println(password);
 
-    if (!managerCheck && DatabaseAgent.checkLoginInformation(username, password)) {
-      System.out.println("Logged in successfully");
+    //boolean managerCheck = ckbManagerLogin.isSelected();
 
-      // set session information to include username, userID and if is manager
-      sessionInformation.setUserName(username);
+    if (!password.equals("")) {
+      if (DatabaseAgent.checkLoginInformation(username, password)) {
+        System.out.println("Logged in successfully");
 
-      updateLoginPane();
+        // set session information to include username, userID and if is manager
+        sessionInformation.setUserName(username);
 
-    } else if (managerCheck && DatabaseAgent.checkLoginInformation(username, password)) {
-      System.out.println("Manager Login");
+        updateLoginPane();
 
-      // set session information
-      sessionInformation.setUserName(username);
-      sessionInformation.setManager(true);
-
-      // change visibility for login pane and manager button
-      updateLoginPane();
-
+      } else {
+        System.out.println("Username or password incorrect");
+        createLoginValidator(false);
+      }
     } else {
-      System.out.println("Username or password incorrect");
+      System.out.println("Must enter password");
       createLoginValidator(false);
+
     }
   }
+
 
   private FadeTransition loginFadeOut = new FadeTransition(Duration.millis(2000));
 
@@ -177,7 +190,7 @@ public class TitleController {
   void btnClickManagerView(MouseEvent event) throws IOException {
     // changing scenes code
     //get a reference to the window we are in
-    Stage window = (Stage) ckbManagerLogin.getScene().getWindow();
+    Stage window = (Stage) btnManagerView.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
     FXMLLoader loader = new FXMLLoader();
