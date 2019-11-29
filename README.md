@@ -9,12 +9,13 @@ edit or delete a booking in the system.
 Javadocs - comming soon
 ## Diagrams
 ### Class Digram
+![](/src/Resort/Utility/ClassDiagram.PNG)
 
 ### Use Case Diagram
-
+![](/src/Resort/Utility/UseCaseDiagram.png)
 
 ### Database Diagram
-
+![](/src/Resort/Utility/DatabaseDiagram.PNG)
 ## Getting Started
 
 ## Built With
