@@ -297,6 +297,12 @@ public class ManagerViewController {
     }
   }
 
+  /**
+   * Change the currently selected booking's date of occupancy.
+   *
+   * @param event
+   * @throws SQLException
+   */
   @FXML
   void clickChangeDate(ActionEvent event) throws SQLException {
     if (tvBooked.getSelectionModel().getSelectedItem() == null) {
@@ -336,6 +342,11 @@ public class ManagerViewController {
     }
   }
 
+  /**
+   * Change the currently selected booking's room with an available room.
+   * @param event
+   * @throws SQLException
+   */
   @FXML
   void clickSwapBooking(ActionEvent event) throws SQLException {
     if (tvVacant.getSelectionModel().getSelectedItem() == null) {
@@ -414,6 +425,11 @@ public class ManagerViewController {
     }
   }
 
+  /**
+   * Move to the edit account scene.
+   * @param event
+   * @throws IOException
+   */
   @FXML
   void clickChangeAccountInfo(ActionEvent event) throws IOException {
     // Only change scenes if a user is selected in users table
@@ -468,7 +484,7 @@ public class ManagerViewController {
     this.sessionInformation = sessionInformation;
   }
 
-  public void updateDisplayedAccount(String userName) {
+  private void updateDisplayedAccount(String userName) {
     AccountInformation displayAccount = DatabaseAgent.getAccountInformation(userName);
     // Set the information on the right side of scene with the selected booking's account
     // information

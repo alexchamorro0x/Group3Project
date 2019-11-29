@@ -31,7 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MyAccountController {
-
+  //region GUI
   @FXML private Button btnHome;
 
   @FXML private ImageView homeLogo;
@@ -54,12 +54,14 @@ public class MyAccountController {
   @FXML private Button btnEditAccount;
   @FXML private Button btnCancelBooking;
   @FXML private Button btnDeleteAccount;
-
+//endregion
 
   // String to hold our username if logged in and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
 
-
+  /**
+   * Code that rus at page startup, sets up the table.
+   */
  public void initialize() {
     tvCheckIn.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
     tvCheckOut.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
@@ -113,6 +115,11 @@ public class MyAccountController {
     System.out.println("Delete Account Entered");
   }
 
+  /**
+   * Move to the edit account page.
+   * @param event
+   * @throws IOException
+   */
   @FXML
   void btnClickEditAccount(MouseEvent event) throws IOException {
     // get a reference to the window we are in
@@ -134,6 +141,11 @@ public class MyAccountController {
     window.setScene(titleScene);
   }
 
+  /**
+   * Move to the title page.
+   * @param event
+   * @throws IOException
+   */
   @FXML void btnClickHome(MouseEvent event) throws IOException {
     // get a reference to the window we are in
     Stage window = (Stage) btnHome.getScene().getWindow();
@@ -174,8 +186,10 @@ public class MyAccountController {
     homeLogo.setImage(pineapple);
   }
 
-
-  // setter for session information, updates information on the page
+  /**
+   * setter for session information, updates information on the page
+   * @param sessionInformation
+   */
   public void setSessionInformation(SessionInformation sessionInformation) {
     this.sessionInformation = sessionInformation;
     AccountInformation userInformation =

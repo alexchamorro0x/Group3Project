@@ -54,10 +54,10 @@ public class EditAccountController {
   @FXML private TextField tfCreditCardNumber;
   @FXML private TextField tfCvv;
 
-  ObservableList<String> expireMonthList =
+  private ObservableList<String> expireMonthList =
       FXCollections.observableArrayList(
           "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-  ObservableList<String> expireYearList =
+  private ObservableList<String> expireYearList =
       FXCollections.observableArrayList(
           "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
           "2030");
@@ -84,7 +84,10 @@ public class EditAccountController {
     lblInvalid.setVisible(false);
   }
 
-  // Setter so that when called from manager view to edit another users account this can be set
+  /**
+   *  Setter so that when called from manager view to edit another users account this can be set
+   * @param userNameForManagerEdit
+   */
   public void setUserNameForManagerEdit(String userNameForManagerEdit) {
     this.userNameForManagerEdit = userNameForManagerEdit;
 
@@ -106,7 +109,10 @@ public class EditAccountController {
    // expireMonth.setSelectionModel(5);
   }
 
-  // setter for session information
+  /**
+   *  setter for session information
+   * @param sessionInformation
+   */
   public void setSessionInformation(SessionInformation sessionInformation) {
     this.sessionInformation = sessionInformation;
   }
@@ -117,6 +123,12 @@ public class EditAccountController {
   //  userNameForManagerEdit = targetUser;
   // }
 
+  /**
+   * Get's data from text boxes, checks to see if the received data meets requirements,
+   * if they do update user information with the data, if it doesn't highlight the text boxes
+   * that may have an error.
+   * @param event
+   */
   @FXML
   void btnClickUpdateAccount(MouseEvent event) {
     boolean blankEntry = false;

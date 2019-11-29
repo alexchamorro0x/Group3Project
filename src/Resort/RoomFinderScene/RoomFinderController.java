@@ -70,7 +70,7 @@ public class RoomFinderController implements Initializable {
   @FXML private AnchorPane roomDescriptionBorder;
 
   // variable to track what room type we are filtering by (default = all)
-  String roomAvailabilityFilterType = "all";
+  private String roomAvailabilityFilterType = "all";
 
   // String to hold our username if logged in and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
@@ -84,7 +84,7 @@ public class RoomFinderController implements Initializable {
     return sessionInformation;
   }
 
-  /*
+  /**
    runs this code at the start of the fxml file being launched. Hides the radio buttons and
    'Available Rooms' label until the date is selected. In the near future this will be implemented
    to show only the radio buttons for open rooms via communication with the Database. If no rooms
@@ -131,7 +131,7 @@ public class RoomFinderController implements Initializable {
     roomDescriptionBorder.setVisible(false);
   }
 
-  /*
+  /**
    * Clicking the 'Book Room' button will print to the console the start and end date. This must be
    * implemented into communicating with the Database in the near future. If either of the
    * DatePicker fields are empty, the button will blink "Invalid Date" 3 times in red text directly
@@ -200,9 +200,12 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type All' to true, selected. Other Radio Buttons (A,B,C,D) are
-  // set
-  // to false(deselected)
+  /**
+   * Sets the Radio Button for 'Room Type All' to true, selected.
+   * Other Radio Buttons (A,B,C,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
   public void RadioBtnClickedRoomAll(ActionEvent actionEvent) throws SQLException {
     // all selected so image and text is set to null
     File RoomA = new File("src/Resort/RoomFinderScene/allRooms.png");
@@ -223,9 +226,12 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type A' to true, selected. Other Radio Buttons (All,B,C,D) are
-  // set
-  // to false(deselected)
+  /**
+   * Sets the Radio Button for 'Room Type A' to true, selected.
+   * Other Radio Buttons (All,B,C,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
   public void RadioBtnClickedRoomAmbassador(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/ambassadorSuite.jpg");
@@ -248,9 +254,12 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type B' to true, selected. Other Radio Buttons (All,A,C,D) are
-  // set
-  // to false(deselected)
+  /**
+   * Sets the Radio Button for 'Room Type B' to true, selected.
+   * Other Radio Buttons (All,A,C,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
   public void RadioBtnClickedRoomEagleView(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/eagleViewCondo.jpg");
@@ -273,9 +282,12 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type C' to true, selected. Other Radio Buttons (All,A,B,D) are
-  // set
-  // to false(deselected)
+  /**
+   * Sets the Radio Button for 'Room Type C' to true, selected.
+   * Other Radio Buttons (All,A,B,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
   public void RadioBtnClickedRoomPoolSide(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/poolSideCondo.jpg");
@@ -299,9 +311,12 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type D' to true, selected. Other Radio Buttons (All,A,B,C) are
-  // set
-  // to false(deselected)
+  /**
+   * Sets the Radio Button for 'Room Type D' to true, selected.
+   * Other Radio Buttons (All,A,B,C) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
   public void RadioBtnClickedRoomJunior(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/juniorSuite.jpg");
@@ -324,8 +339,12 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // This declares the 'Home' button on Scene 4 'Find Room'. This changes the scene back to 1,
-  // 'Title'.
+  /**
+   * This declares the 'Home' button on Scene 4 'Find Room'.
+   * This changes the scene back to 1, 'Title'.
+   * @param actionEvent
+   * @throws IOException
+   */
   public void btnClickedHome4(ActionEvent actionEvent) throws IOException {
     /*
     Stage thisStage = (Stage) GoToScene1From4.getScene().getWindow();
@@ -355,7 +374,10 @@ public class RoomFinderController implements Initializable {
     window.setScene(titleScene);
   }
 
-  // update method called every time a date change for checkin or checkout is made
+  /**
+   *  update method called every time a date change for checkin or checkout is made
+   * @throws SQLException
+   */
 
   public void updateResults() throws SQLException {
     // only update if a start and end date have been selected
@@ -375,7 +397,10 @@ public class RoomFinderController implements Initializable {
     }
   }
 
-  // adds a shadow border to pictures from ImageView objects.
+  /**
+   *  adds a shadow border to pictures from ImageView objects.
+   * @param RoomLayoutPicture
+   */
   public static void pictureBorder(ImageView RoomLayoutPicture) {
     // https://stackoverflow.com/questions/20489908/border-radius-and-shadow-on-imageview
     Rectangle clip =
@@ -404,6 +429,11 @@ public class RoomFinderController implements Initializable {
     timeline.play();
   }
 
+  /**
+   * Displays An error massage WHen trying to input a invalid date.
+   * @param lblInvalidDate
+   * @param message
+   */
   private static void displayInavlid(Label lblInvalidDate, String message) {
     lblInvalidDate.setText(message);
     lblInvalidDate.setTextFill(Color.RED);

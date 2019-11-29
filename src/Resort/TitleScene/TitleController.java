@@ -27,53 +27,44 @@ import javafx.util.Duration;
 public class TitleController {
 
 
-  @FXML
-  private AnchorPane apLoginPrompt;
-  @FXML
-  private AnchorPane apLoggedIn;
+  @FXML private AnchorPane apLoginPrompt;
+  @FXML private AnchorPane apLoggedIn;
 
-  @FXML
-  private Button btnRoomFinder;
-  @FXML
-  private Button btnNewUser;
-  @FXML
-  private Button btnManagerView;
+  @FXML private Button btnRoomFinder;
+  @FXML private Button btnNewUser;
+  @FXML private Button btnManagerView;
 
-  @FXML
-  private ImageView ivRoomFinder;
-  @FXML
-  private ImageView ivTitlePage;
+  @FXML private ImageView ivRoomFinder;
+  @FXML private ImageView ivTitlePage;
 
-  @FXML
-  private Label lblLoginValidation;
-  @FXML
-  private Label lblLoggedInUsername;
+  @FXML private Label lblLoginValidation;
+  @FXML private Label lblLoggedInUsername;
 
-  @FXML
-  private PasswordField pfLoginPassword;
+  @FXML private PasswordField pfLoginPassword;
 
-  @FXML
-  private TextField tfFirstNameLogin;
-  @FXML
-  private Label lblDescription;
-  @FXML
-  private Label lblTempDescription;
-  @FXML
-  private Label lblTitleLabel;
-  @FXML
-  private Pane titleBackGround;
+  @FXML private TextField tfFirstNameLogin;
+  @FXML private Label lblDescription;
+  @FXML private Label lblTempDescription;
+  @FXML private Label lblTitleLabel;
+  @FXML private Pane titleBackGround;
 
-  // Fields to hold the Username and if user is a manager
+
+  //Fields to hold the Username and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
 
 
-  // method for setting username if logged in
+  /**
+   *  method for setting username if logged in
+   * @param sessionInformation
+   */
   public void setSessionInformation(SessionInformation sessionInformation) {
     this.sessionInformation = sessionInformation;
     updateLoginPane();
   }
 
-  // method for setting visibility of LoggedInPane or login prompt pane
+  /**
+   *  method for setting visibility of LoggedInPane or login prompt pane
+   */
   private void updateLoginPane() {
     // if logged in, set prompt to not visible and set loggedInpane to visible and set username
     if (sessionInformation.getUserName() != null) {
