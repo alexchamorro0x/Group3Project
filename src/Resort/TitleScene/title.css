@@ -21,7 +21,7 @@
 }
 
 .glasswhite {
-  -fx-background-color: rgba(240, 240, 240, 0.5);
+  -fx-background-color: rgba(240, 240, 240, 0.7);
   -fx-background-radius: 10;
 }
 
@@ -36,8 +36,14 @@
 }
 
 .glassgreen {
-  -fx-background-color: rgba(50, 168, 129, .6);
+  -fx-background-color: rgba(70, 194, 60, .65 );
   -fx-background-radius: 10;
+}
+
+.text-area, .text-area .viewport, .text-area .content {
+  -fx-background-color: rgba(0, 100, 100, 0.2);
+  -fx-background-radius: 10;
+  -fx-text-fill: white;
 }
 
 #titleBackGround {

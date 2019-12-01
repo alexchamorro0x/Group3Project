@@ -46,7 +46,7 @@
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Button>
-        <Label fx:id="lblInvalidDate" layoutX="10.0" layoutY="360.0" prefHeight="27.0" prefWidth="215.0" textFill="WHITE">
+        <Label fx:id="lblInvalidDate" layoutX="10.0" layoutY="360.0" prefHeight="36.0" prefWidth="385.0" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="25.0" />
             </font>
@@ -58,27 +58,27 @@
                         <Font name="Times New Roman Bold" size="25.0" />
                     </font>
                 </Label>
-                <RadioButton fx:id="radioBtnRoomTypeAll" layoutX="6.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomAll" text="All Rooms" textFill="WHITE">
+                <RadioButton fx:id="radioBtnRoomTypeAll" layoutX="6.0" layoutY="40.0" mnemonicParsing="false" onAction="#RadioBtnClickedRoomAll" text="All Rooms" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </RadioButton>
-                <RadioButton fx:id="radioBtnRoomTypeAmbassador" layoutX="6.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomAmbassador" text="Ambassador Suite" textFill="WHITE">
+                <RadioButton fx:id="radioBtnRoomTypeAmbassador" layoutX="6.0" layoutY="70.0" mnemonicParsing="false" onAction="#RadioBtnClickedRoomAmbassador" text="Ambassador Suite" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </RadioButton>
-                <RadioButton fx:id="radioBtnRoomTypeEagleView" layoutX="6.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomEagleView" text="Eagle View Condo" textFill="WHITE">
+                <RadioButton fx:id="radioBtnRoomTypeEagleView" layoutX="6.0" layoutY="100.0" mnemonicParsing="false" onAction="#RadioBtnClickedRoomEagleView" text="Eagle View Condo" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </RadioButton>
-                <RadioButton fx:id="radioBtnRoomTypePoolSide" layoutX="6.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomPoolSide" text="Pool Side Condo" textFill="WHITE">
+                <RadioButton fx:id="radioBtnRoomTypePoolSide" layoutX="6.0" layoutY="130.0" mnemonicParsing="false" onAction="#RadioBtnClickedRoomPoolSide" text="Pool Side Condo" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </RadioButton>
-                <RadioButton fx:id="radioBtnRoomTypeJunior" layoutX="6.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#RadioBtnClickedRoomJunior" text="Junior Condo" textFill="WHITE">
+                <RadioButton fx:id="radioBtnRoomTypeJunior" layoutX="6.0" layoutY="160.0" mnemonicParsing="false" onAction="#RadioBtnClickedRoomJunior" text="Junior Condo" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>

@@ -1,0 +1,42 @@
+.header {
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 64px;
+}
+#CreateAccountTitle .text {
+    -fx-stroke: black;
+    -fx-stroke-width: 2px;
+}
+
+.btnCreateAccount {
+    -fx-focus-color: lightblue;
+    -fx-background-insets: 0, 1, 2;
+    -fx-focus-radius: 5,4,3;
+}
+
+.transparent {
+    -fx-background-color: transparent;
+}
+
+
+.glasswhite {
+    -fx-background-color: rgba(235, 235, 235, 0.72);
+    -fx-background-radius: 10;
+}
+
+.glassblue {
+    -fx-background-color: rgba(20, 68, 200, 0.7);
+    -fx-background-radius: 10;
+}
+
+.glassgray {
+    -fx-background-color: rgba(135, 135, 135, 0.63);
+    -fx-background-radius: 10;
+}
+
+
+
+#btnCreateAccount {
+    -fx-background-image: url("../CreateAccountScene/beachBoat.jpg");
+
+}

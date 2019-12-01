@@ -8,7 +8,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,14 +22,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -74,7 +70,7 @@ public class RoomFinderController implements Initializable {
   @FXML private AnchorPane roomDescriptionBorder;
 
   // variable to track what room type we are filtering by (default = all)
-  String roomAvailabilityFilterType = "all";
+  private String roomAvailabilityFilterType = "all";
 
   // String to hold our username if logged in and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
@@ -84,7 +80,11 @@ public class RoomFinderController implements Initializable {
     this.sessionInformation = sessionInformation;
   }
 
-  /*
+  public SessionInformation getSessionInformation(SessionInformation sessionInformation) {
+    return sessionInformation;
+  }
+
+  /**
    runs this code at the start of the fxml file being launched. Hides the radio buttons and
    'Available Rooms' label until the date is selected. In the near future this will be implemented
    to show only the radio buttons for open rooms via communication with the Database. If no rooms
@@ -128,45 +128,61 @@ public class RoomFinderController implements Initializable {
 
     pictureBorder(homeLogo);
 
-
     roomDescriptionBorder.setVisible(false);
-
-    // TODO: lock the 'book room' button unless someone is logged in
   }
 
-  /*
+  /**
    * Clicking the 'Book Room' button will print to the console the start and end date. This must be
    * implemented into communicating with the Database in the near future. If either of the
    * DatePicker fields are empty, the button will blink "Invalid Date" 3 times in red text directly
    * to the left of the button
    */
-  public void btnClickedBookRoom() {
+  public void btnClickedBookRoom() throws SQLException {
     // https://stackoverflow.com/questions/20446026/get-value-from-date-picker
     // date picker
     // https://stackoverflow.com/questions/43084698/flashing-label-in-javafx-gui
     // label animation
 
+    // if not logged in, display message, else, code below
     LocalDate dateStart = datePickerStart.getValue();
     LocalDate dateEnd = datePickerEnd.getValue();
-    if (dateStart == null || dateEnd == null) {
-      btnBookRoom.setDisable(true);
-      displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
-      // Outputs 'invalid date' if the start date is after the end date
-    } else if (dateStart.compareTo(dateEnd) > 0) {
-      btnBookRoom.setDisable(true);
-      displayInavlid(dateStart, dateEnd, lblInvalidDate);
-
+    if (tvAvailableRooms.getSelectionModel().getSelectedItem() == null
+        && dateStart != null
+        && dateEnd != null
+        && dateStart.compareTo(dateEnd) < 0) {
+      lblInvalidDate.setStyle("-fx-font-size: 16");
+      lblInvalidDate.setStyle("-fx-fill: red");
+      fadeOut(lblInvalidDate, "Please select a room from the list");
+      lblInvalidDate.setStyle("-fx-font-size: 25");
     } else {
-      System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
-      AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
-      DatabaseAgent.insertIntoReservations(
-          sessionInformation.getUserName(),
-          roomToBook.getRoomNumber(),
-          Date.valueOf(dateStart),
-          Date.valueOf(dateEnd));
+      // LocalDate dateStart = datePickerStart.getValue();
+      // LocalDate dateEnd = datePickerEnd.getValue();
+      if (dateStart == null || dateEnd == null) {
+        btnBookRoom.setDisable(true);
+        displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+        // Outputs 'invalid date' if the start date is after the end date
+      } else if (dateStart.compareTo(dateEnd) > 0) {
+        btnBookRoom.setDisable(true);
+        displayInavlid(dateStart, dateEnd, lblInvalidDate);
+
+      } else if (sessionInformation.getUserName() == null) {
+        System.out.println("Please LogIn.");
+        String message = "Please Log In.";
+        displayInavlid(lblInvalidDate, message);
+
+      } else {
+        System.out.println("\nStart date: " + dateStart + "\nEnd date: " + dateEnd);
+        AvailableRoom roomToBook = tvAvailableRooms.getSelectionModel().getSelectedItem();
+        DatabaseAgent.insertIntoReservations(
+            sessionInformation.getUserName(),
+            roomToBook.getRoomNumber(),
+            Date.valueOf(dateStart),
+            Date.valueOf(dateEnd));
+      }
+      btnBookRoom.setDisable(false);
+      updateResults();
     }
-    btnBookRoom.setDisable(false);
   }
 
   @FXML
@@ -184,10 +200,13 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type All' to true, selected. Other Radio Buttons (A,B,C,D) are
-  // set
-  // to false(deselected)
-  public void RadioBtnClickedRoomAll(MouseEvent mouseEvent) throws SQLException {
+  /**
+   * Sets the Radio Button for 'Room Type All' to true, selected.
+   * Other Radio Buttons (A,B,C,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
+  public void RadioBtnClickedRoomAll(ActionEvent actionEvent) throws SQLException {
     // all selected so image and text is set to null
     File RoomA = new File("src/Resort/RoomFinderScene/allRooms.png");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -207,10 +226,13 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type A' to true, selected. Other Radio Buttons (All,B,C,D) are
-  // set
-  // to false(deselected)
-  public void RadioBtnClickedRoomAmbassador(MouseEvent mouseEvent) throws SQLException {
+  /**
+   * Sets the Radio Button for 'Room Type A' to true, selected.
+   * Other Radio Buttons (All,B,C,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
+  public void RadioBtnClickedRoomAmbassador(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/ambassadorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -232,10 +254,13 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type B' to true, selected. Other Radio Buttons (All,A,C,D) are
-  // set
-  // to false(deselected)
-  public void RadioBtnClickedRoomEagleView(MouseEvent mouseEvent) throws SQLException {
+  /**
+   * Sets the Radio Button for 'Room Type B' to true, selected.
+   * Other Radio Buttons (All,A,C,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
+  public void RadioBtnClickedRoomEagleView(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/eagleViewCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -257,10 +282,13 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type C' to true, selected. Other Radio Buttons (All,A,B,D) are
-  // set
-  // to false(deselected)
-  public void RadioBtnClickedRoomPoolSide(MouseEvent mouseEvent) throws SQLException {
+  /**
+   * Sets the Radio Button for 'Room Type C' to true, selected.
+   * Other Radio Buttons (All,A,B,D) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
+  public void RadioBtnClickedRoomPoolSide(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/poolSideCondo.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -283,10 +311,13 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // Sets the Radio Button for 'Room Type D' to true, selected. Other Radio Buttons (All,A,B,C) are
-  // set
-  // to false(deselected)
-  public void RadioBtnClickedRoomJunior(MouseEvent mouseEvent) throws SQLException {
+  /**
+   * Sets the Radio Button for 'Room Type D' to true, selected.
+   * Other Radio Buttons (All,A,B,C) are set to false(deselected)
+   * @param actionEvent
+   * @throws SQLException
+   */
+  public void RadioBtnClickedRoomJunior(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
     File RoomA = new File("src/Resort/RoomFinderScene/juniorSuite.jpg");
     Image RoomAImage = new Image(RoomA.toURI().toString());
@@ -308,8 +339,12 @@ public class RoomFinderController implements Initializable {
     updateResults();
   }
 
-  // This declares the 'Home' button on Scene 4 'Find Room'. This changes the scene back to 1,
-  // 'Title'.
+  /**
+   * This declares the 'Home' button on Scene 4 'Find Room'.
+   * This changes the scene back to 1, 'Title'.
+   * @param actionEvent
+   * @throws IOException
+   */
   public void btnClickedHome4(ActionEvent actionEvent) throws IOException {
     /*
     Stage thisStage = (Stage) GoToScene1From4.getScene().getWindow();
@@ -339,7 +374,10 @@ public class RoomFinderController implements Initializable {
     window.setScene(titleScene);
   }
 
-  // update method called every time a date change for checkin or checkout is made
+  /**
+   *  update method called every time a date change for checkin or checkout is made
+   * @throws SQLException
+   */
 
   public void updateResults() throws SQLException {
     // only update if a start and end date have been selected
@@ -359,7 +397,10 @@ public class RoomFinderController implements Initializable {
     }
   }
 
-  // adds a shadow border to pictures from ImageView objects.
+  /**
+   *  adds a shadow border to pictures from ImageView objects.
+   * @param RoomLayoutPicture
+   */
   public static void pictureBorder(ImageView RoomLayoutPicture) {
     // https://stackoverflow.com/questions/20489908/border-radius-and-shadow-on-imageview
     Rectangle clip =
@@ -388,21 +429,50 @@ public class RoomFinderController implements Initializable {
     timeline.play();
   }
 
+  /**
+   * Displays An error massage WHen trying to input a invalid date.
+   * @param lblInvalidDate
+   * @param message
+   */
+  private static void displayInavlid(Label lblInvalidDate, String message) {
+    lblInvalidDate.setText(message);
+    lblInvalidDate.setTextFill(Color.RED);
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0.75), evt -> lblInvalidDate.setVisible(false)),
+            new KeyFrame(Duration.seconds(0.35), evt -> lblInvalidDate.setVisible(true)));
+    timeline.setCycleCount(3);
+    timeline.play();
+  }
+
+  private static void fadeOut(Label x, String message) {
+    // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
+    x.setText(message);
+    x.setVisible(true);
+    FadeTransition ft = new FadeTransition(Duration.millis(2400), (Node) x);
+    ft.setToValue(0);
+    ft.setFromValue(1);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
+    ft.play();
+  }
+
   private static void fadeIn(Object x) {
     // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
     FadeTransition ft = new FadeTransition(Duration.millis(650), (Node) x);
     ft.setToValue(1);
     ft.setFromValue(0);
-    //ft.setCycleCount(4);
-    //ft.setAutoReverse(true);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
     ft.play();
   }
+
   private static void fadeIn2(Object x) {
     FadeTransition ft = new FadeTransition(Duration.millis(550), (Node) x);
     ft.setToValue(1);
     ft.setFromValue(0);
-    //ft.setCycleCount(4);
-    //ft.setAutoReverse(true);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
     ft.play();
   }
 

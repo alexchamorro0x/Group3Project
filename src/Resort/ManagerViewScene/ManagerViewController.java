@@ -12,13 +12,21 @@ import Resort.Utility.User;
 import java.io.File;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,6 +43,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.util.Duration;
 
 public class ManagerViewController {
 
@@ -51,6 +60,9 @@ public class ManagerViewController {
   @FXML private Label lblState;
   @FXML private Label lblZipCode;
   @FXML private Label lblCreditCard;
+  @FXML private Label lblUpdated;
+  @FXML private Label lblError;
+  @FXML private Label lblInvalid;
 
   @FXML private TableColumn<?, ?> tcFirstName;
   @FXML private TableColumn<?, ?> tcLastName;
@@ -65,8 +77,13 @@ public class ManagerViewController {
   @FXML private TableView<Booking> tvBooked;
   @FXML private TableView<User> tvUsers;
 
-  @FXML private AnchorPane Name;
+  @FXML private Button btnChangeAccountInfo;
+  @FXML private Button btnDeleteUser;
+  @FXML private Button btnSwapBooking;
+  @FXML private Button btnChangeDate;
   @FXML private Button btnCancelBooking;
+
+  @FXML private AnchorPane Name;
   @FXML private DatePicker dpCheckInBooked;
   @FXML private DatePicker dpCheckOutBooked;
 
@@ -86,6 +103,9 @@ public class ManagerViewController {
     // Associate Vacant table with fields from AvailableRoom
     tcRoomNumberVacant.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
     tcRoomTypeVacant.setCellValueFactory(new PropertyValueFactory<>("roomType"));
+
+    lblInvalid.setText("Selection Error.");
+    lblInvalid.setVisible(false);
 
     // add a listener so that selecting roms in the booked table displays the users account info
     // as well as alternative rooms they could switch to
@@ -109,6 +129,9 @@ public class ManagerViewController {
                   // set class variable in case a change of room is to be made
                   selectedBooking = observable.getValue();
 
+                  btnCancelBooking.setDisable(false);
+                  btnChangeDate.setDisable(false);
+
                   try {
                     updateVacancySearch();
                   } catch (SQLException e) {
@@ -131,6 +154,8 @@ public class ManagerViewController {
                   AvailableRoom newValue) {
                 // set class variable in case a change of room is to be made
                 selectedVacancy = observable.getValue();
+
+                btnSwapBooking.setDisable(false);
               }
             });
 
@@ -157,6 +182,17 @@ public class ManagerViewController {
                     updateBookings(observable.getValue().getUserName());
                     // Display the users information on the right side of teh screen
                     updateDisplayedAccount(observable.getValue().getUserName());
+
+                    btnChangeAccountInfo.setDisable(false);
+                    btnDeleteUser.setDisable(false);
+                    lblFirstName.setVisible(true);
+                    lblLastName.setVisible(true);
+                    lblUserName.setVisible(true);
+                    lblAddress.setVisible(true);
+                    lblState.setVisible(true);
+                    lblZipCode.setVisible(true);
+                    lblEmail.setVisible(true);
+                    lblCreditCard.setVisible(true);
                   }
                 } catch (SQLException e) {
                   e.printStackTrace();
@@ -173,6 +209,28 @@ public class ManagerViewController {
     homeLogo.setFitHeight(45);
     homeLogo.setFitHeight(70);
 
+    btnChangeAccountInfo.setDisable(true);
+    btnDeleteUser.setDisable(true);
+    btnCancelBooking.setDisable(true);
+    btnSwapBooking.setDisable(true);
+    btnChangeDate.setDisable(true);
+
+    lblFirstName.setVisible(false);
+    lblLastName.setVisible(false);
+    lblUserName.setVisible(false);
+    lblAddress.setVisible(false);
+    lblState.setVisible(false);
+    lblZipCode.setVisible(false);
+    lblEmail.setVisible(false);
+    lblCreditCard.setVisible(false);
+    lblUpdated.setVisible(false);
+    lblError.setVisible(false);
+
+    dpCheckInVacant.setValue(LOCAL_DATE());
+    dpCheckOutVacant.setValue(LOCAL_DATE().plusDays(1));
+    updateVacancySearch();
+
+    tvBooked.setPlaceholder(new Label("No Booked Rooms."));
   }
 
   @FXML
@@ -239,25 +297,92 @@ public class ManagerViewController {
     }
   }
 
+  /**
+   * Change the currently selected booking's date of occupancy.
+   *
+   * @param event
+   * @throws SQLException
+   */
+  @FXML
+  void clickChangeDate(ActionEvent event) throws SQLException {
+    if (tvBooked.getSelectionModel().getSelectedItem() == null) {
+      msgNoSelection();
+    } else {
+      LocalDate dateStart = dpCheckInVacant.getValue();
+      LocalDate dateEnd = dpCheckOutVacant.getValue();
+
+      if (dateStart.compareTo(dateEnd) > 0) {
+        lblError.setVisible(true);
+      } else {
+        if (selectedBooking != null) {
+          DatabaseAgent.deleteReservation(Integer.parseInt(selectedBooking.getBookingId()));
+          DatabaseAgent.insertIntoReservations(
+              selectedBooking.getAccountInformation().getUserName(),
+              selectedBooking.getRoomNumber(),
+              Date.valueOf(dpCheckInVacant.getValue()),
+              Date.valueOf(dpCheckOutVacant.getValue()));
+
+          // save index of booking so the new booking can be selected
+          int bookingIndex = tvBooked.getSelectionModel().getSelectedIndex();
+
+          // update the booked and vacant tables as well as the displayed user information
+          updateBookings();
+
+          // select previous index from booking table
+          tvBooked.getSelectionModel().select(bookingIndex);
+
+          lblError.setVisible(false);
+          Timeline timeline =
+              new Timeline(
+                  new KeyFrame(Duration.seconds(0), evt -> lblUpdated.setVisible(true)),
+                  new KeyFrame(Duration.seconds(2.5), evt -> lblUpdated.setVisible(false)));
+          timeline.play();
+        }
+      }
+    }
+  }
+
+  /**
+   * Change the currently selected booking's room with an available room.
+   * @param event
+   * @throws SQLException
+   */
   @FXML
   void clickSwapBooking(ActionEvent event) throws SQLException {
-    if (selectedBooking != null && selectedVacancy != null) {
-      DatabaseAgent.deleteReservation(Integer.parseInt(selectedBooking.getBookingId()));
-      DatabaseAgent.insertIntoReservations(
-          selectedBooking.getAccountInformation().getUserName(),
-          selectedVacancy.getRoomNumber(),
-          Date.valueOf(dpCheckInVacant.getValue()),
-          Date.valueOf(dpCheckOutVacant.getValue()));
+    if (tvVacant.getSelectionModel().getSelectedItem() == null) {
+      msgNoSelection();
+    } else {
+      LocalDate dateStart = dpCheckInVacant.getValue();
+      LocalDate dateEnd = dpCheckOutVacant.getValue();
 
-      // save index of booking so the new booking can be selected
-      int bookingIndex = tvBooked.getSelectionModel().getSelectedIndex();
+      if (dateStart.compareTo(dateEnd) > 0) {
+        lblError.setVisible(true);
+      } else {
+        if (selectedBooking != null && selectedVacancy != null) {
+          DatabaseAgent.deleteReservation(Integer.parseInt(selectedBooking.getBookingId()));
+          DatabaseAgent.insertIntoReservations(
+              selectedBooking.getAccountInformation().getUserName(),
+              selectedVacancy.getRoomNumber(),
+              Date.valueOf(dpCheckInVacant.getValue()),
+              Date.valueOf(dpCheckOutVacant.getValue()));
 
-      // update the booked and vacant tables as well as the displayed user information
+          // save index of booking so the new booking can be selected
+          int bookingIndex = tvBooked.getSelectionModel().getSelectedIndex();
 
-      updateBookings();
+          // update the booked and vacant tables as well as the displayed user information
+          updateBookings();
 
-      // select previous index from booking table
-      tvBooked.getSelectionModel().select(bookingIndex);
+          // select previous index from booking table
+          tvBooked.getSelectionModel().select(bookingIndex);
+
+          lblError.setVisible(false);
+          Timeline timeline =
+              new Timeline(
+                  new KeyFrame(Duration.seconds(0), evt -> lblUpdated.setVisible(true)),
+                  new KeyFrame(Duration.seconds(2.5), evt -> lblUpdated.setVisible(false)));
+          timeline.play();
+        }
+      }
     }
   }
 
@@ -276,26 +401,41 @@ public class ManagerViewController {
 
   @FXML
   void clickCancelBooking(ActionEvent event) throws SQLException {
-    DatabaseAgent.deleteReservation(Integer.parseInt(selectedBooking.getBookingId()));
-    updateBookings();
+    if (tvBooked.getSelectionModel().getSelectedItem() == null) {
+      msgNoSelection();
+    } else {
+      DatabaseAgent.deleteReservation(Integer.parseInt(selectedBooking.getBookingId()));
+      updateBookings();
+    }
   }
 
   @FXML
   void clickDeleteUser(ActionEvent event) throws SQLException {
     // Get the selected user from the Users table
-    AccountInformation selectedAccount =
-        DatabaseAgent.getAccountInformation(
-            tvUsers.getSelectionModel().getSelectedItem().getUserName());
-    // Delete the user from the database
-    DatabaseAgent.deleteAccount(selectedAccount.getUserId());
-    // Update the user table
-    updateUserTable();
+    if (tvUsers.getSelectionModel().getSelectedItem() == null) {
+      msgNoSelection();
+    } else {
+      AccountInformation selectedAccount =
+          DatabaseAgent.getAccountInformation(
+              tvUsers.getSelectionModel().getSelectedItem().getUserName());
+      // Delete the user from the database
+      DatabaseAgent.deleteAccount(selectedAccount.getUserId());
+      // Update the user table
+      updateUserTable();
+    }
   }
 
+  /**
+   * Move to the edit account scene.
+   * @param event
+   * @throws IOException
+   */
   @FXML
   void clickChangeAccountInfo(ActionEvent event) throws IOException {
     // Only change scenes if a user is selected in users table
-    if (tvUsers.getSelectionModel().getSelectedItem() != null) {
+    if (tvUsers.getSelectionModel().getSelectedItem() == null) {
+      msgNoSelection();
+    } else {
       Stage window = (Stage) lblFirstName.getScene().getWindow();
 
       // declare and initialize a loader for the FXML scene we are going to
@@ -344,7 +484,7 @@ public class ManagerViewController {
     this.sessionInformation = sessionInformation;
   }
 
-  public void updateDisplayedAccount(String userName) {
+  private void updateDisplayedAccount(String userName) {
     AccountInformation displayAccount = DatabaseAgent.getAccountInformation(userName);
     // Set the information on the right side of scene with the selected booking's account
     // information
@@ -368,5 +508,26 @@ public class ManagerViewController {
     for (AvailableRoom availableRoom : availableRooms) {
       tvVacant.getItems().add(availableRoom);
     }
+  }
+
+  private LocalDate LOCAL_DATE() {
+    String date = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    return LocalDate.parse(date, formatter);
+  }
+
+  private void msgNoSelection() {
+    lblInvalid.setVisible(true);
+    fadeOut(lblInvalid);
+  }
+
+  private static void fadeOut(Object x) {
+    // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
+    FadeTransition ft = new FadeTransition(Duration.millis(2200), (Node) x);
+    ft.setToValue(0);
+    ft.setFromValue(1);
+    // ft.setCycleCount(4);
+    // ft.setAutoReverse(true);
+    ft.play();
   }
 }

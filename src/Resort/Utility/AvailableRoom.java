@@ -25,4 +25,3 @@ public class AvailableRoom {
     this.roomNumber = roomNumber;
   }
 }
-
