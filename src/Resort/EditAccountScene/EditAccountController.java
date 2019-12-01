@@ -53,6 +53,7 @@ public class EditAccountController {
   @FXML private TextField tfzipcode;
   @FXML private TextField tfCreditCardNumber;
   @FXML private TextField tfCvv;
+  @FXML private RadioButton radioManagerLevelAccount;
 
   private ObservableList<String> expireMonthList =
       FXCollections.observableArrayList(
@@ -82,6 +83,7 @@ public class EditAccountController {
     homeLogo.setFitHeight(100);
 
     lblInvalid.setVisible(false);
+    radioManagerLevelAccount.setVisible(false);
   }
 
   /**
@@ -92,6 +94,7 @@ public class EditAccountController {
     this.userNameForManagerEdit = userNameForManagerEdit;
 
     btnReturnToManager.setVisible(true);
+    radioManagerLevelAccount.setVisible(true);
 
     AccountInformation userAccount = DatabaseAgent.getAccountInformation(userNameForManagerEdit);
 
@@ -106,7 +109,9 @@ public class EditAccountController {
     tfConfirmPassword.setText(userAccount.getPassWord());
     tfCvv.setText(userAccount.getCvv());
     tfCreditCardNumber.setText(userAccount.getCreditCardNumber());
-   // expireMonth.setSelectionModel(5);
+    expireMonth.setValue(userAccount.getCcExpMonth());
+    expireYear.setValue(userAccount.getCcExpYear());
+    radioManagerLevelAccount.setSelected(userAccount.isManager());
   }
 
   /**
@@ -215,7 +220,12 @@ public class EditAccountController {
 
     if (blankEntry == false) {
 
-      // todo add logic to update the account in the database
+      // make the final update to the account
+      updateAccount();
+      // show success message
+      lblCreateIndicate.setVisible(true);
+      fadeOut(lblCreateIndicate);
+
     } else {
       // sout "please check RED Labels." -Label message
       lblInvalid.setVisible(true);
@@ -272,8 +282,6 @@ public class EditAccountController {
     AccountInformation userAccount =
         DatabaseAgent.getAccountInformation(sessionformation.getUserName());
 
-    System.out.println("Test");
-
     tfFirstName.setText(userAccount.getFirstName());
     tfLastName.setText(userAccount.getLastName());
     tfUsername.setText(userAccount.getUserName());
@@ -284,6 +292,10 @@ public class EditAccountController {
     tfPassword.setText(userAccount.getPassWord());
     tfConfirmPassword.setText(userAccount.getPassWord());
     tfCvv.setText(userAccount.getCvv());
+    tfCreditCardNumber.setText(userAccount.getCreditCardNumber());
+    expireMonth.setValue(userAccount.getCcExpMonth());
+    expireYear.setValue(userAccount.getCcExpYear());
+    radioManagerLevelAccount.setSelected(userAccount.isManager());
   }
 
   @FXML
@@ -310,26 +322,36 @@ public class EditAccountController {
   }
 
   @FXML
-  void clickUpdateAccount(ActionEvent event) throws SQLException {
-    int userId = DatabaseAgent.getAccountInformation(sessionInformation.getUserName()).getUserId();
-    // if a manager is editing someones account username needs to be reassigned
-    if (userNameForManagerEdit != null) {
-      userId = DatabaseAgent.getAccountInformation(userNameForManagerEdit).getUserId();
-    }
-    AccountInformation accountInformation = new AccountInformation();
-    accountInformation.setFirstName(tfFirstName.getText());
-    accountInformation.setLastName(tfLastName.getText());
-    accountInformation.setPassWord(tfPassword.getText());
-    accountInformation.setUserName(tfUsername.getText());
-    accountInformation.setEmail(tfEmail.getText());
-    accountInformation.setAddress(tfAddress.getText());
-    accountInformation.setState(tfState.getText());
-    accountInformation.setZipCode(tfzipcode.getText());
-    accountInformation.setCreditCardNumber(tfCreditCardNumber.getText());
-    accountInformation.setCvv(tfCvv.getText());
-    accountInformation.setUserId(userId);
+  void updateAccount() {
 
-    DatabaseAgent.updateAccount(accountInformation);
+    try {
+      int userId = DatabaseAgent.getAccountInformation(sessionInformation.getUserName())
+          .getUserId();
+      // if a manager is editing someones account username needs to be reassigned
+      if (userNameForManagerEdit != null) {
+        userId = DatabaseAgent.getAccountInformation(userNameForManagerEdit).getUserId();
+      }
+      AccountInformation accountInformation = new AccountInformation();
+      accountInformation.setFirstName(tfFirstName.getText());
+      accountInformation.setLastName(tfLastName.getText());
+      accountInformation.setPassWord(tfPassword.getText());
+      accountInformation.setUserName(tfUsername.getText());
+      accountInformation.setEmail(tfEmail.getText());
+      accountInformation.setAddress(tfAddress.getText());
+      accountInformation.setState(tfState.getText());
+      accountInformation.setZipCode(tfzipcode.getText());
+      accountInformation.setCreditCardNumber(tfCreditCardNumber.getText());
+      accountInformation.setCvv(tfCvv.getText());
+      accountInformation.setUserId(userId);
+      accountInformation
+          .setCcExpMonth(expireMonth.getSelectionModel().getSelectedItem().toString());
+      accountInformation.setCcExpYear(expireYear.getSelectionModel().getSelectedItem().toString());
+      accountInformation.setManager(radioManagerLevelAccount.selectedProperty().getValue());
+
+      DatabaseAgent.updateAccount(accountInformation);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   private static void fadeOut(Object x) {

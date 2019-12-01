@@ -11,6 +11,9 @@ public class AccountInformation {
   private String creditCardNumber;
   private String cvv;
   private String passWord;
+  private String ccExpMonth;
+  private String ccExpYear;
+  private boolean isManager;
 
   public String getCvv() {
     return cvv;
@@ -102,5 +105,27 @@ public class AccountInformation {
     this.userId = userId;
   }
 
+  public String getCcExpMonth() {
+    return ccExpMonth;
+  }
 
+  public void setCcExpMonth(String ccExpMonth) {
+    this.ccExpMonth = ccExpMonth;
+  }
+
+  public String getCcExpYear() {
+    return ccExpYear;
+  }
+
+  public void setCcExpYear(String ccExpYear) {
+    this.ccExpYear = ccExpYear;
+  }
+
+  public boolean isManager() {
+    return isManager;
+  }
+
+  public void setManager(boolean manager) {
+    isManager = manager;
+  }
 }

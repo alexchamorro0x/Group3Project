@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
+<AnchorPane fx:id="btnCreateAccount" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Resort.EditAccountScene.EditAccountController">
    <children>
       <Button fx:id="btnReturnToManager" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickReturnToManager" styleClass="glassblue" stylesheets="@EditAccount.css" text="Return to Manager View" textFill="WHITE" />
       <ImageView fx:id="homeLogo" fitHeight="120.0" fitWidth="125.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
@@ -118,7 +124,7 @@
             <ComboBox fx:id="expireMonth" layoutX="395.0" layoutY="135.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
             <ComboBox fx:id="expireYear" layoutX="509.0" layoutY="135.0" prefHeight="25.0" prefWidth="85.0" styleClass="combo-box" stylesheets="@../resortTemplate.css" />
             <TextField fx:id="tfCvv" layoutX="406.0" layoutY="196.0" onKeyReleased="#tfCvvKey" onMouseClicked="#tfCvvClicked" prefHeight="25.0" prefWidth="149.0" />
-            <Button layoutX="241.0" layoutY="300.0" mnemonicParsing="false" onAction="#clickUpdateAccount" onMouseClicked="#btnClickUpdateAccount" stylesheets="@EditAccount.css" text="Update Account">
+            <Button layoutX="241.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#btnClickUpdateAccount" stylesheets="@EditAccount.css" text="Update Account">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -132,6 +138,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
+            <RadioButton fx:id="radioManagerLevelAccount" layoutX="212.0" layoutY="226.0" mnemonicParsing="false" text="Manager Level Accout" />
          </children>
       </AnchorPane>
       <Label fx:id="CreateAccountTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="21.0" prefHeight="74.0" prefWidth="499.0" styleClass="header" stylesheets="@EditAccount.css" text="Update Account" textFill="WHITE">

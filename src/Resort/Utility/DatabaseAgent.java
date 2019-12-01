@@ -52,12 +52,12 @@ public class DatabaseAgent {
    */
   public static boolean addUser(String username, String firstName, String lastName, String password,
       String email, String address, String state, String zipCode, String creditCardNumber,
-      String cvv) {
+      String cvv, String expMonth, String expYear) {
     Connection connection = getConnection();
     try {
       PreparedStatement ps = connection.prepareStatement(
           "INSERT INTO PUBLIC.ACCOUNTs(FIRSTNAME, LASTNAME, PASSWORD, USERNAME, EMAIL, ADDRESS, "
-              + "STATE, ZIPCODE, CREDITCARDNUMBER, CVV) values (?,?,?,?,?,?,?,?,?,?);");
+              + "STATE, ZIPCODE, CREDITCARDNUMBER, CVV, CCEXPMONTH, CCEXPYEAR) values (?,?,?,?,?,?,?,?,?,?,?,?);");
       ps.setString(1, firstName);
       ps.setString(2, lastName);
       ps.setString(3, password);
@@ -68,6 +68,8 @@ public class DatabaseAgent {
       ps.setString(8, zipCode);
       ps.setString(9, creditCardNumber);
       ps.setString(10, cvv);
+      ps.setString(11, expMonth);
+      ps.setString(12, expYear);
       int returnCode = ps.executeUpdate();
 
       //close the prepared statement
@@ -139,6 +141,37 @@ public class DatabaseAgent {
 
   }
 
+  public static boolean checkIfManager(String username) {
+    //establish a connection to the database
+    Connection connection = getConnection();
+    String sql = "select ISMANAGER from ACCOUNTS where USERNAME=?;";
+    // variable to hold manager status
+    Boolean isManager = false;
+    try {
+      // make the prepared statement
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+      // set username in prepared statement
+      preparedStatement.setString(1, username);
+
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      //Loop through database and read all the values into accounts
+      while (resultSet.next()) {
+        isManager = resultSet.getBoolean("ISMANAGER");
+      }
+      //close the statement and the result set created
+      preparedStatement.close();
+      resultSet.close();
+
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+
+    return isManager;
+
+  }
+
   /**
    * method gets the account information for a specific username in the database
    * @return AccountInformation
@@ -169,6 +202,9 @@ public class DatabaseAgent {
         returnAccountInformation.setCreditCardNumber(resultSetForAccount.getString("CREDITCARDNUMBER"));
         returnAccountInformation.setCvv(resultSetForAccount.getString("CVV"));
         returnAccountInformation.setPassWord(resultSetForAccount.getString("PASSWORD"));
+        returnAccountInformation.setCcExpMonth(resultSetForAccount.getString("CCEXPMONTH"));
+        returnAccountInformation.setCcExpYear(resultSetForAccount.getString("CCEXPYEAR"));
+        returnAccountInformation.setManager(resultSetForAccount.getBoolean("ISMANAGER"));
 
       }
     } catch (SQLException ex) {
@@ -428,7 +464,7 @@ public class DatabaseAgent {
 
     PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ACCOUNTS SET "
         + "FIRSTNAME=?, LASTNAME=?, PASSWORD=?, USERNAME=?, EMAIL=?, ADDRESS=?, STATE=?, ZIPCODE=?, "
-        + "CREDITCARDNUMBER=?, CVV=? where ACCOUNTID=?;");
+        + "CREDITCARDNUMBER=?, CVV=?, CCEXPMONTH=?, CCEXPYEAR=?, ISMANAGER=? where ACCOUNTID=?;");
 
     preparedStatement.setString(1, accountInformation.getFirstName());
     preparedStatement.setString(2, accountInformation.getLastName());
@@ -440,7 +476,11 @@ public class DatabaseAgent {
     preparedStatement.setString(8, accountInformation.getZipCode());
     preparedStatement.setString(9, accountInformation.getCreditCardNumber());
     preparedStatement.setString(10, accountInformation.getCvv());
-    preparedStatement.setInt(11, accountInformation.getUserId());
+    preparedStatement.setString(11, accountInformation.getCcExpMonth());
+    preparedStatement.setString(12, accountInformation.getCcExpYear());
+    preparedStatement.setBoolean(13, accountInformation.isManager());
+
+    preparedStatement.setInt(14, accountInformation.getUserId());
 
 
     preparedStatement.execute();

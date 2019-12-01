@@ -146,6 +146,9 @@ public class TitleController {
         // set session information to include username, userID and if is manager
         sessionInformation.setUserName(username);
 
+        // I will set the manager flag here //////////////////////////////////////////////////////////////
+        sessionInformation.setManager(DatabaseAgent.checkIfManager(username));
+
         updateLoginPane();
 
       } else {

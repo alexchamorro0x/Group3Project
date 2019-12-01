@@ -199,7 +199,10 @@ public class CreateAccountController {
           tfState.getText(),
           tfzipcode.getText(),
           tfCreditCardNumber.getText(),
-          tfCvv.getText());
+          tfCvv.getText(),
+          expireMonth.getSelectionModel().getSelectedItem().toString(),
+          expireYear.getSelectionModel().getSelectedItem().toString()
+          );
 
       // displays "Account Successful" label to blink three times when button clicked
       lblCreateIndicate.setVisible(true);
