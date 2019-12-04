@@ -55,7 +55,7 @@ public class TitleController {
 
   /**
    *  method for setting username if logged in
-   * @param sessionInformation
+   * @param sessionInformation the information from the tab that stores login information.
    */
   public void setSessionInformation(SessionInformation sessionInformation) {
     this.sessionInformation = sessionInformation;
@@ -84,6 +84,11 @@ public class TitleController {
 
   }
 
+  /**
+   * Detects button press and sends user to create account screen.
+   * @param event accepts mouse click event when user clicks the button
+   * @throws IOException exception if input is invalid.
+   */
   @FXML
   void clickNewUser(MouseEvent event) throws IOException {
 
@@ -98,12 +103,7 @@ public class TitleController {
   @FXML
   void clickRoomFinder(ActionEvent event) throws IOException {
 // changing scenes code
-    /*
-    Stage thisStage = (Stage) btnRoomFinder.getScene().getWindow();
-    Parent loggedInScene = FXMLLoader.load(getClass().getResource(
-        "../RoomFinderScene/RoomFinder.fxml"));
-    thisStage.setScene(new Scene(loggedInScene, 750, 500));
-    */
+
     //get a reference to the window we are in
     Stage window = (Stage) btnRoomFinder.getScene().getWindow();
 
@@ -129,6 +129,10 @@ public class TitleController {
 
   }
 
+  /**
+   * Tests for valid login information then changes the screen to the logged in screen.
+   * @param event accepts mouse click from user
+   */
   @FXML
   void clickLogin(MouseEvent event) {
     String username = tfFirstNameLogin.getText();
@@ -170,7 +174,10 @@ public class TitleController {
       Duration.millis(2000)
   );
 
-
+  /**
+   * Show some validation on the screen so the user knows if login worked.
+   * @param success represents if the login function worked or not.
+   */
   private void createLoginValidator(boolean success) {
     if (success) {
       lblLoginValidation.setText("Incorrect First Name or Password");
@@ -231,6 +238,10 @@ public class TitleController {
     window.setScene(myAccountScene);
   }
 
+  /**
+   * Signs the user out if they're already logged into an account.
+   * @param event handles mouse click event
+   */
   @FXML
   void btnClickSignOut(MouseEvent event) {
     sessionInformation.setManager(false);
@@ -264,3 +275,6 @@ public class TitleController {
 
  /* dock.jpg    Free to reuse from Pixabay.com, free-to-use website.
     https://pixabay.com/photos/pier-jetty-ocean-sea-water-way-569314/*/
+
+ /* roomFinderButton.jpg    Free to reuse from Pixabay.com, free-to-use website.
+    https://pixabay.com/photos/hotel-room-home-bed-inner-luxury-4416515/*/
