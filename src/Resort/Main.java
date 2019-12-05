@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-// Dont forget to add your H2 driver to the dependencies.
 /**
  * Main class that starts the FXML application.
  */
@@ -24,13 +23,11 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+    /**
+     * This is the main entry point for the program.
+     * @param args arguments passed in when called from the command line.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 }
-
-// yes
-
-
-// comment
