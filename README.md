@@ -5,6 +5,17 @@ This project is a booking application meant for a high end resort. The applicati
 edit or delete a booking they made previously, and edit the information for their account. The project also allows an employee to log in and view all the bookings in the system as well as 
 edit or delete a booking in the system.
 
+## How to Install and Run
+![](/src/Resort/Utility/ClassDiagram.PNG)
+Download the jar file from the release page to a directory.
+![](/src/Resort/Utility/pointCmdAtDir.PNG)
+Open a commend terminal and point it at the directory containing
+the downloaded jar. 
+![](/src/Resort/Utility/runJar.PNG)
+Execute the command "java -jar Group3Project.jar" to run the program.
+![](/src/Resort/Utility/useApp.PNG)
+Use the Program!
+
 ## Documentation
 Javadocs - comming soon
 ## Diagrams
