@@ -203,8 +203,7 @@ public class ManagerViewController {
     // fill the user table with usernames
     updateUserTable();
 
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
     homeLogo.setFitHeight(45);
     homeLogo.setFitHeight(70);
@@ -239,9 +238,7 @@ public class ManagerViewController {
     Stage window = (Stage) lblFirstName.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
-
+    FXMLLoader loader = new FXMLLoader(TitleController.class.getResource("Title.fxml"));
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
 
@@ -439,8 +436,7 @@ public class ManagerViewController {
       Stage window = (Stage) lblFirstName.getScene().getWindow();
 
       // declare and initialize a loader for the FXML scene we are going to
-      FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("../EditAccountScene/EditAccount.fxml"));
+      FXMLLoader loader = new FXMLLoader(EditAccountController.class.getResource("EditAccount.fxml"));
 
       // create a parent class with our loader pointing at the new scene
       Parent editScene = loader.load();
@@ -474,8 +470,7 @@ public class ManagerViewController {
   public void btnHomeExited(MouseEvent mouseEvent) {
     homeLogo.setFitHeight(45);
     homeLogo.setFitHeight(70);
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
   }
 

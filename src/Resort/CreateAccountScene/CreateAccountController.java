@@ -1,6 +1,7 @@
 package Resort.CreateAccountScene;
 
 import Resort.Main;
+import Resort.TitleScene.TitleController;
 import Resort.Utility.DatabaseAgent;
 
 import java.io.File;
@@ -33,6 +34,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * This class controls the scene for making new accounts.
+ */
 public class CreateAccountController {
 
   @FXML private ComboBox expireMonth;
@@ -64,14 +68,16 @@ public class CreateAccountController {
           "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029",
           "2030");
 
+  /**
+   * Called when the controller is loaded. Sets the default selections for the user.
+   */
   public void initialize() {
     expireMonth.setItems(expireMonthList);
     expireYear.setItems(expireYearList);
 
     lblCreateIndicate.setVisible(false);
 
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("/Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
     homeLogo.setFitWidth(65);
     homeLogo.setFitHeight(100);
@@ -82,14 +88,18 @@ public class CreateAccountController {
     lblInvalid.setVisible(false);
   }
 
+  /**
+   * This method returns the user to the title scene.
+   * @param event Mouse click event.
+   * @throws IOException
+   */
   @FXML
   void btnClickHome(MouseEvent event) throws IOException {
     // get a reference to the window we are in
     Stage window = (Stage) tfUsername.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+    FXMLLoader loader = new FXMLLoader(TitleController.class.getResource("Title.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
@@ -100,6 +110,11 @@ public class CreateAccountController {
     window.setScene(titleScene);
   }
 
+  /**
+   * This method checks all of the fields and makes a database update if everything is ok.
+   * otherwise it highlights the field to show an error has occured.
+   * @param actionEvent
+   */
   @FXML
   public void btnClickCreateAccount(ActionEvent actionEvent) {
     /*
@@ -220,6 +235,10 @@ public class CreateAccountController {
     }
   }
 
+  /**
+   * Highlights the logo to show it is active
+   * @param mouseEvent the event for the mouse event.
+   */
   public void btnHomeEntered(MouseEvent mouseEvent) {
     homeLogo.setFitHeight(70);
     homeLogo.setFitHeight(105);
@@ -231,102 +250,197 @@ public class CreateAccountController {
     Resort.RoomFinderScene.RoomFinderController.pictureBorder(homeLogo);
   }
 
+  /**
+   * This method returns the users to the title scene
+   * @param mouseEvent the event for the mouse event.
+   */
   public void btnHomeExited(MouseEvent mouseEvent) {
     homeLogo.setFitHeight(65);
     homeLogo.setFitHeight(100);
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("/Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfFirstNameClicked(MouseEvent mouseEvent) {
     tfFirstName.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfFirstNameKey(KeyEvent keyEvent) {
     tfFirstName.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfLastNameClicked(MouseEvent mouseEvent) {
     tfLastName.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfLastNameKey(KeyEvent keyEvent) {
     tfLastName.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfUsernameClicked(MouseEvent mouseEvent) {
     tfUsername.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfUsernameKey(KeyEvent keyEvent) {
     tfUsername.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfEmailClicked(MouseEvent mouseEvent) {
     tfEmail.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfEmailKey(KeyEvent keyEvent) {
     tfEmail.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfPasswordClicked(MouseEvent mouseEvent) {
     tfPassword.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfPasswordKey(KeyEvent keyEvent) {
     tfPassword.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfConfirmPasswordClicked(MouseEvent mouseEvent) {
     tfConfirmPassword.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfConfirmPasswordKey(KeyEvent keyEvent) {
     tfConfirmPassword.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfAddressClicked(MouseEvent mouseEvent) {
     tfAddress.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfAddressKey(KeyEvent keyEvent) {
     tfAddress.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfStateClicked(MouseEvent mouseEvent) {
     tfState.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfStateKey(KeyEvent keyEvent) {
     tfState.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfzipcodeClicked(MouseEvent mouseEvent) {
     tfzipcode.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfzipcodeKey(KeyEvent keyEvent) {
     tfzipcode.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfCreditCardNumberClicked(MouseEvent mouseEvent) {
     tfCreditCardNumber.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfCreditCardNumberKey(KeyEvent keyEvent) {
     tfCreditCardNumber.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param mouseEvent mouseclickevent
+   */
   public void tfCvvClicked(MouseEvent mouseEvent) {
     tfCvv.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method changes component color to show it is the selected area of teh screne.
+   * @param keyEvent keyboardclickevent
+   */
   public void tfCvvKey(KeyEvent keyEvent) {
     tfCvv.setStyle("-fx-background-color: whitesmoke");
   }
 
+  /**
+   * This method causes the component to fade out over 2.2 seconds
+   * @param x the object that will be faded
+   */
   private static void fadeOut(Object x) {
     // https://docs.oracle.com/javafx/2/api/javafx/animation/FadeTransition.html
     FadeTransition ft = new FadeTransition(Duration.millis(2200), (Node) x);

@@ -1,11 +1,14 @@
 package Resort.TitleScene;
 
+import Resort.CreateAccountScene.CreateAccountController;
+import Resort.Main;
 import Resort.ManagerViewScene.ManagerViewController;
 import Resort.MyAccountScene.MyAccountController;
 import Resort.RoomFinderScene.RoomFinderController;
 import Resort.Utility.DatabaseAgent;
 import Resort.Utility.SessionInformation;
 import java.io.IOException;
+import java.nio.file.Path;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -87,11 +90,18 @@ public class TitleController {
   @FXML
   void clickNewUser(MouseEvent event) throws IOException {
 
+    Stage window = (Stage) btnNewUser.getScene().getWindow();
+
 // changing scenes code
     Stage thisStage = (Stage) btnNewUser.getScene().getWindow();
-    Parent loggedInScene = FXMLLoader.load(getClass().getResource(
-        "../CreateAccountScene/CreateAccount.fxml"));
-    thisStage.setScene(new Scene(loggedInScene, 1000, 600));
+    FXMLLoader loader = new FXMLLoader(CreateAccountController.class.getResource("CreateAccount.fxml"));
+    Parent title = loader.load();
+
+    // make the new scene we are going to
+    Scene titleScene = new Scene(title);
+
+    // initiate the scene change (no need to make changes to controller)
+    window.setScene(titleScene);
 
   }
 
@@ -108,8 +118,14 @@ public class TitleController {
     Stage window = (Stage) btnRoomFinder.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../RoomFinderScene/roomFinder.fxml"));
+    FXMLLoader loader = new FXMLLoader(RoomFinderController.class.getResource("RoomFinder.fxml"));
+
+
+    //loader.setLocation(getClass().getResource("../RoomFinderScene/RoomFinder.fxml"));
+
+
+    System.out.println(getClass().getResource("Resort"));
+
 
     // create a parent class with our loader pointing at the new scene
     Parent roomFinder = loader.load();
@@ -187,8 +203,7 @@ public class TitleController {
     Stage window = (Stage) btnManagerView.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../ManagerViewScene/ManagerView.fxml"));
+    FXMLLoader loader = new FXMLLoader(ManagerViewController.class.getResource("ManagerView.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent myAccountParent = loader.load();
@@ -213,8 +228,7 @@ public class TitleController {
     Stage window = (Stage) lblLoginValidation.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../MyAccountScene/MyAccount.fxml"));
+    FXMLLoader loader = new FXMLLoader(MyAccountController.class.getResource("MyAccount.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent myAccountParent = loader.load();

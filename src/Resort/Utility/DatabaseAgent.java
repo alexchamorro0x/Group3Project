@@ -215,6 +215,14 @@ public class DatabaseAgent {
     return returnAccountInformation;
     }
 
+  /**
+   * Returns a list of the available room for a specified data range and room type
+    * @param checkIn Checkin date for the search.
+   * @param checkOut Check out date for the search.
+   * @param roomType The room type for the search
+   * @return An ArrayList of available rooms.
+   * @throws SQLException
+   */
   public static ArrayList<AvailableRoom> getAvailableRooms(String checkIn, String checkOut,
       String roomType)
       throws SQLException {
@@ -268,6 +276,13 @@ public class DatabaseAgent {
 
   }
 
+  /**
+   * Inserts a reservation into the database reservation table.
+   * @param userName String Booking users username.
+   * @param roomNumber Int containing room number for the booking.
+   * @param checkin Date Checkin date for the booking.
+   * @param checkOut Date Check out date for the booking.
+   */
   public static void insertIntoReservations(String userName, int roomNumber, Date checkin, Date checkOut) {
 
     AccountInformation accountInformation = getAccountInformation(userName);
@@ -299,6 +314,13 @@ public class DatabaseAgent {
       }
   }
 
+  /**
+   * Inserts a reservation into the database reservation table. Overloaded to take a string for the roomnumber
+   * @param userName String Booking users username.
+   * @param roomNumber String containing room number for the booking.
+   * @param checkin Date Checkin date for the booking.
+   * @param checkOut Date Check out date for the booking.
+   */
   public static void insertIntoReservations(String userName, String roomNumber, Date checkin, Date checkOut) {
 
     AccountInformation accountInformation = getAccountInformation(userName);
@@ -330,6 +352,11 @@ public class DatabaseAgent {
     }
   }
 
+  /**
+   * Gets all of the bookings from the database.
+   * @return An ArrayList of all the bookings in the database.
+   * @throws SQLException
+   */
   public static ArrayList<Booking> getAllBookings() throws SQLException {
     ArrayList<Booking> allBookings = new ArrayList<>();
 
@@ -361,6 +388,11 @@ public class DatabaseAgent {
     return allBookings;
   }
 
+  /**
+   * Gets a list of the bookings for a specific user.
+   * @param userName String contains the users username for teh search.
+   * @return An arraylist of bookings.
+   */
   public static ArrayList<Booking> getUserBookings(String userName) {
     AccountInformation accountInformation = getAccountInformation(userName);
     ArrayList<Booking> returnResults = new ArrayList<Booking>();
@@ -404,6 +436,10 @@ public class DatabaseAgent {
     return returnResults;
   }
 
+  /**
+   * Removes the specified booking from the database.
+   * @param reservationID Int containg the reservationID for the booking to be deleted.
+   */
   public static void deleteReservation(int reservationID) {
     //'DELETE from RESERVATIONS where RESERVATIONID = ?'
     Connection connection = getConnection();
@@ -423,6 +459,10 @@ public class DatabaseAgent {
 
   }
 
+  /**
+   * Deletes a specified account from the database.
+   * @param accountId int containing the accountID to be deleted.
+   */
   public static void deleteAccount(int accountId) {
     Connection connection = getConnection();
     try {
@@ -441,6 +481,11 @@ public class DatabaseAgent {
 
   }
 
+  /**
+   * Gets a list of all of the users in the database.
+   * @return Returns an arraylist of all of the users in the database.
+   * @throws SQLException
+   */
   public static ArrayList<User> getUsers() throws SQLException {
     Connection connection = getConnection();
 
@@ -459,6 +504,12 @@ public class DatabaseAgent {
       return userList;
   }
 
+  /**
+   * Updates an account in the database.
+   * @param accountInformation AccountInformation clas containing the information to make the
+   *                           database update.
+   * @throws SQLException
+   */
   public static void updateAccount(AccountInformation accountInformation) throws SQLException {
     Connection connection = getConnection();
 

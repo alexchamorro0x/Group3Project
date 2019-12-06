@@ -76,8 +76,7 @@ public class EditAccountController {
     lblCreateIndicate.setVisible(false);
     btnReturnToManager.setVisible(false);
 
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("/Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
     homeLogo.setFitWidth(65);
     homeLogo.setFitHeight(100);
@@ -239,8 +238,7 @@ public class EditAccountController {
     Stage window = (Stage) tfUsername.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+    FXMLLoader loader = new FXMLLoader(TitleController.class.getResource("Title.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
@@ -269,8 +267,7 @@ public class EditAccountController {
   public void btnHomeExited(MouseEvent mouseEvent) {
     homeLogo.setFitHeight(65);
     homeLogo.setFitHeight(100);
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("/Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
   }
 
@@ -303,8 +300,7 @@ public class EditAccountController {
     Stage window = (Stage) tfUsername.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../ManagerViewScene/ManagerView.fxml"));
+    FXMLLoader loader = new FXMLLoader(ManagerViewController.class.getResource("ManagerView.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent managerView = loader.load();

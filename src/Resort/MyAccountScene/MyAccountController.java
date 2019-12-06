@@ -6,14 +6,8 @@ import Resort.Utility.AccountInformation;
 import Resort.Utility.Booking;
 import Resort.Utility.DatabaseAgent;
 import Resort.Utility.SessionInformation;
-
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,15 +21,14 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Class for the controller for the MyAccount scene.
+ */
 public class MyAccountController {
-  //region GUI
   @FXML private Button btnHome;
-
   @FXML private ImageView homeLogo;
-
   @FXML private Label lblFirstName;
   @FXML private Label lblLastName;
   @FXML private Label lblUserName;
@@ -51,10 +44,6 @@ public class MyAccountController {
   @FXML private TableColumn<?, ?> tvRoomNumber;
   @FXML private TableColumn<?, ?> tvBookingId;
 
-  @FXML private Button btnEditAccount;
-  @FXML private Button btnCancelBooking;
-  @FXML private Button btnDeleteAccount;
-//endregion
 
   // String to hold our username if logged in and if user is a manager
   private SessionInformation sessionInformation = new SessionInformation();
@@ -69,8 +58,7 @@ public class MyAccountController {
     tvRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
     tvBookingId.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
 
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
     homeLogo.setFitHeight(65);
     homeLogo.setFitHeight(100);
@@ -79,7 +67,10 @@ public class MyAccountController {
   }
 
 
-
+  /**
+   * Method for initiating the cancellation of a booking.
+   * @param event A mouse click event.
+   */
   @FXML
   void btnClickCancelBooking(MouseEvent event) {
     Booking bookingToDelete = tvBookings.getSelectionModel().getSelectedItem();
@@ -88,6 +79,11 @@ public class MyAccountController {
     tvBookings.getItems().remove(indexToRemove);
   }
 
+  /**
+   * Method for initiating the deletion of the users account.
+   * @param event A mouse click event.
+   * @throws IOException
+   */
   @FXML
   void btnClickDeleteAccount(MouseEvent event) throws IOException {
     AccountInformation accountToDelete =
@@ -98,8 +94,7 @@ public class MyAccountController {
     Stage window = (Stage) btnHome.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+    FXMLLoader loader = new FXMLLoader(TitleController.class.getResource("Title.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
@@ -117,7 +112,7 @@ public class MyAccountController {
 
   /**
    * Move to the edit account page.
-   * @param event
+   * @param event A mouse click event.
    * @throws IOException
    */
   @FXML
@@ -126,8 +121,7 @@ public class MyAccountController {
     Stage window = (Stage) btnHome.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../EditAccountScene/EditAccount.fxml"));
+    FXMLLoader loader = new FXMLLoader(EditAccountController.class.getResource("EditAccount.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
@@ -143,7 +137,7 @@ public class MyAccountController {
 
   /**
    * Move to the title page.
-   * @param event
+   * @param event A mouse click event.
    * @throws IOException
    */
   @FXML void btnClickHome(MouseEvent event) throws IOException {
@@ -151,8 +145,7 @@ public class MyAccountController {
     Stage window = (Stage) btnHome.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+    FXMLLoader loader = new FXMLLoader(TitleController.class.getResource("Title.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
@@ -167,6 +160,10 @@ public class MyAccountController {
     window.setScene(titleScene);
   }
 
+  /**
+   * Method for showing the home button is active on hover.
+   * @param mouseEvent mouse event for the action.
+   */
   public void btnHomeEntered(MouseEvent mouseEvent) {
     homeLogo.setFitHeight(70);
     homeLogo.setFitHeight(105);
@@ -178,11 +175,14 @@ public class MyAccountController {
     Resort.RoomFinderScene.RoomFinderController.pictureBorder(homeLogo);
   }
 
+  /**
+   * Method for showing the home button is active on hover.
+   * @param mouseEvent mouse event for the action.
+   */
   public void btnHomeExited(MouseEvent mouseEvent) {
     homeLogo.setFitHeight(65);
     homeLogo.setFitHeight(100);
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
   }
 

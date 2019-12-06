@@ -108,14 +108,13 @@ public class RoomFinderController implements Initializable {
     tvAvailableRooms.setPlaceholder(new Label(""));
     tvAvailableRooms.setVisible(false);
 
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("/Resort/RoomFinderScene/pineapple.png");;
     homeLogo.setImage(pineapple);
     homeLogo.setFitHeight(65);
     homeLogo.setFitHeight(100);
 
-    File Room = new File("src/Resort/RoomFinderScene/allRooms.png");
-    Image RoomAImage = new Image(Room.toURI().toString());
+
+    Image RoomAImage = new Image("/Resort/RoomFinderScene/allRooms.png");
     RoomLayoutPicture.setImage(RoomAImage);
     pictureBorder(RoomLayoutPicture);
 
@@ -208,8 +207,7 @@ public class RoomFinderController implements Initializable {
    */
   public void RadioBtnClickedRoomAll(ActionEvent actionEvent) throws SQLException {
     // all selected so image and text is set to null
-    File RoomA = new File("src/Resort/RoomFinderScene/allRooms.png");
-    Image RoomAImage = new Image(RoomA.toURI().toString());
+    Image RoomAImage = new Image("/Resort/RoomFinderScene/allRooms.png");
     RoomLayoutPicture.setImage(RoomAImage);
     pictureBorder(RoomLayoutPicture); // sets the room title and 3 description text boxes
     RoomTypeText.setText("");
@@ -234,8 +232,7 @@ public class RoomFinderController implements Initializable {
    */
   public void RadioBtnClickedRoomAmbassador(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/ambassadorSuite.jpg");
-    Image RoomAImage = new Image(RoomA.toURI().toString());
+    Image RoomAImage = new Image("/Resort/RoomFinderScene/ambassadorsuite.jpg");
     RoomLayoutPicture.setImage(RoomAImage);
     pictureBorder(RoomLayoutPicture);
 
@@ -262,8 +259,7 @@ public class RoomFinderController implements Initializable {
    */
   public void RadioBtnClickedRoomEagleView(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/eagleViewCondo.jpg");
-    Image RoomAImage = new Image(RoomA.toURI().toString());
+    Image RoomAImage = new Image("/Resort/RoomFinderScene/eagleViewCondo.jpg");
     RoomLayoutPicture.setImage(RoomAImage);
     pictureBorder(RoomLayoutPicture);
 
@@ -290,8 +286,7 @@ public class RoomFinderController implements Initializable {
    */
   public void RadioBtnClickedRoomPoolSide(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/poolSideCondo.jpg");
-    Image RoomAImage = new Image(RoomA.toURI().toString());
+    Image RoomAImage = new Image("/Resort/RoomFinderScene/poolSideCondo.jpg");
     RoomLayoutPicture.setImage(RoomAImage);
     pictureBorder(RoomLayoutPicture);
 
@@ -319,8 +314,7 @@ public class RoomFinderController implements Initializable {
    */
   public void RadioBtnClickedRoomJunior(ActionEvent actionEvent) throws SQLException {
     // sets the image for the room layout from local file
-    File RoomA = new File("src/Resort/RoomFinderScene/juniorSuite.jpg");
-    Image RoomAImage = new Image(RoomA.toURI().toString());
+    Image RoomAImage = new Image("/Resort/RoomFinderScene/juniorsuite.jpg");
     RoomLayoutPicture.setImage(RoomAImage);
     pictureBorder(RoomLayoutPicture);
 
@@ -355,8 +349,7 @@ public class RoomFinderController implements Initializable {
     Stage window = (Stage) btnHome.getScene().getWindow();
 
     // declare and initialize a loader for the FXML scene we are going to
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../TitleScene/Title.fxml"));
+    FXMLLoader loader = new FXMLLoader(TitleController.class.getResource("Title.fxml"));
 
     // create a parent class with our loader pointing at the new scene
     Parent title = loader.load();
@@ -490,8 +483,7 @@ public class RoomFinderController implements Initializable {
   public void btnHomeExited(MouseEvent mouseEvent) {
     homeLogo.setFitHeight(65);
     homeLogo.setFitHeight(100);
-    File RoomA = new File("src/Resort/RoomFinderScene/pineapple.png");
-    Image pineapple = new Image(RoomA.toURI().toString());
+    Image pineapple = new Image("/Resort/RoomFinderScene/pineapple.png");
     homeLogo.setImage(pineapple);
   }
 }
