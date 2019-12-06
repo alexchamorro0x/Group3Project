@@ -6,14 +6,14 @@ edit or delete a booking they made previously, and edit the information for thei
 edit or delete a booking in the system.
 
 ## How to Install and Run
-![](/src/Resort/Utility/ClassDiagram.PNG)
+![](/docs/images/downloadJar.PNG)
 Download the jar file from the release page to a directory.
-![](/src/Resort/Utility/pointCmdAtDir.PNG)
+![](/docs/images/pointCmdAtDir.PNG)
 Open a commend terminal and point it at the directory containing
 the downloaded jar. 
-![](/src/Resort/Utility/runJar.PNG)
+![](/docs/images/runJar.PNG)
 Execute the command "java -jar Group3Project.jar" to run the program.
-![](/src/Resort/Utility/useApp.PNG)
+![](/docs/images/useApp.PNG)
 Use the Program!
 
 ## Documentation
