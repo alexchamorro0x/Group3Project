@@ -1,0 +1,54 @@
+﻿Summary: Group 3 Resort
+Repo Link: https://github.com/Dingram91/Group3Project
+
+
+Title Screen:
+	* Display resort description and name
+	* Holds button to send the user to the room finder
+	* Login section with username and password verification
+	* Once logged in
+		1. Sign out button for current user
+		2. Button to open users account screen
+	* Create account button
+
+Room Finder:
+	* Pineapple resort button to return to home
+	* Date pickers to select a start and end date for the booking
+		1. Once a valid date range is selected the available bookings appear in a table view to the right of the screen
+	* Book room button to confirm a selected booking
+	* Radio buttons to specify a certain room type when checking available rooms
+		1. Ambassador Suite, Eagle View Condo, Pool Side Condo, Junior Condo
+		2. Displays a picture and description box for the room selected
+
+Create Account:
+	* Pineapple resort button to return to home
+	* Text fields to accept user credentials for new account
+	* Combo boxes for credit card month and year
+	* Button to verify all fields are entered and then create account
+
+My Account:
+	* Pineapple resort button to return to home
+	* Description of account without credit card information
+	* Edit account button
+	* Delete account button
+	* Table view with the users current bookings
+		1. Check in, check out, room type, room number, and booking id
+	* Button to cancel a selected booking
+
+Manager View:
+	* Can only be accessed if user has isManager checked in the database
+	* Pineapple resort button to return to home
+	* Display list of all the users in the database
+		1. Shows users credentials for that user including credit card information
+	* Ability to change any accounts info, or delete any account
+	* Table view to display the current bookings for the selected user
+		1. Displays all booking if no user is selected or the view all bookings button is pressed
+	* Change check in date of selected booking
+	* Cancel a selected booking
+	* Swap a users booked room with a currently available room
+
+Edit Account:
+	* Pineapple resort button to return to home
+	* Accessed from the my account screen by clicking “Edit Account”
+	* Fills all text fields and combo boxes with the users current credentials
+	* Allows for alterations and then saves them to the database
