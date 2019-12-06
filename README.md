@@ -23,7 +23,7 @@ edit or delete a booking in the system.
 ![](/docs/images/useApp.PNG)
 
 ## Documentation
-Javadocs - comming soon
+[Link to Java-Docs](https://dingram91.github.io/Group3Project/)
 ## Diagrams
 ### Class Digram
 ![](/src/Resort/Utility/ClassDiagram.PNG)
@@ -40,9 +40,6 @@ Java, JavaFX, H2-Database
 
 ## Authors
 Alex Chamorro, Brian Ciszewski, Garett Flagg, Dylan Ingram, Alan Norman
-## License
-
-## History
 
 ## Key Programming Concepts Utilized
 GUI programming with JavaFX
