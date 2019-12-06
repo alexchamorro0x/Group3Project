@@ -7,20 +7,20 @@ edit or delete a booking in the system.
 
 ## How to Install and Run
 
-![](/docs/images/downloadJar.PNG)
 ### 1.) Download the jar file from the release page to a directory.
+![](/docs/images/downloadJar.PNG)
 
 
-![](/docs/images/pointCmdAtDir.PNG)
 ### 2.) Open a commend terminal and point it at the directory containing the downloaded jar. 
+![](/docs/images/pointCmdAtDir.PNG)
 
 
-![](/docs/images/runJar.PNG)
 ### 3.) Execute the command "java -jar Group3Project.jar" to run the program.
+![](/docs/images/runJar.PNG)
 
 
-![](/docs/images/useApp.PNG)
 ### 4.) Use the Program!
+![](/docs/images/useApp.PNG)
 
 ## Documentation
 Javadocs - comming soon
