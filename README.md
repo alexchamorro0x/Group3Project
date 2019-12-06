@@ -6,15 +6,21 @@ edit or delete a booking they made previously, and edit the information for thei
 edit or delete a booking in the system.
 
 ## How to Install and Run
+
 ![](/docs/images/downloadJar.PNG)
-Download the jar file from the release page to a directory.
+### 1.) Download the jar file from the release page to a directory.
+
+
 ![](/docs/images/pointCmdAtDir.PNG)
-Open a commend terminal and point it at the directory containing
-the downloaded jar. 
+### 2.) Open a commend terminal and point it at the directory containing the downloaded jar. 
+
+
 ![](/docs/images/runJar.PNG)
-Execute the command "java -jar Group3Project.jar" to run the program.
+### 3.) Execute the command "java -jar Group3Project.jar" to run the program.
+
+
 ![](/docs/images/useApp.PNG)
-Use the Program!
+### 4.) Use the Program!
 
 ## Documentation
 Javadocs - comming soon
