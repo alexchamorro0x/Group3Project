@@ -16,7 +16,6 @@ import jdk.nashorn.api.scripting.ScriptUtils;
 import org.h2.tools.RunScript;
 import org.h2.util.ScriptReader;
 
-// Dont forget to add your H2 driver to the dependencies.
 /**
  * Main class that starts the FXML application.
  */
@@ -46,13 +45,11 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+    /**
+     * This is the main entry point for the program.
+     * @param args arguments passed in when called from the command line.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 }
-
-// yes
-
-
-// comment
